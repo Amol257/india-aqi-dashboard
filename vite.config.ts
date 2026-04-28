@@ -8,7 +8,6 @@ export default defineConfig({
   base: '/india-aqi-dashboard/', 
   build: {
     outDir: 'dist',
-    assetsDir: 'assets', // Back to standard
     sourcemap: true
   }
 });
