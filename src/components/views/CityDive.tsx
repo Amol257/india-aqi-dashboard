@@ -291,7 +291,7 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
               alt={selectedCity.name} 
               className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent"></div>
           </div>
           
           <div className="relative z-10 p-8 flex flex-col md:flex-row items-end justify-between gap-6">

@@ -329,7 +329,7 @@ export default function Stations({ onNavigate }: { onNavigate?: (view: any, cont
         </div>
       </div>
 
-      <section className="bg-white rounded-[2rem] border border-slate-100 mt-12 overflow-hidden shadow-sm">
+      <section className="bg-white rounded-4xl border border-slate-100 mt-12 overflow-hidden shadow-sm">
         <div className="px-8 py-6 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
           <div className="flex items-center gap-6">
             <h3 className="font-black text-lg tracking-tight px-2">Station Inventory</h3>

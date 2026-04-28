@@ -352,7 +352,7 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
 
           <div className="flex flex-col items-center justify-center py-6 relative">
             {/* Custom SVG Gauge */}
-            <div className="w-56 h-56 rounded-full border-[18px] border-slate-100 relative flex items-center justify-center shadow-inner">
+            <div className="w-56 h-56 rounded-full border-18 border-slate-100 relative flex items-center justify-center shadow-inner">
               <svg className="absolute inset-0 w-full h-full -rotate-90">
                 <circle
                   cx="50%" cy="50%" r="46%"
