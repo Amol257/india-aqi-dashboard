@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   LayoutDashboard, 
@@ -78,7 +79,9 @@ export default function App() {
     // Check for View Transitions API support
     if (typeof document !== 'undefined' && 'startViewTransition' in document) {
       (document as any).startViewTransition(() => {
-        setIsDarkMode(targetMode);
+        flushSync(() => {
+          setIsDarkMode(targetMode);
+        });
       });
     } else {
       setIsDarkMode(targetMode);
@@ -253,24 +256,24 @@ export default function App() {
                             <button 
                               onClick={() => toggleTheme(false)}
                               className={cn(
-                                "py-2 rounded-lg text-[10px] font-black uppercase transition-all flex items-center justify-center gap-1.5",
+                                "py-3 rounded-lg text-[10px] font-black uppercase transition-all flex items-center justify-center gap-1.5 touch-manipulation",
                                 !isDarkMode 
                                   ? "bg-[#1275e2] text-white shadow-lg shadow-blue-100" 
                                   : "bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
                               )}
                             >
-                              <Sun size={12} /> Light
+                              <Sun size={14} /> Light
                             </button>
                             <button 
                               onClick={() => toggleTheme(true)}
                               className={cn(
-                                "py-2 rounded-lg text-[10px] font-black uppercase transition-all flex items-center justify-center gap-1.5",
+                                "py-3 rounded-lg text-[10px] font-black uppercase transition-all flex items-center justify-center gap-1.5 touch-manipulation",
                                 isDarkMode 
                                   ? "bg-blue-600 text-white shadow-lg shadow-blue-900/20" 
                                   : "bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
                               )}
                             >
-                              <Moon size={12} /> Dark
+                              <Moon size={14} /> Dark
                             </button>
                           </div>
                         </div>
