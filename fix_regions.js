@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const path = 'c:/Users/Amol/Desktop/Antigravity/AQI project/src/constants.ts';
+const path = './src/constants.ts';
 let content = fs.readFileSync(path, 'utf8');
 
 const northStates = ['Delhi', 'Haryana', 'Punjab', 'Uttar Pradesh', 'Chandigarh', 'Himachal Pradesh', 'Jammu', 'Kashmir', 'Uttarakhand'];

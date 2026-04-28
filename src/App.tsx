@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   LayoutDashboard, 
@@ -15,7 +15,9 @@ import {
   Bell, 
   Settings,
   Menu,
-  X
+  X,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { cn } from './lib/utils';
 import Summary from './components/views/Summary';
@@ -23,18 +25,26 @@ import CityDive from './components/views/CityDive';
 import Composite from './components/views/Composite';
 import Stations from './components/views/Stations';
 import Health from './components/views/Health';
-import { MAJOR_CITIES_COMPARISON, TOP_POLLUTED_CITIES, STATIONS_DATA, getAllCities } from './constants';
+import { MAJOR_CITIES_COMPARISON, TOP_POLLUTED_CITIES, STATIONS_DATA, getAllCities, CityData } from './constants';
 
 type View = 'summary' | 'city-dive' | 'composite' | 'stations' | 'health';
 
 export default function App() {
   const [activeView, setActiveView] = useState<View>('summary');
-  const [activeContext, setActiveContext] = useState<any>(null);
+  const [activeContext, setActiveContext] = useState<string | CityData | undefined>(undefined);
+  const blurTimerRef = useRef<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      return saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+    return false;
+  });
 
   const notifications = [
     { id: 1, title: 'AQI Alert: Delhi', message: 'AQI has reached "Severe" levels (412). Avoid outdoor activities.', time: '12m ago', type: 'error' },
@@ -42,7 +52,38 @@ export default function App() {
     { id: 3, title: 'Health Tip', message: 'High Ozone levels expected in Bangalore this afternoon.', time: '5h ago', type: 'warning' },
   ];
 
-  const allCities = React.useMemo(() => getAllCities(), []);
+  const allCities = useMemo(() => getAllCities(), []);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.style.colorScheme = 'dark';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.style.colorScheme = 'light';
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    return () => {
+      if (blurTimerRef.current) window.clearTimeout(blurTimerRef.current);
+    };
+  }, []);
+
+  const toggleTheme = (targetMode: boolean) => {
+    if (isDarkMode === targetMode) return;
+    
+    // Check for View Transitions API support
+    if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+      (document as any).startViewTransition(() => {
+        setIsDarkMode(targetMode);
+      });
+    } else {
+      setIsDarkMode(targetMode);
+    }
+  };
 
   const searchResults = allCities.filter(city => 
     city.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -73,50 +114,52 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f9f9ff] text-[#181c22] font-sans selection:bg-blue-100">
+    <div className="min-h-screen bg-[#f9f9ff] dark:bg-slate-950 text-[#181c22] dark:text-slate-200 font-sans selection:bg-blue-100 transition-colors duration-300">
       {/* Top App Bar */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50 flex items-center justify-between px-4 md:px-6">
+      <header className="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-50 flex items-center justify-between px-4 md:px-6 shadow-sm">
         <div className="flex items-center gap-4">
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="md:hidden p-2 hover:bg-slate-50 rounded-full transition-colors"
+            className="md:hidden p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors"
           >
             {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <span className="text-xl font-bold tracking-tight text-[#1275e2]">AQI Health India</span>
+          <span className="text-xl font-bold tracking-tight text-[#1275e2] dark:text-blue-400">AQI Health India</span>
         </div>
 
         <div className="flex items-center gap-2 md:gap-6">
-          <div className="hidden sm:flex items-center bg-[#ebedf7] rounded-full px-4 py-1.5 border border-[#c1c6d5] focus-within:ring-2 focus-within:ring-[#005ab4] transition-all relative">
-            <Search className="text-[#717785] mr-2" size={18} />
+          <div className="hidden sm:flex items-center bg-[#ebedf7] dark:bg-slate-800 rounded-full px-4 py-1.5 border border-[#c1c6d5] dark:border-slate-700 focus-within:ring-2 focus-within:ring-[#005ab4] transition-all relative">
+            <Search className="text-[#717785] dark:text-slate-400 mr-2" size={18} />
             <input 
               type="text" 
               placeholder="Search cities..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
-              onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-              className="bg-transparent border-none outline-none text-sm w-32 md:w-64 placeholder:text-[#717785]"
+              onBlur={() => {
+                blurTimerRef.current = window.setTimeout(() => setIsSearchFocused(false), 200);
+              }}
+              className="bg-transparent border-none outline-none text-sm w-32 md:w-64 placeholder:text-[#717785] dark:placeholder:text-slate-500"
             />
             
             {/* Search Results Dropdown */}
             {isSearchFocused && searchQuery && (
-              <div className="absolute top-full left-0 mt-2 w-full bg-white border border-slate-200 shadow-xl rounded-xl max-h-64 overflow-y-auto z-50">
+              <div className="absolute top-full left-0 mt-2 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl rounded-xl max-h-64 overflow-y-auto z-50">
                 {searchResults.length > 0 ? (
                   searchResults.map((city, index) => (
                     <div 
                       key={index} 
-                      className="px-4 py-3 hover:bg-slate-50 cursor-pointer flex justify-between items-center border-b border-slate-100 last:border-0"
+                      className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer flex justify-between items-center border-b border-slate-100 dark:border-slate-700 last:border-0"
                       onClick={() => {
-                        handleNavigate('city-dive', city.name);
+                        handleNavigate('city-dive', city);
                         setSearchQuery('');
                       }}
                     >
                       <div>
-                        <div className="font-bold text-sm text-[#181c22]">{city.name}</div>
-                        <div className="text-[10px] text-slate-500">{city.state}</div>
+                        <div className="font-bold text-sm text-[#181c22] dark:text-slate-100">{city.name}</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-400">{city.state}</div>
                       </div>
-                      <div className="text-xs font-bold text-[#1275e2]">AQI: {city.aqi}</div>
+                      <div className="text-xs font-bold text-[#1275e2] dark:text-blue-400">AQI: {city.aqi}</div>
                     </div>
                   ))
                 ) : (
@@ -135,11 +178,11 @@ export default function App() {
                 }}
                 className={cn(
                   "p-2 rounded-full transition-all relative group",
-                  isNotificationsOpen ? "bg-blue-50" : "hover:bg-slate-50"
+                  isNotificationsOpen ? "bg-blue-50 dark:bg-slate-800" : "hover:bg-slate-50 dark:hover:bg-slate-800"
                 )}
               >
-                <Bell className={cn("transition-colors", isNotificationsOpen ? "text-[#1275e2]" : "text-slate-600 group-hover:text-[#1275e2]")} size={20} />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                <Bell className={cn("transition-colors", isNotificationsOpen ? "text-[#1275e2] dark:text-blue-400" : "text-slate-600 dark:text-slate-400 group-hover:text-[#1275e2] dark:group-hover:text-blue-400")} size={20} />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
               </button>
 
               <AnimatePresence>
@@ -150,24 +193,24 @@ export default function App() {
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute top-full right-0 mt-3 w-80 bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl overflow-hidden z-20"
+                      className="absolute top-full right-0 mt-3 w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl rounded-2xl overflow-hidden z-20"
                     >
-                      <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                        <h3 className="font-black text-sm uppercase tracking-wider text-slate-800">Notifications</h3>
-                        <button className="text-[10px] font-bold text-[#1275e2] hover:underline">Mark all read</button>
+                      <div className="p-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
+                        <h3 className="font-black text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Notifications</h3>
+                        <button className="text-[10px] font-bold text-[#1275e2] dark:text-blue-400 hover:underline">Mark all read</button>
                       </div>
                       <div className="max-h-96 overflow-y-auto">
                         {notifications.map(n => (
-                          <div key={n.id} className="p-4 border-b border-slate-50 hover:bg-blue-50/30 transition-colors cursor-pointer group">
+                          <div key={n.id} className="p-4 border-b border-slate-50 dark:border-slate-700 hover:bg-blue-50/30 dark:hover:bg-slate-700/50 transition-colors cursor-pointer group">
                             <div className="flex justify-between items-start mb-1">
-                              <span className="font-bold text-xs group-hover:text-[#1275e2] transition-colors">{n.title}</span>
+                              <span className="font-bold text-xs group-hover:text-[#1275e2] dark:group-hover:text-blue-400 transition-colors dark:text-slate-200">{n.title}</span>
                               <span className="text-[9px] text-slate-400 font-bold">{n.time}</span>
                             </div>
-                            <p className="text-[11px] text-slate-600 leading-relaxed">{n.message}</p>
+                            <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">{n.message}</p>
                           </div>
                         ))}
                       </div>
-                      <button className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#1275e2] transition-colors border-t border-slate-100">
+                      <button className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#1275e2] dark:hover:text-blue-400 transition-colors border-t border-slate-100 dark:border-slate-700">
                         View All Notifications
                       </button>
                     </motion.div>
@@ -184,10 +227,10 @@ export default function App() {
                 }}
                 className={cn(
                   "p-2 rounded-full transition-all group",
-                  isSettingsOpen ? "bg-blue-50" : "hover:bg-slate-50"
+                  isSettingsOpen ? "bg-blue-50 dark:bg-slate-800" : "hover:bg-slate-50 dark:hover:bg-slate-800"
                 )}
               >
-                <Settings className={cn("transition-colors", isSettingsOpen ? "text-[#1275e2]" : "text-slate-600 group-hover:text-[#1275e2]")} size={20} />
+                <Settings className={cn("transition-colors", isSettingsOpen ? "text-[#1275e2] dark:text-blue-400" : "text-slate-600 dark:text-slate-400 group-hover:text-[#1275e2] dark:group-hover:text-blue-400")} size={20} />
               </button>
 
               <AnimatePresence>
@@ -198,33 +241,56 @@ export default function App() {
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute top-full right-0 mt-3 w-64 bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl overflow-hidden z-20"
+                      className="absolute top-full right-0 mt-3 w-64 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl rounded-2xl overflow-hidden z-20"
                     >
-                      <div className="p-4 border-b border-slate-100 bg-slate-50/50">
-                        <h3 className="font-black text-sm uppercase tracking-wider text-slate-800">Preferences</h3>
+                      <div className="p-4 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50">
+                        <h3 className="font-black text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">Preferences</h3>
                       </div>
                       <div className="p-2 space-y-1">
-                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
-                          <span className="text-xs font-bold text-slate-700">Appearance</span>
-                          <span className="text-[10px] font-black text-[#1275e2] bg-blue-100 px-2 py-0.5 rounded-full uppercase">Light</span>
+                        <div className="px-3 py-2 space-y-2">
+                          <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Theme Mode</span>
+                          <div className="grid grid-cols-2 gap-2">
+                            <button 
+                              onClick={() => toggleTheme(false)}
+                              className={cn(
+                                "py-2 rounded-lg text-[10px] font-black uppercase transition-all flex items-center justify-center gap-1.5",
+                                !isDarkMode 
+                                  ? "bg-[#1275e2] text-white shadow-lg shadow-blue-100" 
+                                  : "bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
+                              )}
+                            >
+                              <Sun size={12} /> Light
+                            </button>
+                            <button 
+                              onClick={() => toggleTheme(true)}
+                              className={cn(
+                                "py-2 rounded-lg text-[10px] font-black uppercase transition-all flex items-center justify-center gap-1.5",
+                                isDarkMode 
+                                  ? "bg-blue-600 text-white shadow-lg shadow-blue-900/20" 
+                                  : "bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
+                              )}
+                            >
+                              <Moon size={12} /> Dark
+                            </button>
+                          </div>
                         </div>
-                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
-                          <span className="text-xs font-bold text-slate-700">Language</span>
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg cursor-pointer transition-colors">
+                          <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Language</span>
                           <span className="text-[10px] font-black text-slate-400 uppercase">English</span>
                         </div>
-                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
-                          <span className="text-xs font-bold text-slate-700">Units</span>
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg cursor-pointer transition-colors">
+                          <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Units</span>
                           <span className="text-[10px] font-black text-slate-400 uppercase">AQI (US)</span>
                         </div>
-                        <div className="h-px bg-slate-100 my-2" />
-                        <div className="px-3 py-2 flex items-center justify-between hover:bg-red-50 rounded-lg cursor-pointer transition-colors group">
+                        <div className="h-px bg-slate-100 dark:bg-slate-700 my-2" />
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg cursor-pointer transition-colors group">
                           <span className="text-xs font-bold text-red-600">Emergency Mode</span>
-                          <div className="w-8 h-4 bg-slate-200 rounded-full relative">
+                          <div className="w-8 h-4 bg-slate-200 dark:bg-slate-700 rounded-full relative">
                             <div className="absolute left-1 top-1 w-2 h-2 bg-white rounded-full" />
                           </div>
                         </div>
                       </div>
-                      <div className="p-3 bg-slate-50 text-center">
+                      <div className="p-3 bg-slate-50 dark:bg-slate-900/50 text-center">
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">v2.4.0 Stable Build</p>
                       </div>
                     </motion.div>
@@ -232,12 +298,8 @@ export default function App() {
                 )}
               </AnimatePresence>
             </div>
-            <div className="w-8 h-8 rounded-full border border-slate-200 bg-blue-100 flex items-center justify-center overflow-hidden">
-              <img 
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
-                alt="User" 
-                className="w-full h-full object-cover"
-              />
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-bold text-[#1275e2] border border-blue-200">
+              U
             </div>
           </div>
         </div>
@@ -245,12 +307,12 @@ export default function App() {
 
       {/* Side Navigation Bar */}
       <aside className={cn(
-        "fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-slate-200 pt-20 px-4 z-40 transition-transform duration-300 ease-in-out md:translate-x-0",
+        "fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 pt-20 px-4 z-40 transition-transform duration-300 ease-in-out md:translate-x-0",
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="mb-8 px-2">
-          <h2 className="text-lg font-black text-[#1275e2]">India AQI</h2>
-          <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">National Dashboard</p>
+          <h2 className="text-lg font-black text-[#1275e2] dark:text-blue-400">India AQI</h2>
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold">National Dashboard</p>
         </div>
 
         <nav className="space-y-1">
@@ -267,13 +329,13 @@ export default function App() {
                 className={cn(
                   "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group",
                   isActive 
-                    ? "bg-blue-50 text-[#1275e2] font-semibold" 
-                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+                    ? "bg-blue-50 dark:bg-blue-900/20 text-[#1275e2] dark:text-blue-400 font-semibold" 
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800"
                 )}
               >
                 <div className={cn(
                   "p-1.5 rounded-md transition-colors",
-                  isActive ? "bg-blue-100" : "bg-slate-100 group-hover:bg-slate-200"
+                  isActive ? "bg-blue-100 dark:bg-blue-900/40" : "bg-slate-100 dark:bg-slate-800 group-hover:bg-slate-200 dark:group-hover:bg-slate-700"
                 )}>
                   <Icon size={16} fill={isActive ? "currentColor" : "none"} />
                 </div>
@@ -284,11 +346,11 @@ export default function App() {
         </nav>
 
         <div className="mt-auto mb-10 px-2">
-          <div className="bg-[#ebedf7] rounded-xl p-4 border border-[#c1c6d5]/30">
-            <p className="text-[10px] text-[#717785] font-bold uppercase tracking-wider mb-2">System Status</p>
+          <div className="bg-[#ebedf7] dark:bg-slate-800 rounded-xl p-4 border border-[#c1c6d5]/30 dark:border-slate-700">
+            <p className="text-[10px] text-[#717785] dark:text-slate-400 font-bold uppercase tracking-wider mb-2">System Status</p>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-              <span className="text-xs font-semibold">Real-time Sync Active</span>
+              <span className="text-xs font-semibold dark:text-slate-200">Real-time Sync Active</span>
             </div>
           </div>
         </div>
@@ -297,13 +359,14 @@ export default function App() {
       {/* Main Content Area */}
       <main className="pt-24 pb-20 px-4 md:px-6 md:ml-64 min-h-screen">
         <div className="max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={activeView}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="will-change-[opacity,transform]"
             >
               {renderView()}
             </motion.div>
@@ -312,7 +375,7 @@ export default function App() {
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-lg border-t border-slate-200 md:hidden z-50 flex items-center justify-around px-2 pb-safe">
+      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 md:hidden z-50 flex items-center justify-around px-2 pb-safe transition-colors">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeView === item.id;
@@ -322,7 +385,7 @@ export default function App() {
               onClick={() => setActiveView(item.id as View)}
               className={cn(
                 "flex flex-col items-center gap-1 transition-all duration-200",
-                isActive ? "text-[#1275e2] scale-110" : "text-slate-400"
+                isActive ? "text-[#1275e2] dark:text-blue-400 scale-110" : "text-slate-400 dark:text-slate-500"
               )}
             >
               <Icon size={20} fill={isActive ? "currentColor" : "none"} />
@@ -333,7 +396,7 @@ export default function App() {
       </nav>
 
       {/* Contextual FAB */}
-      <button className="fixed right-6 bottom-20 md:bottom-8 w-14 h-14 bg-[#1275e2] text-white rounded-2xl shadow-xl shadow-blue-200 flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group z-30">
+      <button className="fixed right-6 bottom-20 md:bottom-8 w-14 h-14 bg-[#1275e2] dark:bg-blue-600 text-white rounded-2xl shadow-xl shadow-blue-200 dark:shadow-none flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group z-30">
         <Activity size={24} className="group-hover:animate-pulse" />
       </button>
     </div>

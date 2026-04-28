@@ -269,15 +269,15 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
       {/* Header */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#181c22]">Health Impact Assessment</h1>
-          <p className="text-[#414753] mt-2 max-w-2xl">
+          <h1 className="text-3xl font-bold tracking-tight text-[#181c22] dark:text-slate-100">Health Impact Assessment</h1>
+          <p className="text-[#414753] dark:text-slate-400 mt-2 max-w-2xl font-medium">
             National epidemiological monitoring based on real-time exposure to particulate matter and toxic gases.
           </p>
         </div>
-        <div className="flex bg-white rounded-lg p-1 border border-slate-200 shadow-sm self-start">
-          <div className="px-4 py-2 flex items-center gap-2 text-emerald-600">
+        <div className="flex bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700 shadow-sm self-start">
+          <div className="px-4 py-2 flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
             <ShieldCheck size={18} />
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-900 leading-none">Medical Data Verified</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 leading-none">Medical Data Verified</span>
           </div>
         </div>
       </section>
@@ -285,17 +285,17 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
       {/* Body Systems Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { icon: Wind, label: 'Respiratory', status: 'High Risk', color: 'text-red-500', bg: 'bg-red-50' },
-          { icon: Heart, label: 'Cardiovascular', status: 'Elevated', color: 'text-amber-500', bg: 'bg-amber-50' },
-          { icon: Brain, label: 'Neurovascular', status: 'Moderate', color: 'text-blue-500', bg: 'bg-blue-50' },
-          { icon: Eye, label: 'Ocular Health', status: 'Normal', color: 'text-emerald-500', bg: 'bg-emerald-50' },
+          { icon: Wind, label: 'Respiratory', status: 'High Risk', color: 'text-red-500', darkColor: 'dark:text-red-400', bg: 'bg-red-50', darkBg: 'dark:bg-red-900/30' },
+          { icon: Heart, label: 'Cardiovascular', status: 'Elevated', color: 'text-amber-500', darkColor: 'dark:text-amber-400', bg: 'bg-amber-50', darkBg: 'dark:bg-amber-900/30' },
+          { icon: Brain, label: 'Neurovascular', status: 'Moderate', color: 'text-blue-500', darkColor: 'dark:text-blue-400', bg: 'bg-blue-50', darkBg: 'dark:bg-blue-900/30' },
+          { icon: Eye, label: 'Ocular Health', status: 'Normal', color: 'text-emerald-500', darkColor: 'dark:text-emerald-400', bg: 'bg-emerald-50', darkBg: 'dark:bg-emerald-900/30' },
         ].map((system) => (
-          <div key={system.label} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center group hover:shadow-md transition-all">
-            <div className={cn("p-4 rounded-2xl mb-4 transition-transform group-hover:scale-110", system.bg, system.color)}>
+          <div key={system.label} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col items-center text-center group hover:shadow-md transition-all">
+            <div className={cn("p-4 rounded-2xl mb-4 transition-transform group-hover:scale-110", system.bg, system.darkBg, system.color, system.darkColor)}>
               <system.icon size={32} />
             </div>
-            <h3 className="font-bold text-slate-800">{system.label}</h3>
-            <p className={cn("text-[10px] font-black uppercase tracking-widest mt-2", system.color)}>{system.status}</p>
+            <h3 className="font-bold text-slate-800 dark:text-slate-100">{system.label}</h3>
+            <p className={cn("text-[10px] font-black uppercase tracking-widest mt-2", system.color, system.darkColor)}>{system.status}</p>
           </div>
         ))}
       </div>
@@ -303,20 +303,20 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
       {/* Main Charts Area */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Medical Admissions Chart */}
-        <div className="lg:col-span-8 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col">
+        <div className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h3 className="text-xl font-bold">Respiratory Admissions Trend</h3>
-              <p className="text-xs text-slate-500 font-medium">Daily correlation between AQI spikes and ER visits.</p>
+              <h3 className="text-xl font-bold dark:text-slate-100">Respiratory Admissions Trend</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Daily correlation between AQI spikes and ER visits.</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-[#1275e2]"></div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase">Actual</span>
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase">Actual</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-slate-200"></div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase">Baseline</span>
+                <div className="w-3 h-3 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase">Baseline</span>
               </div>
             </div>
           </div>
@@ -330,11 +330,16 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
                     <stop offset="95%" stopColor="#1275e2" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" opacity={0.1} />
                 <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} />
                 <Tooltip
-                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                  contentStyle={{ 
+                    borderRadius: '12px', 
+                    border: 'none', 
+                    boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  }}
                   itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
                 />
                 <Area type="monotone" dataKey="baseline" stroke="#e2e8f0" strokeWidth={2} fill="transparent" strokeDasharray="5 5" />
@@ -348,9 +353,9 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
         <div className="lg:col-span-4 space-y-6">
           <RealtimeWeatherWarning />
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-            <h4 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Stethoscope size={18} className="text-[#1275e2]" /> Clinical Breakdown
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+            <h4 className="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
+              <Stethoscope size={18} className="text-[#1275e2] dark:text-blue-400" /> Clinical Breakdown
             </h4>
             <div className="space-y-4">
               {pollutantRisks.map((p) => (
@@ -358,14 +363,14 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
                   <div className={cn("w-1.5 h-10 rounded-full mt-1", p.color)}></div>
                   <div className="flex-1">
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-sm font-black">{p.name}</span>
-                      <span className={cn("text-[10px] font-bold px-2 py-0.5 rounded", p.impact === 'High' ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-600')}>
+                      <span className="text-sm font-black dark:text-slate-200">{p.name}</span>
+                      <span className={cn("text-[10px] font-bold px-2 py-0.5 rounded", p.impact === 'High' ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400' : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400')}>
                         {p.impact}
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {p.systems.map(s => (
-                        <span key={s} className="text-[9px] font-bold text-slate-400 group">{s}</span>
+                        <span key={s} className="text-[9px] font-bold text-slate-400 dark:text-slate-500 group">{s}</span>
                       ))}
                     </div>
                   </div>
@@ -378,7 +383,7 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
 
       {/* Vulnerable Groups */}
       <section className="mt-12">
-        <h3 className="text-2xl font-black text-[#181c22] mb-8 tracking-tight">Vulnerable Groups Advisory</h3>
+        <h3 className="text-2xl font-black text-[#181c22] dark:text-slate-100 mb-8 tracking-tight">Vulnerable Groups Advisory</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
@@ -388,7 +393,8 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
               action: 'Check School Guidelines',
               url: 'https://www.healthygallatin.org/wp-content/uploads/2024/06/ActivityGuidelinesWildfireSmokeEventsSchools.pdf',
               color: 'text-pink-500',
-              bg: 'bg-pink-50'
+              bg: 'bg-pink-50',
+              darkBg: 'dark:bg-pink-900/30'
             },
             {
               title: 'Elderly Support',
@@ -397,7 +403,8 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
               action: 'Emergency Contact List',
               url: 'https://scw.dosje.gov.in/elderline',
               color: 'text-indigo-500',
-              bg: 'bg-indigo-50'
+              bg: 'bg-indigo-50',
+              darkBg: 'dark:bg-indigo-900/30'
             },
             {
               title: 'Outdoor Workers',
@@ -406,24 +413,25 @@ export default function Health({ onNavigate }: { onNavigate?: (view: any, contex
               action: 'Safety Standards',
               url: 'https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.134',
               color: 'text-amber-500',
-              bg: 'bg-amber-50'
+              bg: 'bg-amber-50',
+              darkBg: 'dark:bg-amber-900/30'
             },
           ].map((item) => (
-            <div key={item.title} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-lg transition-all">
+            <div key={item.title} className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden group hover:shadow-lg transition-all">
               <div className={cn("h-2 w-full", item.bg.replace('bg-', 'bg-').replace('50', '500'))}></div>
               <div className="p-6">
-                <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-4", item.bg, item.color)}>
+                <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-4", item.bg, item.darkBg, item.color)}>
                   <item.icon size={24} />
                 </div>
-                <h4 className="text-lg font-bold mb-2">{item.title}</h4>
-                <p className="text-sm text-slate-500 mb-6 leading-relaxed font-medium">
+                <h4 className="text-lg font-bold mb-2 dark:text-slate-100">{item.title}</h4>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed font-medium">
                   {item.desc}
                 </p>
                 <a
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:text-[#1275e2] transition-colors"
+                  className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group-hover:text-[#1275e2] dark:group-hover:text-blue-400 transition-colors"
                 >
                   {item.action} <TrendingUp size={14} className="group-hover:translate-x-1 transition-transform" />
                 </a>

@@ -297,17 +297,17 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
       {/* Header */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#181c22]">National Health Executive Summary</h1>
-          <p className="text-[#414753] mt-2 max-w-2xl">
+          <h1 className="text-3xl font-bold tracking-tight text-[#181c22] dark:text-slate-100">National Health Executive Summary</h1>
+          <p className="text-[#414753] dark:text-slate-400 mt-2 max-w-2xl">
             Real-time aggregated health metrics across {summaryStats?.activeStations.toLocaleString()} monitoring stations in 28 states and 8 union territories.
           </p>
         </div>
-        <div className="flex bg-white rounded-lg p-1 border border-slate-200 shadow-sm self-start">
+        <div className="flex bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700 shadow-sm self-start">
           <button
             onClick={() => setTimeframe('daily')}
             className={cn(
               "px-5 py-2 rounded-md text-sm font-semibold transition-all",
-              timeframe === 'daily' ? "bg-[#1275e2] text-white shadow-sm" : "text-slate-500 hover:bg-slate-50"
+              timeframe === 'daily' ? "bg-[#1275e2] text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
             )}
           >
             Daily
@@ -316,7 +316,7 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
             onClick={() => setTimeframe('weekly')}
             className={cn(
               "px-5 py-2 rounded-md text-sm font-semibold transition-all",
-              timeframe === 'weekly' ? "bg-[#1275e2] text-white shadow-sm" : "text-slate-500 hover:bg-slate-50"
+              timeframe === 'weekly' ? "bg-[#1275e2] text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
             )}
           >
             Weekly
@@ -325,7 +325,7 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
             onClick={() => setTimeframe('monthly')}
             className={cn(
               "px-5 py-2 rounded-md text-sm font-semibold transition-all",
-              timeframe === 'monthly' ? "bg-[#1275e2] text-white shadow-sm" : "text-slate-500 hover:bg-slate-50"
+              timeframe === 'monthly' ? "bg-[#1275e2] text-white shadow-sm" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
             )}
           >
             Monthly
@@ -336,15 +336,15 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
       {/* Bento Grid Top */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* National AQI Gauge Card */}
-        <div className="lg:col-span-8 bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-white shadow-sm flex flex-col justify-between min-h-[420px] transition-transform hover:scale-[1.01]">
+        <div className="lg:col-span-8 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col justify-between min-h-[420px] transition-transform hover:scale-[1.01]">
           <div className="flex justify-between items-start">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-[#1275e2]">National Average AQI</p>
-              <h3 className="text-2xl font-bold mt-1">{getAqiStatusLabel(summaryStats?.avgAqi || 0)}</h3>
+              <h3 className="text-2xl font-bold mt-1 dark:text-slate-100">{getAqiStatusLabel(summaryStats?.avgAqi || 0)}</h3>
             </div>
             <div className={cn(
               "p-2 rounded-xl border",
-              (summaryStats?.avgAqi || 0) <= 100 ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-amber-50 text-amber-600 border-amber-100"
+              (summaryStats?.avgAqi || 0) <= 100 ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-500/20" : "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-500/20"
             )}>
               <Activity size={24} />
             </div>
@@ -352,7 +352,7 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
 
           <div className="flex flex-col items-center justify-center py-6 relative">
             {/* Custom SVG Gauge */}
-            <div className="w-56 h-56 rounded-full border-18 border-slate-100 relative flex items-center justify-center shadow-inner">
+            <div className="w-56 h-56 rounded-full border-18 border-slate-100 dark:border-slate-800 relative flex items-center justify-center shadow-inner">
               <svg className="absolute inset-0 w-full h-full -rotate-90">
                 <circle
                   cx="50%" cy="50%" r="46%"
@@ -364,33 +364,33 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
                 />
               </svg>
               <div className="text-center z-10">
-                <span className="text-6xl font-black text-[#181c22]">
+                <span className="text-6xl font-black text-[#181c22] dark:text-slate-100">
                   {summaryStats?.avgAqi}
                 </span>
-                <p className="text-xs font-black text-[#717785] mt-1 uppercase tracking-widest">PM 2.5 Index</p>
+                <p className="text-xs font-black text-[#717785] dark:text-slate-400 mt-1 uppercase tracking-widest">PM 2.5 Index</p>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
+          <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
             <div>
-              <p className="text-[10px] text-[#717785] font-bold uppercase tracking-widest">Last 24h Peak</p>
+              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Last 24h Peak</p>
               <div className="flex items-baseline gap-1">
                 <span className="text-xl font-bold text-red-500">{summaryStats?.maxAqiCity.aqi}</span>
-                <span className="text-[10px] font-bold text-slate-400 truncate max-w-[60px]">{summaryStats?.maxAqiCity.name}</span>
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 truncate max-w-[60px]">{summaryStats?.maxAqiCity.name}</span>
               </div>
             </div>
-            <div className="border-x border-slate-100 px-4">
-              <p className="text-[10px] text-[#717785] font-bold uppercase tracking-widest">Cleanest Area</p>
+            <div className="border-x border-slate-100 dark:border-slate-800 px-4">
+              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Cleanest Area</p>
               <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-emerald-600">{summaryStats?.minAqiCity.aqi}</span>
-                <span className="text-[10px] font-bold text-slate-400 truncate max-w-[60px]">{summaryStats?.minAqiCity.name}</span>
+                <span className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{summaryStats?.minAqiCity.aqi}</span>
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 truncate max-w-[60px]">{summaryStats?.minAqiCity.name}</span>
               </div>
             </div>
             <div className="pl-4">
-              <p className="text-[10px] text-[#717785] font-bold uppercase tracking-widest">Stations Active</p>
+              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Stations Active</p>
               <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-[#181c22]">{summaryStats?.activeStations.toLocaleString()}</span>
+                <span className="text-xl font-bold text-[#181c22] dark:text-slate-100">{summaryStats?.activeStations.toLocaleString()}</span>
                 <span className="text-[10px] font-bold text-emerald-500">99.8%</span>
               </div>
             </div>
@@ -399,58 +399,58 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
 
         {/* Side Stats */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-          <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-white shadow-sm flex flex-col justify-between hover:scale-[1.02] transition-transform">
+          <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col justify-between hover:scale-[1.02] transition-transform">
             <div className="flex justify-between items-center mb-4">
-              <p className="text-xs font-bold text-[#717785] uppercase tracking-widest">Health Risk Index</p>
+              <p className="text-xs font-bold text-[#717785] dark:text-slate-500 uppercase tracking-widest">Health Risk Index</p>
               <span className={cn(
                 "px-2 py-0.5 rounded text-[10px] font-bold",
-                Number(summaryStats?.healthRiskIndex || 0) > 40 ? "bg-red-100 text-red-700" : "bg-emerald-100 text-emerald-700"
+                Number(summaryStats?.healthRiskIndex || 0) > 40 ? "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400" : "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400"
               )}>
                 {Number(summaryStats?.healthRiskIndex || 0) > 40 ? "HIGH" : "MODERATE"}
               </span>
             </div>
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-black">{summaryStats?.healthRiskIndex}%</span>
+                <span className="text-4xl font-black dark:text-slate-100">{summaryStats?.healthRiskIndex}%</span>
                 <span className="text-xs font-bold text-red-500 flex items-center">
                   <TrendingUp size={12} className="mr-0.5" /> 4.1%
                 </span>
               </div>
-              <p className="text-xs text-[#717785] mt-1">Population in high exposure zones</p>
+              <p className="text-xs text-[#717785] dark:text-slate-400 mt-1">Population in high exposure zones</p>
             </div>
             <div className="h-12 w-full mt-6 flex items-end gap-1.5 px-1">
               {getStatsPattern('health').map((h, i) => (
                 <div key={i} className={cn(
                   "flex-1 rounded-t-sm transition-all duration-500",
-                  i % 2 === 0 ? "bg-[#c55b00]" : "bg-slate-200"
+                  i % 2 === 0 ? "bg-[#c55b00]" : "bg-slate-200 dark:bg-slate-700"
                 )} style={{ height: `${h}%` }}></div>
               ))}
             </div>
           </div>
 
-          <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-white shadow-sm flex flex-col justify-between hover:scale-[1.02] transition-transform">
+          <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col justify-between hover:scale-[1.02] transition-transform">
             <div className="flex justify-between items-center mb-4">
-              <p className="text-xs font-bold text-[#717785] uppercase tracking-widest">Medical Alert Load</p>
-              <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-bold tracking-widest">STABLE</span>
+              <p className="text-xs font-bold text-[#717785] dark:text-slate-500 uppercase tracking-widest">Medical Alert Load</p>
+              <span className="px-2 py-0.5 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded text-[10px] font-bold tracking-widest">STABLE</span>
             </div>
             <div>
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-black">
+                <span className="text-4xl font-black dark:text-slate-100">
                 {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
                   ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
                   : summaryStats?.totalAdmissions}
                 </span>
-                <span className="text-xs font-bold text-emerald-600 flex items-center">
+                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center">
                   <TrendingDown size={12} className="mr-0.5" /> {timeframe === 'daily' ? '12%' : '8%'}
                 </span>
               </div>
-              <p className="text-xs text-[#717785] mt-1">{timeframe === 'daily' ? 'Daily' : timeframe === 'weekly' ? 'Weekly' : 'Monthly'} respiratory admissions</p>
+              <p className="text-xs text-[#717785] dark:text-slate-400 mt-1">{timeframe === 'daily' ? 'Daily' : timeframe === 'weekly' ? 'Weekly' : 'Monthly'} respiratory admissions</p>
             </div>
             <div className="h-12 w-full mt-6 flex items-end gap-1.5 px-1">
               {getStatsPattern('medical').reverse().map((h, i) => (
                 <div key={i} className={cn(
                   "flex-1 rounded-t-sm transition-all duration-500",
-                  h > 60 ? "bg-[#1275e2]" : "bg-blue-100"
+                  h > 60 ? "bg-[#1275e2]" : "bg-blue-100 dark:bg-blue-500/20"
                 )} style={{ height: `${h}%` }}></div>
               ))}
             </div>
@@ -461,31 +461,31 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
       {/* Bento Grid Bottom */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Scatter Plot Card */}
-        <div className="lg:col-span-7 bg-white/60 backdrop-blur-xl rounded-2xl p-6 border border-white shadow-sm">
+        <div className="lg:col-span-7 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-bold">Regional AQI vs Population Density</h3>
+            <h3 className="text-xl font-bold dark:text-slate-100">Regional AQI vs Population Density</h3>
             <button
               onClick={() => onNavigate && onNavigate('city-dive')}
-              className="text-[#1275e2] text-xs font-bold flex items-center gap-1 hover:underline"
+              className="text-[#1275e2] dark:text-blue-400 text-xs font-bold flex items-center gap-1 hover:underline"
             >
               Expand Details <AlertCircle size={14} />
             </button>
           </div>
 
-          <div className="h-[280px] w-full bg-slate-50/50 rounded-xl border border-slate-100 relative p-4">
+          <div className="h-[280px] w-full bg-slate-50/50 dark:bg-slate-800/30 rounded-xl border border-slate-100 dark:border-slate-800 relative p-4">
             <ResponsiveContainer width="100%" height="100%">
               <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke={document.documentElement.classList.contains('dark') ? "#334155" : "#e2e8f0"} />
                 <XAxis type="number" dataKey="x" name="Density" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} />
                 <YAxis type="number" dataKey="y" name="AQI" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} />
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-2 border border-slate-200 rounded shadow-md text-xs font-bold">
-                        <div className="text-slate-500 mb-1">{data.name}</div>
-                        <div>AQI: <span className="text-[#181c22]">{data.y}</span></div>
-                        <div>Population Density: <span className="text-[#181c22]">{data.x}%</span></div>
+                      <div className="bg-white dark:bg-slate-800 p-2 border border-slate-200 dark:border-slate-700 rounded shadow-md text-xs font-bold">
+                        <div className="text-slate-500 dark:text-slate-400 mb-1">{data.name}</div>
+                        <div className="dark:text-slate-100">AQI: <span className="text-[#181c22] dark:text-blue-400">{data.y}</span></div>
+                        <div className="dark:text-slate-100">Population Density: <span className="text-[#181c22] dark:text-blue-400">{data.x}%</span></div>
                       </div>
                     );
                   }
@@ -496,8 +496,8 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
                 <Scatter name="Industrial Zones" data={industrialData} fill="#c55b00" fillOpacity={0.7} />
               </ScatterChart>
             </ResponsiveContainer>
-            <div className="absolute left-8 bottom-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Density (low)</div>
-            <div className="absolute left-4 top-12 text-[10px] font-black text-slate-400 uppercase tracking-widest rotate-90 origin-left">AQI (High)</div>
+            <div className="absolute left-8 bottom-4 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Density (low)</div>
+            <div className="absolute left-4 top-12 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest rotate-90 origin-left">AQI (High)</div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-4 px-2">
@@ -508,17 +508,17 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></div>
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{item.label}</span>
+                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">{item.label}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Critical Hotspots Card */}
-        <div className="lg:col-span-5 bg-white/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white shadow-sm flex flex-col animate-in fade-in slide-in-from-right-4 duration-500">
-          <div className="p-6 bg-red-50/50 border-b border-red-100">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-600">Regional Alert Level: High</p>
-            <h3 className="text-lg font-bold mt-1 text-[#181c22]">
+        <div className="lg:col-span-5 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white dark:border-slate-800 shadow-sm flex flex-col animate-in fade-in slide-in-from-right-4 duration-500">
+          <div className="p-6 bg-red-50/50 dark:bg-red-500/10 border-b border-red-100 dark:border-red-500/20">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-600 dark:text-red-400">Regional Alert Level: High</p>
+            <h3 className="text-lg font-bold mt-1 text-[#181c22] dark:text-slate-100">
               {citiesList.filter(c => c.aqi > 200).length} regions requiring attention
             </h3>
           </div>
@@ -526,22 +526,22 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {citiesList.slice().sort((a, b) => b.aqi - a.aqi).slice(0, 5).map((city) => {
               const isSevere = city.aqi > 300;
-              const colorClass = isSevere ? 'text-red-600' : 'text-amber-600';
-              const bgClass = isSevere ? 'bg-red-50' : 'bg-amber-50';
+              const colorClass = isSevere ? 'text-red-600 dark:text-red-400' : 'text-amber-600 dark:text-amber-400';
+              const bgClass = isSevere ? 'bg-red-50 dark:bg-red-500/10' : 'bg-amber-50 dark:bg-amber-500/10';
 
               return (
                 <div
                   key={city.name}
                   onClick={() => onNavigate && onNavigate('city-dive', city.name)}
-                  className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer group border border-transparent hover:border-slate-100"
+                  className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group border border-transparent hover:border-slate-100 dark:hover:border-slate-700"
                 >
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center relative z-10 bg-slate-100 border border-white shadow-sm overflow-hidden")}>
+                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center relative z-10 bg-slate-100 dark:bg-slate-700 border border-white dark:border-slate-800 shadow-sm overflow-hidden")}>
                         {city.imageUrl ? (
                           <img src={city.imageUrl} alt={city.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                         ) : (
-                          <span className="text-slate-500 font-bold text-lg">{city.name.charAt(0)}</span>
+                          <span className="text-slate-500 dark:text-slate-400 font-bold text-lg">{city.name.charAt(0)}</span>
                         )}
                       </div>
                       <div className={cn("absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center z-20 shadow-sm", bgClass, colorClass)}>
@@ -549,8 +549,8 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm">{city.name}</h4>
-                      <p className="text-[11px] font-bold text-[#717785] line-clamp-2 max-w-[240px] leading-tight mt-0.5">{city.description || `${city.aqi} AQI - ${city.status}`}</p>
+                      <h4 className="font-bold text-sm dark:text-slate-100">{city.name}</h4>
+                      <p className="text-[11px] font-bold text-[#717785] dark:text-slate-400 line-clamp-2 max-w-[240px] leading-tight mt-0.5">{city.description || `${city.aqi} AQI - ${city.status}`}</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1">
@@ -569,9 +569,9 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
         <div className="flex justify-between items-center px-2">
           <div>
             <div className="flex items-center gap-3">
-              <h4 className="text-xl font-bold text-[#181c22]">Executive Insights</h4>
+              <h4 className="text-xl font-bold text-[#181c22] dark:text-slate-100">Executive Insights</h4>
               {isLiveNews && (
-                <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[9px] font-black rounded-full animate-pulse uppercase tracking-widest border border-emerald-200">
+                <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[9px] font-black rounded-full animate-pulse uppercase tracking-widest border border-emerald-200 dark:border-emerald-500/30">
                   <span className="w-1 h-1 bg-emerald-500 rounded-full"></span> Live Feed
                 </span>
               )}
@@ -581,14 +581,14 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
           <div className="flex gap-2">
             <button 
               onClick={() => scroll('left')}
-              className="p-2 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-[#1275e2] hover:border-[#1275e2] transition-all shadow-sm active:scale-95"
+              className="p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#1275e2] dark:hover:text-blue-400 hover:border-[#1275e2] dark:hover:border-blue-400 transition-all shadow-sm active:scale-95"
               aria-label="Scroll left"
             >
               <ChevronLeft size={20} />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-2 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-[#1275e2] hover:border-[#1275e2] transition-all shadow-sm active:scale-95"
+              className="p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#1275e2] dark:hover:text-blue-400 hover:border-[#1275e2] dark:hover:border-blue-400 transition-all shadow-sm active:scale-95"
               aria-label="Scroll right"
             >
               <ChevronRight size={20} />
@@ -605,11 +605,11 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
               key={idx} 
               onClick={() => news.link !== '#' && window.open(news.link, '_blank')}
               className={cn(
-                "min-w-[320px] md:min-w-[480px] bg-white/60 backdrop-blur-xl rounded-2xl p-4 border border-white shadow-sm flex gap-4 snap-start hover:bg-white/80 transition-all hover:scale-[1.02] duration-300",
+                "min-w-[320px] md:min-w-[480px] bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-4 border border-white dark:border-slate-800 shadow-sm flex gap-4 snap-start hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all hover:scale-[1.02] duration-300",
                 news.link !== '#' && "cursor-pointer"
               )}
             >
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden shadow-sm shrink-0 bg-slate-100 flex items-center justify-center">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden shadow-sm shrink-0 bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
                 {news.image_url ? (
                   <img 
                     src={news.image_url} 
@@ -620,19 +620,19 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
                     }}
                   />
                 ) : (
-                  <Info size={40} className="text-blue-200" />
+                  <Info size={40} className="text-blue-200 dark:text-blue-900" />
                 )}
               </div>
               <div className="flex-1 flex flex-col justify-between py-1">
                 <div>
-                  <h5 className="font-bold text-sm md:text-base line-clamp-2 text-[#181c22] leading-tight mb-2 group-hover:text-[#1275e2] transition-colors">{news.title}</h5>
-                  <p className="text-xs text-[#717785] line-clamp-2 leading-relaxed">
+                  <h5 className="font-bold text-sm md:text-base line-clamp-2 text-[#181c22] dark:text-slate-100 leading-tight mb-2 group-hover:text-[#1275e2] dark:group-hover:text-blue-400 transition-colors">{news.title}</h5>
+                  <p className="text-xs text-[#717785] dark:text-slate-400 line-clamp-2 leading-relaxed">
                     {news.description}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-1 mt-3">
                   {(news.keywords || []).slice(0, 3).map((tag: string) => (
-                    <span key={tag} className="px-2 py-0.5 bg-blue-50 text-[#1275e2] text-[9px] font-bold rounded-md border border-blue-100 uppercase tracking-tighter">
+                    <span key={tag} className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-[#1275e2] dark:text-blue-400 text-[9px] font-bold rounded-md border border-blue-100 dark:border-blue-900/50 uppercase tracking-tighter">
                       {tag}
                     </span>
                   ))}

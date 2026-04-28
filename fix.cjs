@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = 'c:/Users/Amol/Desktop/Antigravity/AQI project/src/components/views/Stations.tsx';
+const path = './src/components/views/Stations.tsx';
 let content = fs.readFileSync(path, 'utf8');
 
 // 1. Replace Active Sites

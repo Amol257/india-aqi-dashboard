@@ -1,8 +1,8 @@
 import fs from 'fs';
 
-const csvPath = 'c:/Users/Amol/Desktop/Antigravity/data/city_summary.csv';
-const healthPath = 'c:/Users/Amol/Desktop/Antigravity/data/health_data.csv';
-const compositePath = 'c:/Users/Amol/Desktop/Antigravity/data/composite_aqi.csv';
+const csvPath = '../data/city_summary.csv';
+const healthPath = '../data/health_data.csv';
+const compositePath = '../data/composite_aqi.csv';
 
 const csvData = fs.readFileSync(csvPath, 'utf-8');
 const healthData = fs.readFileSync(healthPath, 'utf-8');
@@ -267,5 +267,5 @@ export const EXECUTIVE_INSIGHT = {
 };
 `;
 
-fs.writeFileSync('c:/Users/Amol/Desktop/Antigravity/AQI project/src/constants.ts', tsContent);
+fs.writeFileSync('./src/constants.ts', tsContent);
 console.log('constants.ts updated successfully with real health and composite data.');
