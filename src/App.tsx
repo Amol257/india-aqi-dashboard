@@ -28,11 +28,15 @@ import { MAJOR_CITIES_COMPARISON, TOP_POLLUTED_CITIES, STATIONS_DATA, getAllCiti
 type View = 'summary' | 'city-dive' | 'composite' | 'stations' | 'health';
 
 export default function App() {
-  const [activeView, setActiveView] = useState<View>('summary');
-  const [activeContext, setActiveContext] = useState<any>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const notifications = [
+    { id: 1, title: 'AQI Alert: Delhi', message: 'AQI has reached "Severe" levels (412). Avoid outdoor activities.', time: '12m ago', type: 'error' },
+    { id: 2, title: 'Better Air: Mumbai', message: 'Air quality improved to "Satisfactory" (84). Great for a walk!', time: '2h ago', type: 'success' },
+    { id: 3, title: 'Health Tip', message: 'High Ozone levels expected in Bangalore this afternoon.', time: '5h ago', type: 'warning' },
+  ];
 
   const allCities = React.useMemo(() => getAllCities(), []);
 
@@ -119,13 +123,111 @@ export default function App() {
           </div>
           
           <div className="flex items-center gap-1 md:gap-3">
-            <button className="p-2 rounded-full hover:bg-slate-50 relative group transition-colors">
-              <Bell className="text-slate-600 group-hover:text-[#1275e2]" size={20} />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-            </button>
-            <button className="p-2 rounded-full hover:bg-slate-50 group transition-colors">
-              <Settings className="text-slate-600 group-hover:text-[#1275e2]" size={20} />
-            </button>
+            <div className="relative">
+              <button 
+                onClick={() => {
+                  setIsNotificationsOpen(!isNotificationsOpen);
+                  setIsSettingsOpen(false);
+                }}
+                className={cn(
+                  "p-2 rounded-full transition-all relative group",
+                  isNotificationsOpen ? "bg-blue-50" : "hover:bg-slate-50"
+                )}
+              >
+                <Bell className={cn("transition-colors", isNotificationsOpen ? "text-[#1275e2]" : "text-slate-600 group-hover:text-[#1275e2]")} size={20} />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+              </button>
+
+              <AnimatePresence>
+                {isNotificationsOpen && (
+                  <>
+                    <div className="fixed inset-0 z-10" onClick={() => setIsNotificationsOpen(false)} />
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute top-full right-0 mt-3 w-80 bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl overflow-hidden z-20"
+                    >
+                      <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                        <h3 className="font-black text-sm uppercase tracking-wider text-slate-800">Notifications</h3>
+                        <button className="text-[10px] font-bold text-[#1275e2] hover:underline">Mark all read</button>
+                      </div>
+                      <div className="max-h-96 overflow-y-auto">
+                        {notifications.map(n => (
+                          <div key={n.id} className="p-4 border-b border-slate-50 hover:bg-blue-50/30 transition-colors cursor-pointer group">
+                            <div className="flex justify-between items-start mb-1">
+                              <span className="font-bold text-xs group-hover:text-[#1275e2] transition-colors">{n.title}</span>
+                              <span className="text-[9px] text-slate-400 font-bold">{n.time}</span>
+                            </div>
+                            <p className="text-[11px] text-slate-600 leading-relaxed">{n.message}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <button className="w-full py-3 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-[#1275e2] transition-colors border-t border-slate-100">
+                        View All Notifications
+                      </button>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="relative">
+              <button 
+                onClick={() => {
+                  setIsSettingsOpen(!isSettingsOpen);
+                  setIsNotificationsOpen(false);
+                }}
+                className={cn(
+                  "p-2 rounded-full transition-all group",
+                  isSettingsOpen ? "bg-blue-50" : "hover:bg-slate-50"
+                )}
+              >
+                <Settings className={cn("transition-colors", isSettingsOpen ? "text-[#1275e2]" : "text-slate-600 group-hover:text-[#1275e2]")} size={20} />
+              </button>
+
+              <AnimatePresence>
+                {isSettingsOpen && (
+                  <>
+                    <div className="fixed inset-0 z-10" onClick={() => setIsSettingsOpen(false)} />
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute top-full right-0 mt-3 w-64 bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl overflow-hidden z-20"
+                    >
+                      <div className="p-4 border-b border-slate-100 bg-slate-50/50">
+                        <h3 className="font-black text-sm uppercase tracking-wider text-slate-800">Preferences</h3>
+                      </div>
+                      <div className="p-2 space-y-1">
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                          <span className="text-xs font-bold text-slate-700">Appearance</span>
+                          <span className="text-[10px] font-black text-[#1275e2] bg-blue-100 px-2 py-0.5 rounded-full uppercase">Light</span>
+                        </div>
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                          <span className="text-xs font-bold text-slate-700">Language</span>
+                          <span className="text-[10px] font-black text-slate-400 uppercase">English</span>
+                        </div>
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                          <span className="text-xs font-bold text-slate-700">Units</span>
+                          <span className="text-[10px] font-black text-slate-400 uppercase">AQI (US)</span>
+                        </div>
+                        <div className="h-px bg-slate-100 my-2" />
+                        <div className="px-3 py-2 flex items-center justify-between hover:bg-red-50 rounded-lg cursor-pointer transition-colors group">
+                          <span className="text-xs font-bold text-red-600">Emergency Mode</span>
+                          <div className="w-8 h-4 bg-slate-200 rounded-full relative">
+                            <div className="absolute left-1 top-1 w-2 h-2 bg-white rounded-full" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-3 bg-slate-50 text-center">
+                        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">v2.4.0 Stable Build</p>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
             <div className="w-8 h-8 rounded-full border border-slate-200 bg-blue-100 flex items-center justify-center overflow-hidden">
               <img 
                 src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
