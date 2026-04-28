@@ -8,7 +8,15 @@ export default defineConfig({
   base: './',
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: true
+    assetsDir: '', // Puts everything in the root of dist
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        // Ensure files have clear extensions
+        entryFileNames: `[name].js`,
+        chunkFileNames: `[name].js`,
+        assetFileNames: `[name].[ext]`
+      }
+    }
   }
 });
