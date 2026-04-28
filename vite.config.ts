@@ -5,10 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/india-aqi-dashboard/', // Explicit absolute path for your repo
+  base: '', // Empty string makes all paths relative to index.html (Works everywhere)
   build: {
     outDir: 'dist',
-    assetsDir: '', // Keeps files flat in the root for better MIME recognition
+    assetsDir: '', // Flattened for MIME compatibility
     sourcemap: true,
     rollupOptions: {
       output: {
