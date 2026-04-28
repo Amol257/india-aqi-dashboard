@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/india-aqi-dashboard/', 
+  base: process.env.VITE_BASE_PATH || '/', 
   build: {
     outDir: 'dist',
     sourcemap: true
