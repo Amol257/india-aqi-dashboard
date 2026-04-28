@@ -28,6 +28,10 @@ import { MAJOR_CITIES_COMPARISON, TOP_POLLUTED_CITIES, STATIONS_DATA, getAllCiti
 type View = 'summary' | 'city-dive' | 'composite' | 'stations' | 'health';
 
 export default function App() {
+  const [activeView, setActiveView] = useState<View>('summary');
+  const [activeContext, setActiveContext] = useState<any>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
