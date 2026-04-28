@@ -202,7 +202,7 @@ const RealtimeWeatherWarning = () => {
         </div>
 
         <a 
-          href="/heat_bulletin.pdf"
+          href="./heat_bulletin.pdf"
           download="Heat_Bulletin.pdf"
           target="_blank"
           rel="noopener noreferrer"

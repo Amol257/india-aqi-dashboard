@@ -29,7 +29,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 341,
     "trend": "up",
     "admissions": 3078,
-    "imageUrl": "/db/cities/Khora/Khora.jpg",
+    "imageUrl": "./db/cities/Khora/Khora.jpg",
     "description": "Critical levels due to local industrial discharge and high urban density."
   },
   {
@@ -40,7 +40,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 251,
     "trend": "up",
     "admissions": 2762,
-    "imageUrl": "/db/cities/Charkhi Dadri/Charkhi Dadri.jpg",
+    "imageUrl": "./db/cities/Charkhi Dadri/Charkhi Dadri.jpg",
     "description": "Severe hazardous zone with heavy particulate suspension from agricultural activity."
   },
   {
@@ -51,7 +51,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 250,
     "trend": "up",
     "admissions": 2877,
-    "imageUrl": "/db/cities/Hajipur/Hajipur.jpg",
+    "imageUrl": "./db/cities/Hajipur/Hajipur.jpg",
     "description": "Severe air quality with high industrial smoke entrapment and stagnant air."
   },
   {
@@ -62,7 +62,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 241,
     "trend": "up",
     "admissions": 2986,
-    "imageUrl": "/db/cities/Rohtak/Rohtak.jpg",
+    "imageUrl": "./db/cities/Rohtak/Rohtak.jpg",
     "description": "Hazardous conditions with stagnant air and high construction dust content."
   },
   {
@@ -73,7 +73,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 227,
     "trend": "up",
     "admissions": 2687,
-    "imageUrl": "/db/cities/Modinagar/Modinagar.jpg",
+    "imageUrl": "./db/cities/Modinagar/Modinagar.jpg",
     "description": "Severe industrial zone impact with concentrated PM 2.5 levels today."
   },
   {
@@ -84,7 +84,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 203,
     "trend": "up",
     "admissions": 2629,
-    "imageUrl": "/db/cities/Tirupati/Tirupati.jpg",
+    "imageUrl": "./db/cities/Tirupati/Tirupati.jpg",
     "description": "Severe particulate matter levels due to heavy pilgrimage transit traffic."
   },
   {
@@ -95,7 +95,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 185,
     "trend": "up",
     "admissions": 2735,
-    "imageUrl": "/db/cities/Jind/Jind.png",
+    "imageUrl": "./db/cities/Jind/Jind.png",
     "description": "Severe dust pollution exacerbated by seasonal agricultural waste burning."
   },
   {
@@ -106,7 +106,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 185,
     "trend": "up",
     "admissions": 2856,
-    "imageUrl": "/db/cities/Baddi/Baddi.jpg",
+    "imageUrl": "./db/cities/Baddi/Baddi.jpg",
     "description": "Severe industrial belt pollution trapped in the valley topography."
   },
   {
@@ -117,7 +117,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 184,
     "trend": "up",
     "admissions": 2546,
-    "imageUrl": "/db/cities/Mandi Gobindgarh/Mandi Gobindgarh.jpg",
+    "imageUrl": "./db/cities/Mandi Gobindgarh/Mandi Gobindgarh.jpg",
     "description": "Severe hazardous air from extensive local steel and power plant units."
   },
   {
@@ -128,7 +128,7 @@ export const TOP_POLLUTED_CITIES: CityData[] = [
     "pm25": 174,
     "trend": "up",
     "admissions": 2675,
-    "imageUrl": "/db/cities/Suakati/Suakati.jpg",
+    "imageUrl": "./db/cities/Suakati/Suakati.jpg",
     "description": "Severe levels in the local mining belt with high mineral dust suspension."
   }
 ];
@@ -143,7 +143,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "trend": "up",
     "trendValue": "18%",
     "admissions": 8760,
-    "imageUrl": "/db/cities/Delhi/Delhi.jpg",
+    "imageUrl": "./db/cities/Delhi/Delhi.jpg",
     "description": "Hazardous smog accumulation due to low wind speeds and stubble burning."
   },
   {
@@ -155,7 +155,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "trend": "down",
     "trendValue": "12%",
     "admissions": 7885,
-    "imageUrl": "/db/cities/Mumbai/Mumbai.jpg",
+    "imageUrl": "./db/cities/Mumbai/Mumbai.jpg",
     "description": "Moderate air quality. Seasonal sea breeze helping in dispersion."
   },
   {
@@ -167,7 +167,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "trend": "stable",
     "trendValue": "STABLE",
     "admissions": 5737,
-    "imageUrl": "/db/cities/Bengaluru/Bengaluru.jpg",
+    "imageUrl": "./db/cities/Bengaluru/Bengaluru.jpg",
     "description": "Good air quality. Occasional rain showers helping dispersion."
   },
   {
@@ -179,7 +179,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "trend": "up",
     "trendValue": "8%",
     "admissions": 6115,
-    "imageUrl": "/db/cities/Kolkata/Kolkata.jpg",
+    "imageUrl": "./db/cities/Kolkata/Kolkata.jpg",
     "description": "Poor air quality. High humidity and industrial smoke trapped."
   },
   {
@@ -190,7 +190,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "pm25": 28,
     "trend": "stable",
     "admissions": 5490,
-    "imageUrl": "/db/cities/Chennai/Chennai.jpg",
+    "imageUrl": "./db/cities/Chennai/Chennai.jpg",
     "description": "Satisfactory air quality levels thanks to strong coastal wind dispersion."
   },
   {
@@ -201,7 +201,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "pm25": 53,
     "trend": "stable",
     "admissions": 5498,
-    "imageUrl": "/db/cities/Hyderabad/Hyderabad.jpg",
+    "imageUrl": "./db/cities/Hyderabad/Hyderabad.jpg",
     "description": "Moderate levels due to urban construction and vehicular density."
   }
 ];

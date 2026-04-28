@@ -64,7 +64,7 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
     setNoDataError(false);
     try {
       // 1. Try Local Data First (Requested Switch)
-      const localResponse = await fetch('/data/local_aqi.json');
+      const localResponse = await fetch('./data/local_aqi.json');
       const localDataMap = await localResponse.json();
       
       // Try exact match or underscore match
