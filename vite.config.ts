@@ -1,16 +1,14 @@
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@theme/tailwindcss';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  return {
-    plugins: [react(), tailwindcss()],
-    base: "/india-aqi-dashboard/",
-    build: {
-      outDir: 'dist',
-      assetsDir: 'assets',
-      sourcemap: true
-    }
-  };
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  base: "/india-aqi-dashboard/",
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: true
+  }
 });
