@@ -1,6 +1,6 @@
 # 🌫️ India AQI Dashboard
 
-> **Atmospheric Clarity** — A real-time Air Quality Index dashboard for cities across India, powered by Gemini AI.
+> **Atmospheric Clarity** — A real-time Air Quality Index dashboard for cities across India.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-india--aqi--dashboard.vercel.app-brightgreen?style=flat-square)](https://india-aqi-dashboard.vercel.app)
 [![TypeScript](https://img.shields.io/badge/TypeScript-94%25-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
