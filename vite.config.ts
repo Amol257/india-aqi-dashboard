@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/india-aqi-dashboard/',
+  base: '/india-aqi-dashboard-v2/',
   build: {
     outDir: 'dist',
     sourcemap: true
