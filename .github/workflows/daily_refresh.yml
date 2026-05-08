@@ -39,7 +39,7 @@ jobs:
 
       - name: Fetch & process AQI data
         env:
-          DATA_GOV_API_KEY: 579b464db66ec23bdd00000189279fc7106147b759c6c62ccec790e9
+          DATA_GOV_API_KEY: ${{ secrets.DATA_GOV_API_KEY }}
         run: python scripts/fetch_aqi_data.py
 
       - name: Sync static constants
