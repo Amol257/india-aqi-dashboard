@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
+  LineChart, Line, AreaChart, Area
 } from 'recharts';
 import { TrendingDown, TrendingUp, Info, AlertCircle, Activity, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
@@ -315,25 +316,30 @@ export default function Summary({
         {/* National AQI Gauge Card */}
         <div className="lg:col-span-12 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between min-h-[380px] transition-transform hover:scale-[1.005]">
           <div className="flex flex-col justify-between h-full md:w-1/3">
-            <div>
-              <p className="text-xs font-black uppercase tracking-widest text-[#1275e2]">National Average AQI</p>
-              <h3 className="text-2xl font-bold mt-1 dark:text-slate-100">{getAqiStatusLabel(summaryStats?.avgAqi || 0)}</h3>
-              <p className="text-xs text-slate-500 mt-2 max-w-[280px]">Based on real-time data from across {summaryStats?.totalCities} major urban centers and {summaryStats?.activeStations} monitoring stations.</p>
+            <div className="h-[200px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={nationalTrend.slice(-20)}>
+                  <defs>
+                    <linearGradient id="colorVal" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#1275e2" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#1275e2" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <Area type="monotone" dataKey="val" stroke="#1275e2" fillOpacity={1} fill="url(#colorVal)" strokeWidth={3} />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
-            
-            <div className="grid grid-cols-1 gap-4 mt-8">
-              <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
-                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Medical Alert Estimate</p>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-black dark:text-slate-100">
-                    {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
-                      ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
-                      : summaryStats?.totalAdmissions}
-                  </span>
-                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center">
-                    <TrendingDown size={12} className="mr-0.5" /> 12%
-                  </span>
-                </div>
+            <div className="mt-4">
+              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Medical Alert Trend</p>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-2xl font-black dark:text-slate-100">
+                  {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
+                    ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
+                    : summaryStats?.totalAdmissions}
+                </span>
+                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center">
+                  <TrendingDown size={12} className="mr-0.5" /> 12%
+                </span>
               </div>
             </div>
           </div>
@@ -358,30 +364,37 @@ export default function Summary({
                 <p className="text-xs font-black text-[#717785] dark:text-slate-400 mt-1 uppercase tracking-widest">PM 2.5 Index</p>
               </div>
             </div>
+            
+            {/* Stats below gauge */}
+            <div className="flex gap-8 mt-8 justify-center w-full">
+              <div className="text-center">
+                <p className="text-[9px] text-slate-500 font-black uppercase tracking-widest">Peak</p>
+                <p className="text-lg font-bold text-red-500">{summaryStats?.maxAqiCity.aqi}</p>
+              </div>
+              <div className="text-center">
+                <p className="text-[9px] text-slate-500 font-black uppercase tracking-widest">Pristine</p>
+                <p className="text-lg font-bold text-emerald-500">{summaryStats?.minAqiCity.aqi}</p>
+              </div>
+              <div className="text-center">
+                <p className="text-[9px] text-slate-500 font-black uppercase tracking-widest">Stations</p>
+                <p className="text-lg font-bold dark:text-slate-100">{summaryStats?.activeStations}</p>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col justify-between h-full md:w-1/3 md:pl-12 border-l border-slate-100 dark:border-slate-800">
-            <div className="space-y-6">
-              <div>
-                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Regional Peak Alert</p>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-bold text-red-500">{summaryStats?.maxAqiCity.aqi}</span>
-                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{summaryStats?.maxAqiCity.name}</span>
-                </div>
-              </div>
-              <div>
-                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Pristine Zone</p>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{summaryStats?.minAqiCity.aqi}</span>
-                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{summaryStats?.minAqiCity.name}</span>
-                </div>
-              </div>
-              <div>
-                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Network Coverage</p>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-2xl font-bold text-[#181c22] dark:text-slate-100">{summaryStats?.activeStations.toLocaleString()}</span>
-                  <span className="text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded">99.8% UPTIME</span>
-                </div>
+            <div className="h-[200px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={nationalTrend}>
+                  <Line type="monotone" dataKey="val" stroke="#6366f1" strokeWidth={3} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4">
+              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Network Health</p>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-2xl font-bold text-[#181c22] dark:text-slate-100">99.8%</span>
+                <span className="text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded uppercase">Uptime</span>
               </div>
             </div>
           </div>

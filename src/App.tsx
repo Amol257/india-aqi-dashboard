@@ -81,8 +81,7 @@ export default function App() {
     const fetchLatestData = async () => {
       try {
         setIsLoading(true);
-        const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
-        const response = await fetch(`${baseUrl}/data/local_aqi.json`);
+        const response = await fetch('data/local_aqi.json');
         if (response.ok) {
           const data = await response.json();
           if (data.stations) setStations(data.stations);
