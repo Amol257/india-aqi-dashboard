@@ -3,7 +3,7 @@ import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
   LineChart, Line, AreaChart, Area,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
-  PieChart, Pie
+  PieChart, Pie, BarChart, Bar
 } from 'recharts';
 import { TrendingDown, TrendingUp, Info, AlertCircle, Activity, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
@@ -271,6 +271,12 @@ export default function Summary({
       { subject: 'OZONE', A: Math.round(avgAqi * 0.4), fullMark: 500 },
     ];
 
+    const vulnerability = [
+      { name: 'Children', val: Math.min(100, Math.round(avgAqi * 0.15)), color: '#3b82f6' },
+      { name: 'Elderly', val: Math.min(100, Math.round(avgAqi * 0.18)), color: '#8b5cf6' },
+      { name: 'Chronic', val: Math.min(100, Math.round(avgAqi * 0.22)), color: '#f43f5e' }
+    ];
+
     return {
       avgAqi,
       maxAqiCity: { name: sortedByAqi[0].name, aqi: sortedByAqi[0].aqi },
@@ -280,7 +286,8 @@ export default function Summary({
       totalCities: processedData.length,
       activeStations: totalStations,
       distribution,
-      pollutants
+      pollutants,
+      vulnerability
     };
   }, [processedData, timeframe]);
 
@@ -429,39 +436,85 @@ export default function Summary({
             </div>
           </div>
 
-          <div className="flex flex-col justify-between h-full md:w-1/3 md:pl-12 border-l border-slate-100 dark:border-slate-800">
-            <div className="mb-4">
-              <p className="text-[10px] font-black uppercase tracking-widest text-indigo-500">National Volatility Index</p>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-2xl font-black dark:text-slate-100">Low</span>
-                <span className="px-1.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-[9px] font-black text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20">STABLE</span>
+          <div className="flex flex-col gap-6 h-full md:w-1/3 md:pl-10 border-l border-slate-100 dark:border-slate-800">
+            {/* Health Chart 1: Medical Impact Trend */}
+            <div className="flex-1 min-h-[140px]">
+              <div className="flex justify-between items-start mb-2">
+                <p className="text-[10px] font-black uppercase tracking-widest text-rose-500">Medical Impact Trend</p>
+                <span className="text-[9px] font-bold text-slate-400">EST. ADMISSIONS</span>
+              </div>
+              <div className="h-[100px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={nationalTrend}>
+                    <defs>
+                      <linearGradient id="healthGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.2}/>
+                        <stop offset="95%" stopColor="#f43f5e" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <Area 
+                      type="monotone" 
+                      dataKey="val" 
+                      stroke="#f43f5e" 
+                      strokeWidth={2} 
+                      fill="url(#healthGrad)" 
+                      animationDuration={1500}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
               </div>
             </div>
 
-            <div className="h-[140px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={nationalTrend}>
-                  <Line 
-                    type="monotone" 
-                    dataKey="val" 
-                    stroke="#6366f1" 
-                    strokeWidth={4} 
-                    dot={false} 
-                    animationDuration={2000}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+            {/* Health Chart 2: Respiratory Vulnerability */}
+            <div className="flex-1 min-h-[140px] pt-4 border-t border-slate-50 dark:border-slate-800/50">
+              <div className="flex justify-between items-start mb-3">
+                <p className="text-[10px] font-black uppercase tracking-widest text-indigo-500">Respiratory Vulnerability</p>
+                <span className="text-[9px] font-bold text-slate-400">RISK SCORE</span>
+              </div>
+              <div className="h-[90px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={summaryStats?.vulnerability || []} layout="vertical">
+                    <XAxis type="number" hide domain={[0, 100]} />
+                    <YAxis 
+                      dataKey="name" 
+                      type="category" 
+                      hide
+                    />
+                    <Tooltip 
+                      cursor={{fill: 'transparent'}}
+                      contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '4px', fontSize: '10px' }}
+                    />
+                    <Bar 
+                      dataKey="val" 
+                      radius={[0, 4, 4, 0]} 
+                      barSize={12}
+                    >
+                      {summaryStats?.vulnerability?.map((entry: any, index: number) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex justify-between mt-1 px-1">
+                {summaryStats?.vulnerability?.map((v: any) => (
+                  <div key={v.name} className="flex flex-col items-center">
+                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-tighter">{v.name}</span>
+                    <span className="text-[10px] font-bold dark:text-slate-300">{v.val}%</span>
+                  </div>
+                ))}
+              </div>
             </div>
             
-            <div className="mt-4 p-4 bg-slate-900 dark:bg-slate-950 rounded-xl border border-slate-800 shadow-xl">
-              <div className="flex justify-between items-center">
-                <p className="text-[9px] text-slate-400 font-black uppercase tracking-widest">Network Uptime</p>
-                <span className="text-[10px] font-bold text-emerald-400">99.82%</span>
+            {/* Minimized Uptime Footer */}
+            <div className="p-3 bg-slate-900/5 dark:bg-slate-950/40 rounded-xl border border-slate-100 dark:border-slate-800/60 mt-auto">
+              <div className="flex justify-between items-center mb-1">
+                <p className="text-[8px] text-slate-400 font-black uppercase tracking-widest">Network Health</p>
+                <span className="text-[9px] font-bold text-emerald-500">99.82%</span>
               </div>
-              <div className="w-full bg-slate-800 h-1 rounded-full mt-2 overflow-hidden">
+              <div className="w-full bg-slate-200 dark:bg-slate-800 h-0.5 rounded-full overflow-hidden">
                 <div className="bg-emerald-500 h-full w-[99.8%]" />
               </div>
-              <p className="text-[9px] text-slate-500 mt-2 font-medium">Monitoring {summaryStats?.activeStations} endpoints across 28 states.</p>
             </div>
           </div>
         </div>
