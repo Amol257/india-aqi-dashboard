@@ -23,10 +23,11 @@
 - **🗺️ Interactive Map** — Leaflet-powered map of India with city-level AQI markers and color-coded pollution zones
 - **📊 Trend Charts** — Visualize historical and comparative AQI data across cities using Recharts
 - **🤖 AI Health Insights** — Google Gemini AI generates contextual health recommendations based on current air quality
-- **📰 Pollution News Feed** — Curated air quality news sourced from `news.csv`
+- **📰 News Engine** — Dynamic pollution news feed with fallback to a local dataset for high availability
 - **💨 Health Impact Analysis** — Real-time analysis of AQI levels and their effects on different population groups
-- **📱 Responsive Design** — Works seamlessly on desktop and mobile
-- **✨ Smooth Animations** — Fluid UI transitions powered by Motion
+- **📱 Responsive Design** — Optimized for desktop, tablet, and mobile with a mobile-first philosophy
+- **✨ Premium UI** — Fluid glassmorphism UI with smooth animations powered by Motion
+- **🔄 Automated Pipeline** — Daily data ingestion and normalization from official government sources
 
 ---
 
@@ -39,10 +40,10 @@
 | Mapping | Leaflet, React-Leaflet |
 | Charts | Recharts |
 | AI | Google Gemini AI (`@google/genai`) |
+| Data Processing | Python 3.12, Requests |
 | Build Tool | Vite 6 |
-| Animations | Motion |
 | Icons | Lucide React |
-| Deployment | GitHub Pages |
+| Deployment | GitHub Pages, GitHub Actions |
 
 ---
 
@@ -88,19 +89,21 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```
 india-aqi-dashboard/
-├── .github/workflows/        # CI/CD GitHub Actions pipelines
-├── public/                   # Static assets (icons, images)
-├── scratch/                  # Scratch/experimental files
-├── scripts/                  # Data processing scripts
-├── src/                      # Main React/TypeScript source
-├── .env.example              # Environment variable template
+├── .github/workflows/        # Automated Data Refresh + Deploy pipelines
+├── public/
+│   ├── data/                 # Dynamic datasets (local_aqi.json)
+│   └── db/cities/            # High-resolution city imagery
+├── scripts/
+│   ├── fetch_aqi_data.py     # Python script to pull from data.gov.in
+│   ├── sync_constants.py     # Script to patch frontend constants with fresh data
+│   └── download_images.py    # Utility for managing city assets
+├── src/
+│   ├── components/           # UI Views (Summary, CityDive, etc.)
+│   ├── lib/                  # Utilities and UI helpers
+│   └── constants.ts          # Core dataset and static mappings
 ├── index.html                # HTML entry point
-├── metadata.json             # App metadata
-├── news.csv                  # Pollution news dataset
-├── parse_data.js             # Data parsing utility
-├── fix.cjs / fix_regions.js  # Data normalization utilities
-├── vite.config.ts            # Vite build configuration
-└── tsconfig.json             # TypeScript configuration
+├── package.json              # Dependencies and scripts
+└── vite.config.ts            # Vite configuration
 ```
 
 ---
@@ -136,8 +139,28 @@ This runs `npm run build` then publishes the `dist/` folder to the `gh-pages` br
 
 | Variable | Required | Description |
 |---|---|---|
-| `GEMINI_API_KEY` | ✅ | Google Gemini AI API key — get one free at [aistudio.google.com](https://aistudio.google.com/app/apikey) |
-| `APP_URL` | ✅ | URL where the app is hosted (used for API callbacks and self-referential links) |
+| `VITE_GEMINI_API_KEY` | ✅ | Google Gemini AI API key — get one free at [aistudio.google.com](https://aistudio.google.com/app/apikey) |
+| `DATA_GOV_API_KEY` | ❌ | API key for data.gov.in (only required for manual script execution) |
+
+---
+
+## 📡 Data Pipeline & Refresh Rate
+
+The dashboard uses a sophisticated hybrid data pipeline to ensure accuracy and performance:
+
+### 1. Daily Server-Side Refresh
+Every day at **06:30 AM IST (01:00 UTC)**, a GitHub Action triggers the following workflow:
+- **Fetch**: The `fetch_aqi_data.py` script pulls fresh records from the [official Data.gov.in API](https://api.data.gov.in/).
+- **Process**: Data is cleaned, aggregated by city, and health impact metrics (like respiratory admission estimates) are calculated.
+- **Sync**: The `sync_constants.ts` script patches the frontend's static metadata to ensure search and filtering indices remain current.
+- **Deploy**: A fresh build is automatically deployed to GitHub Pages.
+
+### 2. Live Frontend Polling
+- **10-Minute Cycles**: Once the application is loaded in a browser, it performs a local fetch of the `/data/local_aqi.json` file every **10 minutes**.
+- **Real-Time UI**: This ensures that if you leave the dashboard open, it will automatically reflect the most recent data ingested by the server without requiring a page reload.
+
+### 3. Data Source
+Air quality data is sourced from the **National Air Quality Index (NAQI)** via the Open Government Data (OGD) Platform India.
 
 ---
 

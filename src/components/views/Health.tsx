@@ -246,16 +246,22 @@ const RealtimeWeatherWarning = () => {
   );
 };
 
-export default function Health({ onNavigate }: { onNavigate?: (view: any, context?: any) => void }) {
-  const admissionsData = [
-    { time: '00:00', admissions: 120, baseline: 100 },
-    { time: '04:00', admissions: 145, baseline: 100 },
-    { time: '08:00', admissions: 280, baseline: 110 },
-    { time: '12:00', admissions: 310, baseline: 120 },
-    { time: '16:00', admissions: 260, baseline: 115 },
-    { time: '20:00', admissions: 190, baseline: 105 },
-    { time: '23:59', admissions: 140, baseline: 100 },
-  ];
+export default function Health({ onNavigate, cities = MAJOR_CITIES_COMPARISON }: { onNavigate?: (view: any, context?: any) => void, cities?: CityData[] }) {
+  const admissionsData = React.useMemo(() => {
+    // Generate a trend based on the average AQI
+    const avgAqi = cities.length > 0 ? cities.reduce((acc, c) => acc + c.aqi, 0) / cities.length : 100;
+    const factor = avgAqi / 100;
+    
+    return [
+      { time: '00:00', admissions: Math.round(120 * factor), baseline: 100 },
+      { time: '04:00', admissions: Math.round(145 * factor), baseline: 100 },
+      { time: '08:00', admissions: Math.round(280 * factor), baseline: 110 },
+      { time: '12:00', admissions: Math.round(310 * factor), baseline: 120 },
+      { time: '16:00', admissions: Math.round(260 * factor), baseline: 115 },
+      { time: '20:00', admissions: Math.round(190 * factor), baseline: 105 },
+      { time: '23:59', admissions: Math.round(140 * factor), baseline: 100 },
+    ];
+  }, [cities]);
 
   const pollutantRisks = [
     { name: 'PM 2.5', impact: 'High', systems: ['Cardiovascular', 'Respiratory'], color: 'bg-red-500' },

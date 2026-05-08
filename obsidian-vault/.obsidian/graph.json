@@ -1,0 +1,366 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "\"Summary.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"scroll()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"getCityTier()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"getAqiStatus()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"fetchNews()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"getStatsPattern()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"getAqiColor()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"getAqiStatusLabel()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"Health.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"fetchWeatherAndCity()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"detectLocationAndFetch()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"refreshData()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"getSeverityData()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"cn()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"India AQI Dashboard\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"Google Gemini AI\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"Leaflet Map\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"Recharts Visualization\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"Heat Bulletin\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"Pollution News Feed\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"App.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431454
+      }
+    },
+    {
+      "query": "\"toggleTheme()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431454
+      }
+    },
+    {
+      "query": "\"handleNavigate()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431454
+      }
+    },
+    {
+      "query": "\"renderView()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431454
+      }
+    },
+    {
+      "query": "\"Stations.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 5419232
+      }
+    },
+    {
+      "query": "\"toggleAqiFilter()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5419232
+      }
+    },
+    {
+      "query": "\"getAqiCategory()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5419232
+      }
+    },
+    {
+      "query": "\"getAqiColor()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5419232
+      }
+    },
+    {
+      "query": "\"CityDive.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 7361248
+      }
+    },
+    {
+      "query": "\"getHealthSeverity()\"",
+      "color": {
+        "a": 1,
+        "rgb": 7361248
+      }
+    },
+    {
+      "query": "\"getSeverityActions()\"",
+      "color": {
+        "a": 1,
+        "rgb": 7361248
+      }
+    },
+    {
+      "query": "\"AQI Analysis Dashboard\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701250
+      }
+    },
+    {
+      "query": "\"Respiratory Admissions Correlation\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701250
+      }
+    },
+    {
+      "query": "\"PM2.5 Pollutant\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701250
+      }
+    },
+    {
+      "query": "\"fix_regions.js\"",
+      "color": {
+        "a": 1,
+        "rgb": 10526880
+      }
+    },
+    {
+      "query": "\"getRegion()\"",
+      "color": {
+        "a": 1,
+        "rgb": 10526880
+      }
+    },
+    {
+      "query": "\"update_local_aqi.py\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431520
+      }
+    },
+    {
+      "query": "\"aggregate_city_data()\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431520
+      }
+    },
+    {
+      "query": "\"constants.ts\"",
+      "color": {
+        "a": 1,
+        "rgb": 14710866
+      }
+    },
+    {
+      "query": "\"getAllCities()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14710866
+      }
+    },
+    {
+      "query": "\"utils.ts\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"cn()\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "\"parse_data.js\"",
+      "color": {
+        "a": 1,
+        "rgb": 14717522
+      }
+    },
+    {
+      "query": "\"vite.config.ts\"",
+      "color": {
+        "a": 1,
+        "rgb": 13951058
+      }
+    },
+    {
+      "query": "\"extract_stations.py\"",
+      "color": {
+        "a": 1,
+        "rgb": 5431454
+      }
+    },
+    {
+      "query": "\"merge_stations.py\"",
+      "color": {
+        "a": 1,
+        "rgb": 5419232
+      }
+    },
+    {
+      "query": "\"main.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 7361248
+      }
+    },
+    {
+      "query": "\"types.d.ts\"",
+      "color": {
+        "a": 1,
+        "rgb": 14701250
+      }
+    },
+    {
+      "query": "\"Composite.tsx\"",
+      "color": {
+        "a": 1,
+        "rgb": 10526880
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1.3,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": true,
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 0.18462329271850028,
+  "close": true
+}

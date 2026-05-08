@@ -9,7 +9,17 @@ import 'leaflet/dist/leaflet.css';
 import { TOTAL_STATIONS, STATIONS_DATA, HISTOGRAM_DATA } from '../../constants';
 import { cn } from '../../lib/utils';
 
-export default function Stations({ onNavigate }: { onNavigate?: (view: any, context?: any) => void }) {
+export default function Stations({ 
+  onNavigate, 
+  stations: initialStations = STATIONS_DATA, 
+  lastUpdated: initialLastUpdated = null 
+}: { 
+  onNavigate?: (view: any, context?: any) => void,
+  stations?: any[],
+  lastUpdated?: string | null
+}) {
+  const [stations, setStations] = React.useState(initialStations);
+  const [lastUpdated, setLastUpdated] = React.useState<string | null>(initialLastUpdated);
   const [searchQuery, setSearchQuery] = React.useState('');
   const [region, setRegion] = React.useState('All India');
   const [statusFilter, setStatusFilter] = React.useState('All');
@@ -18,7 +28,10 @@ export default function Stations({ onNavigate }: { onNavigate?: (view: any, cont
   const [currentPage, setCurrentPage] = React.useState(1);
   const [itemsPerPage, setItemsPerPage] = React.useState(10);
 
-  const stations = STATIONS_DATA;
+  React.useEffect(() => {
+    setStations(initialStations);
+    setLastUpdated(initialLastUpdated);
+  }, [initialStations, initialLastUpdated]);
 
   // Dynamic counts derived from stations data
   const totalSites = stations.length;
@@ -114,6 +127,7 @@ export default function Stations({ onNavigate }: { onNavigate?: (view: any, cont
           <h1 className="text-3xl font-bold tracking-tight text-[#181c22] dark:text-slate-100">Stations Analysis</h1>
           <p className="text-[#414753] dark:text-slate-400 mt-2 max-w-2xl font-medium tracking-tight">
             Real-time telemetry and distribution analysis of {activeCount} active monitoring sites.
+            {lastUpdated && <span className="block text-[10px] text-blue-500 font-black mt-2 uppercase tracking-[0.2em]">Live Sync: {new Date(lastUpdated).toLocaleString()}</span>}
           </p>
         </div>
         <div className="flex items-center gap-3 bg-white dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm self-start group transition-all hover:border-[#1275e2]">

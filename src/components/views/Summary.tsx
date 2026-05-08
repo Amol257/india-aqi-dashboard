@@ -4,14 +4,27 @@ import {
 } from 'recharts';
 import { TrendingDown, TrendingUp, Info, AlertCircle, Activity, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
-  EXECUTIVE_INSIGHT,
-  STATIONS_DATA
+  STATIONS_DATA,
+  MAJOR_CITIES_COMPARISON,
+  POLLUTANTS_SUMMARY,
+  getAllCities
 } from '../../constants';
-import { cn } from '../../lib/utils';
-import newsCsvRaw from '../../../news.csv?raw';
+import { cn, getCityImage } from '../../lib/utils';
+import newsCsvRaw from '../../assets/news.csv?raw';
 
-export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' | 'city-dive' | 'composite' | 'stations' | 'health', context?: any) => void }) {
+export default function Summary({ 
+  onNavigate, 
+  stations = STATIONS_DATA, 
+  cities = MAJOR_CITIES_COMPARISON, 
+  lastUpdated: initialLastUpdated = null 
+}: { 
+  onNavigate?: (view: 'summary' | 'city-dive' | 'composite' | 'stations' | 'health', context?: any) => void,
+  stations?: any[],
+  cities?: any[],
+  lastUpdated?: string | null
+}) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [lastUpdated, setLastUpdated] = React.useState<string | null>(initialLastUpdated);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -55,49 +68,11 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
     return 'Severe';
   };
 
-  // Derived Data from STATIONS_DATA for consistency
-  const processedData = React.useMemo(() => {
-    const cityMap: Record<string, any> = {};
+  const processedData = React.useMemo(() => cities, [cities]);
 
-    STATIONS_DATA.forEach(stn => {
-      const cityName = stn.city.split(',')[0].trim();
-      if (!cityMap[cityName]) {
-        cityMap[cityName] = {
-          name: cityName,
-          state: stn.city.split(',')[1]?.trim() || '',
-          aqi_values: [],
-          pm25_values: [],
-          stations: new Set(),
-          description: `Regional monitoring hub for ${cityName}.`
-        };
-      }
-      cityMap[cityName].aqi_values.push(stn.aqi);
-      if (stn.pollutant_values?.['PM2.5']) {
-        cityMap[cityName].pm25_values.push(stn.pollutant_values['PM2.5']);
-      }
-      cityMap[cityName].stations.add(stn.location);
-    });
-
-    return Object.values(cityMap).map((city: any) => {
-      const aqi = Math.round(city.aqi_values.reduce((a: number, b: number) => a + b, 0) / city.aqi_values.length);
-      
-      const tier = getCityTier(city.name);
-
-      const densityMap: Record<string, number> = { "Tier 1": 95, "Industrial": 70, "Tier 2": 45 };
-      const density = (densityMap[tier] || 50) + (city.name.length % 10);
-
-      return {
-        ...city,
-        aqi,
-        peakAqi: Math.max(...city.aqi_values),
-        avgPm25: city.pm25_values.length > 0 ? Math.round(city.pm25_values.reduce((a: number, b: number) => a + b, 0) / city.pm25_values.length) : Math.round(aqi * 0.6),
-        status: getAqiStatus(aqi),
-        category: tier,
-        density,
-        stationsCount: city.stations.size
-      };
-    });
-  }, []);
+  React.useEffect(() => {
+    setLastUpdated(initialLastUpdated);
+  }, [initialLastUpdated]);
 
   const staticNews = React.useMemo(() => [
     { title: 'National AQI Monitoring Expanded', description: `Network now covers ${STATIONS_DATA.length} certified stations across all regions.`, keywords: ['Infrastructure', 'Scale'], image_url: '' },
@@ -297,9 +272,10 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
       {/* Header */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-[#181c22] dark:text-slate-100">National Health Executive Summary</h1>
-          <p className="text-[#414753] dark:text-slate-400 mt-2 max-w-2xl">
-            Real-time aggregated health metrics across {summaryStats?.activeStations.toLocaleString()} monitoring stations in 28 states and 8 union territories.
+          <h1 className="text-3xl font-bold tracking-tight text-[#181c22] dark:text-slate-100">National AQI Health Overview</h1>
+          <p className="text-[#414753] dark:text-slate-400 mt-2 max-w-2xl font-medium tracking-tight">
+            Real-time synchronization with Central Pollution Control Board (CPCB) telemetry.
+            {lastUpdated && <span className="block text-xs text-blue-500 font-bold mt-1 uppercase tracking-widest">Last Updated: {new Date(lastUpdated).toLocaleString()}</span>}
           </p>
         </div>
         <div className="flex bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700 shadow-sm self-start">
@@ -333,26 +309,38 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
         </div>
       </section>
 
-      {/* Bento Grid Top */}
+
+      {/* Top Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* National AQI Gauge Card */}
-        <div className="lg:col-span-8 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col justify-between min-h-[420px] transition-transform hover:scale-[1.01]">
-          <div className="flex justify-between items-start">
+        <div className="lg:col-span-12 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between min-h-[380px] transition-transform hover:scale-[1.005]">
+          <div className="flex flex-col justify-between h-full md:w-1/3">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-[#1275e2]">National Average AQI</p>
               <h3 className="text-2xl font-bold mt-1 dark:text-slate-100">{getAqiStatusLabel(summaryStats?.avgAqi || 0)}</h3>
+              <p className="text-xs text-slate-500 mt-2 max-w-[280px]">Based on real-time data from across {summaryStats?.totalCities} major urban centers and {summaryStats?.activeStations} monitoring stations.</p>
             </div>
-            <div className={cn(
-              "p-2 rounded-xl border",
-              (summaryStats?.avgAqi || 0) <= 100 ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-500/20" : "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-500/20"
-            )}>
-              <Activity size={24} />
+            
+            <div className="grid grid-cols-1 gap-4 mt-8">
+              <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Medical Alert Estimate</p>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-2xl font-black dark:text-slate-100">
+                    {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
+                      ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
+                      : summaryStats?.totalAdmissions}
+                  </span>
+                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center">
+                    <TrendingDown size={12} className="mr-0.5" /> 12%
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center py-6 relative">
+          <div className="flex flex-col items-center justify-center py-6 relative md:w-1/3">
             {/* Custom SVG Gauge */}
-            <div className="w-56 h-56 rounded-full border-18 border-slate-100 dark:border-slate-800 relative flex items-center justify-center shadow-inner">
+            <div className="w-64 h-64 rounded-full border-18 border-slate-100 dark:border-slate-800 relative flex items-center justify-center shadow-inner">
               <svg className="absolute inset-0 w-full h-full -rotate-90">
                 <circle
                   cx="50%" cy="50%" r="46%"
@@ -364,7 +352,7 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
                 />
               </svg>
               <div className="text-center z-10">
-                <span className="text-6xl font-black text-[#181c22] dark:text-slate-100">
+                <span className="text-7xl font-black text-[#181c22] dark:text-slate-100">
                   {summaryStats?.avgAqi}
                 </span>
                 <p className="text-xs font-black text-[#717785] dark:text-slate-400 mt-1 uppercase tracking-widest">PM 2.5 Index</p>
@@ -372,87 +360,29 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-            <div>
-              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Last 24h Peak</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-red-500">{summaryStats?.maxAqiCity.aqi}</span>
-                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 truncate max-w-[60px]">{summaryStats?.maxAqiCity.name}</span>
+          <div className="flex flex-col justify-between h-full md:w-1/3 md:pl-12 border-l border-slate-100 dark:border-slate-800">
+            <div className="space-y-6">
+              <div>
+                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Regional Peak Alert</p>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-2xl font-bold text-red-500">{summaryStats?.maxAqiCity.aqi}</span>
+                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{summaryStats?.maxAqiCity.name}</span>
+                </div>
               </div>
-            </div>
-            <div className="border-x border-slate-100 dark:border-slate-800 px-4">
-              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Cleanest Area</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{summaryStats?.minAqiCity.aqi}</span>
-                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 truncate max-w-[60px]">{summaryStats?.minAqiCity.name}</span>
+              <div>
+                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Pristine Zone</p>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{summaryStats?.minAqiCity.aqi}</span>
+                  <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{summaryStats?.minAqiCity.name}</span>
+                </div>
               </div>
-            </div>
-            <div className="pl-4">
-              <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Stations Active</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-xl font-bold text-[#181c22] dark:text-slate-100">{summaryStats?.activeStations.toLocaleString()}</span>
-                <span className="text-[10px] font-bold text-emerald-500">99.8%</span>
+              <div>
+                <p className="text-[10px] text-[#717785] dark:text-slate-500 font-bold uppercase tracking-widest">Network Coverage</p>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-2xl font-bold text-[#181c22] dark:text-slate-100">{summaryStats?.activeStations.toLocaleString()}</span>
+                  <span className="text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded">99.8% UPTIME</span>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Side Stats */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col justify-between hover:scale-[1.02] transition-transform">
-            <div className="flex justify-between items-center mb-4">
-              <p className="text-xs font-bold text-[#717785] dark:text-slate-500 uppercase tracking-widest">Health Risk Index</p>
-              <span className={cn(
-                "px-2 py-0.5 rounded text-[10px] font-bold",
-                Number(summaryStats?.healthRiskIndex || 0) > 40 ? "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400" : "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400"
-              )}>
-                {Number(summaryStats?.healthRiskIndex || 0) > 40 ? "HIGH" : "MODERATE"}
-              </span>
-            </div>
-            <div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-black dark:text-slate-100">{summaryStats?.healthRiskIndex}%</span>
-                <span className="text-xs font-bold text-red-500 flex items-center">
-                  <TrendingUp size={12} className="mr-0.5" /> 4.1%
-                </span>
-              </div>
-              <p className="text-xs text-[#717785] dark:text-slate-400 mt-1">Population in high exposure zones</p>
-            </div>
-            <div className="h-12 w-full mt-6 flex items-end gap-1.5 px-1">
-              {getStatsPattern('health').map((h, i) => (
-                <div key={i} className={cn(
-                  "flex-1 rounded-t-sm transition-all duration-500",
-                  i % 2 === 0 ? "bg-[#c55b00]" : "bg-slate-200 dark:bg-slate-700"
-                )} style={{ height: `${h}%` }}></div>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm flex flex-col justify-between hover:scale-[1.02] transition-transform">
-            <div className="flex justify-between items-center mb-4">
-              <p className="text-xs font-bold text-[#717785] dark:text-slate-500 uppercase tracking-widest">Medical Alert Load</p>
-              <span className="px-2 py-0.5 bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded text-[10px] font-bold tracking-widest">STABLE</span>
-            </div>
-            <div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-black dark:text-slate-100">
-                {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
-                  ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
-                  : summaryStats?.totalAdmissions}
-                </span>
-                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center">
-                  <TrendingDown size={12} className="mr-0.5" /> {timeframe === 'daily' ? '12%' : '8%'}
-                </span>
-              </div>
-              <p className="text-xs text-[#717785] dark:text-slate-400 mt-1">{timeframe === 'daily' ? 'Daily' : timeframe === 'weekly' ? 'Weekly' : 'Monthly'} respiratory admissions</p>
-            </div>
-            <div className="h-12 w-full mt-6 flex items-end gap-1.5 px-1">
-              {getStatsPattern('medical').reverse().map((h, i) => (
-                <div key={i} className={cn(
-                  "flex-1 rounded-t-sm transition-all duration-500",
-                  h > 60 ? "bg-[#1275e2]" : "bg-blue-100 dark:bg-blue-500/20"
-                )} style={{ height: `${h}%` }}></div>
-              ))}
             </div>
           </div>
         </div>
@@ -538,11 +468,14 @@ export default function Summary({ onNavigate }: { onNavigate?: (view: 'summary' 
                   <div className="flex items-center gap-4">
                     <div className="relative">
                       <div className={cn("w-10 h-10 rounded-full flex items-center justify-center relative z-10 bg-slate-100 dark:bg-slate-700 border border-white dark:border-slate-800 shadow-sm overflow-hidden")}>
-                        {city.imageUrl ? (
-                          <img src={city.imageUrl} alt={city.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                        ) : (
-                          <span className="text-slate-500 dark:text-slate-400 font-bold text-lg">{city.name.charAt(0)}</span>
-                        )}
+                        <img 
+                          src={getCityImage(city.name, city.imageUrl, city.state)} 
+                          alt={city.name} 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1564507592333-c60657451dd6?auto=format&fit=crop&q=80&w=400';
+                          }}
+                        />
                       </div>
                       <div className={cn("absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center z-20 shadow-sm", bgClass, colorClass)}>
                         <MapPin size={8} />

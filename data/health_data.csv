@@ -1,0 +1,247 @@
+City,State,Avg_PM25,Avg_AQI,Peak_AQI,AQI_Category,Monitoring_Stations,Respiratory_Admissions
+Khora,Uttar_Pradesh,341.0,470.0,470,Hazardous,1,3078
+Charkhi Dadri,Haryana,251.0,401.0,401,Hazardous,1,2762
+Hajipur,Bihar,250.0,400.0,400,Severe,1,2877
+Rohtak,Haryana,241.0,393.0,393,Severe,1,2986
+Modinagar,Uttar_Pradesh,227.0,382.0,382,Severe,1,2687
+Tirupati,Andhra_Pradesh,203.0,364.0,364,Severe,1,2629
+Baddi,Himachal Pradesh,185.0,350.0,350,Severe,1,2856
+Jind,Haryana,185.0,350.0,350,Severe,1,2735
+Mandi Gobindgarh,Punjab,184.0,349.0,349,Severe,1,2546
+Suakati,Odisha,174.0,342.0,342,Severe,1,2675
+Manesar,Haryana,172.0,340.0,340,Severe,1,2518
+Yamuna Nagar,Haryana,172.0,340.0,340,Severe,1,2518
+Bahadurgarh,Haryana,169.0,338.0,338,Severe,1,2617
+Ghaziabad,Uttar_Pradesh,171.5,328.5,425,Severe,6,3164
+Patna,Bihar,174.3,325.7,435,Severe,6,3583
+Kalyan,Maharashtra,152.0,325.0,325,Severe,1,2455
+Gurugram,Haryana,158.5,323.2,420,Severe,4,2382
+Nandesari,Gujarat,140.0,315.0,315,Severe,1,2555
+Begusarai,Bihar,134.0,311.0,311,Severe,1,2358
+Motihari,Bihar,132.0,309.0,309,Severe,1,2276
+Baghpat,Uttar_Pradesh,128.0,306.0,306,Severe,1,2699
+Panchgaon,Haryana,128.0,306.0,306,Severe,1,2445
+Narnaul,Haryana,128.0,306.0,306,Severe,1,2489
+Palwal,Haryana,128.0,306.0,306,Severe,1,2265
+Vadodara,Gujarat,125.0,304.0,304,Severe,1,2391
+Hapur,Uttar_Pradesh,125.0,304.0,304,Severe,1,2489
+Hanumangarh,Rajasthan,125.0,304.0,304,Severe,1,2300
+Dharuhera,Haryana,119.0,297.0,297,Very Poor,1,2506
+Saharsa,Bihar,118.0,293.0,293,Very Poor,1,2347
+Arrah,Bihar,112.0,273.0,273,Very Poor,1,2329
+Delhi,Delhi,119.4,265.9,365,Very Poor,44,8760
+Gorakhpur,Uttar_Pradesh,109.0,263.0,263,Very Poor,1,2619
+Vatva,Gujarat,108.0,260.0,260,Very Poor,1,2329
+Kurukshetra,Haryana,106.0,253.0,253,Very Poor,1,2150
+Ballabgarh,Haryana,105.0,250.0,250,Very Poor,1,2423
+Karnal,Haryana,104.0,247.0,247,Very Poor,1,2107
+Baran,Rajasthan,104.0,247.0,247,Very Poor,1,2321
+Chandrapur,Maharashtra,104.0,247.0,247,Very Poor,1,1996
+Byrnihat,Assam,104.0,247.0,247,Very Poor,1,2091
+Meerut,Uttar_Pradesh,141.2,245.0,451,Very Poor,4,2313
+Faridabad,Haryana,128.0,242.7,375,Very Poor,3,2387
+Bhagalpur,Bihar,130.5,241.5,356,Very Poor,2,2298
+Lucknow,Uttar_Pradesh,112.5,240.2,335,Very Poor,6,4251
+Muzaffarpur,Bihar,132.3,239.7,392,Very Poor,3,2221
+Gaya,Bihar,100.3,234.7,300,Very Poor,3,2029
+Noida,Uttar_Pradesh,98.5,228.2,270,Very Poor,4,2122
+Jaipur,Rajasthan,99.3,225.2,311,Very Poor,6,4151
+Panchkula,Haryana,97.0,223.0,223,Very Poor,1,2372
+Udaipur,Rajasthan,96.0,220.0,220,Very Poor,1,2255
+Barbil,Odisha,96.0,220.0,220,Very Poor,1,1939
+Muzaffarnagar,Uttar_Pradesh,95.0,217.0,217,Very Poor,1,2243
+Bhiwadi,Rajasthan,111.5,214.5,337,Very Poor,2,2128
+Kaithal,Haryana,93.0,210.0,210,Very Poor,1,2070
+Vapi,Gujarat,92.0,207.0,207,Very Poor,1,2254
+Parbhani,Maharashtra,91.0,203.0,203,Very Poor,1,2304
+Greater Noida,Uttar_Pradesh,87.5,192.0,257,Poor,2,2254
+Gummidipoondi,TamilNadu,87.0,190.0,190,Poor,1,1982
+Dharwad,Karnataka,87.0,190.0,190,Poor,1,2061
+Ludhiana,Punjab,86.0,187.0,187,Poor,1,2148
+Khurja,Uttar_Pradesh,85.0,183.0,183,Poor,1,2231
+Nagpur,Maharashtra,84.0,180.0,280,Poor,3,3504
+Bilaspur,Chhattisgarh,83.0,177.0,177,Poor,1,2038
+Pali,Rajasthan,83.0,177.0,177,Poor,1,1900
+Kannur,Kerala,83.0,177.0,177,Poor,1,1886
+Malegaon,Maharashtra,81.0,170.0,170,Poor,1,2165
+Bhavnagar,Gujarat,80.0,167.0,167,Poor,1,2237
+Akola,Maharashtra,80.0,167.0,167,Poor,1,2023
+Panipat,Haryana,79.0,163.0,163,Poor,1,2172
+Dhule,Maharashtra,79.0,163.0,163,Poor,1,2075
+Purnia,Bihar,78.0,160.0,160,Poor,1,1915
+Sonipat,Haryana,77.0,157.0,157,Poor,1,2056
+Pampore,Jammu_and_Kashmir,77.0,157.0,157,Poor,1,2233
+Bulandshahr,Uttar_Pradesh,77.0,157.0,157,Poor,1,1997
+Talcher,Odisha,76.0,153.0,153,Poor,1,2224
+Nanded,Maharashtra,76.0,153.0,153,Poor,1,1596
+Mandideep,Madhya Pradesh,76.0,153.0,153,Poor,1,2112
+Firozabad,Uttar_Pradesh,75.0,152.5,210,Poor,2,2001
+Varanasi,Uttar_Pradesh,73.0,152.0,203,Poor,3,2841
+Navi Mumbai,Maharashtra,74.0,147.6,243,Poor,5,1986
+Munger,Bihar,74.0,147.0,147,Poor,1,1672
+Kota,Rajasthan,69.3,146.0,308,Poor,3,1934
+Rourkela,Odisha,72.7,145.3,187,Poor,3,2018
+Nayagarh,Odisha,73.0,143.0,143,Poor,1,2179
+Aurangabad,Maharashtra,73.0,143.0,183,Poor,2,1879
+Solapur,Maharashtra,72.5,142.5,187,Poor,2,1834
+Singrauli,Madhya Pradesh,72.0,140.0,140,Poor,1,1872
+Pimpri-Chinchwad,Maharashtra,68.3,134.6,257,Poor,7,2068
+Ujjain,Madhya Pradesh,70.0,133.0,133,Poor,1,1974
+Angul,Odisha,70.0,133.0,133,Poor,1,1846
+Agra,Uttar_Pradesh,66.4,131.4,306,Poor,5,2997
+Guntur,Andhra_Pradesh,69.0,130.0,130,Poor,1,1930
+Bhiwandi,Maharashtra,68.0,127.0,127,Poor,1,2051
+Tumidih,Chhattisgarh,68.0,127.0,127,Poor,1,1801
+Katni,Madhya Pradesh,68.0,127.0,127,Poor,1,1857
+Rajkot,Gujarat,67.0,123.0,123,Poor,1,1834
+Sri Ganganagar,Rajasthan,67.0,123.0,123,Poor,1,1674
+Churu,Rajasthan,66.0,120.0,120,Poor,1,1928
+Hisar,Haryana,66.0,120.0,120,Poor,1,1923
+Ahmedabad,Gujarat,64.0,120.0,190,Poor,8,4884
+Kanpur,Uttar_Pradesh,65.7,119.3,157,Poor,3,3546
+Durgapur,West_Bengal,64.0,117.7,143,Poor,3,1664
+Jalgaon,Maharashtra,65.0,117.0,117,Poor,1,1811
+Baripada,Odisha,65.0,117.0,117,Poor,1,1822
+Asansol,West_Bengal,56.0,114.8,270,Poor,4,1747
+Anantapur,Andhra_Pradesh,64.0,113.0,113,Poor,1,1837
+Agartala,Tripura,64.0,113.0,113,Poor,1,1922
+Latur,Maharashtra,64.0,113.0,113,Poor,1,2144
+Siwan,Bihar,64.0,113.0,113,Poor,1,1887
+Nagaon,Assam,64.0,113.0,113,Poor,1,1900
+Vijayawada,Andhra_Pradesh,61.0,112.5,143,Poor,2,1848
+Nashik,Maharashtra,60.5,110.5,157,Poor,4,1565
+Karauli,Rajasthan,63.0,110.0,110,Poor,1,1848
+Ajmer,Rajasthan,63.0,110.0,110,Poor,1,1861
+Gwalior,Madhya Pradesh,57.0,109.5,157,Poor,2,2219
+Ramanagara,Karnataka,62.0,107.0,107,Poor,1,1813
+Mumbai,Maharashtra,59.0,106.4,348,Poor,23,7885
+Pune,Maharashtra,57.2,104.0,170,Poor,5,4327
+Chikkaballapur,Karnataka,61.0,103.0,103,Poor,1,1654
+Gandhinagar,Gujarat,57.7,103.0,143,Poor,3,2001
+Alwar,Rajasthan,61.0,103.0,103,Poor,1,1942
+Tonk,Rajasthan,61.0,103.0,103,Poor,1,1948
+Rajgir,Bihar,61.0,103.0,103,Poor,1,1693
+Mahad,Maharashtra,61.0,103.0,103,Poor,1,2040
+Damoh,Madhya Pradesh,61.0,103.0,103,Poor,1,1619
+Surat,Gujarat,59.5,102.5,113,Poor,2,1916
+Buxar,Bihar,60.0,100.0,100,Moderate,1,2148
+Indore,Madhya Pradesh,54.8,99.4,180,Moderate,5,2969
+Dewas,Madhya Pradesh,59.0,98.0,98,Moderate,1,1728
+Amritsar,Punjab,59.0,98.0,98,Moderate,1,1828
+Bengaluru,Karnataka,53.9,97.8,167,Moderate,10,5737
+Moradabad,Uttar_Pradesh,53.0,97.3,190,Moderate,6,1578
+Jalna,Maharashtra,58.0,97.0,97,Moderate,1,1820
+Yadgir,Karnataka,58.0,97.0,97,Moderate,1,1651
+Siliguri,West_Bengal,58.0,97.0,97,Moderate,1,1881
+Jalandhar,Punjab,58.0,97.0,97,Moderate,1,1672
+Eluru,Andhra_Pradesh,58.0,97.0,97,Moderate,1,2042
+Jhunjhunu,Rajasthan,58.0,97.0,97,Moderate,1,1692
+Pithampur,Madhya Pradesh,57.0,95.0,95,Moderate,1,1755
+Bihar Sharif,Bihar,57.0,95.0,95,Moderate,1,1926
+Bathinda,Punjab,57.0,95.0,95,Moderate,1,1619
+Jorapokhar,Jharkhand,57.0,95.0,95,Moderate,1,1838
+Hyderabad,Telangana,53.4,94.5,140,Moderate,12,5498
+Chittoor,Andhra_Pradesh,56.0,93.0,93,Moderate,1,1556
+Dausa,Rajasthan,56.0,93.0,93,Moderate,1,1825
+Mira-Bhayandar,Maharashtra,56.0,93.0,93,Moderate,1,1836
+Bhopal,Madhya Pradesh,54.7,93.0,110,Moderate,3,3014
+Thane,Maharashtra,55.0,92.0,92,Moderate,1,1608
+Sagar,Madhya Pradesh,54.0,90.0,90,Moderate,1,1589
+Mehsana,Gujarat,54.0,90.0,90,Moderate,1,1866
+Patiala,Punjab,54.0,90.0,90,Moderate,1,1832
+Kadapa,Andhra_Pradesh,54.0,90.0,90,Moderate,1,1825
+Haldia,West_Bengal,53.0,88.0,88,Moderate,1,1833
+Kishanganj,Bihar,53.0,88.0,88,Moderate,1,1679
+Belgaum,Karnataka,53.0,88.0,88,Moderate,1,1816
+Badlapur,Maharashtra,53.0,88.0,88,Moderate,1,1825
+Keonjhar,Odisha,53.0,88.0,88,Moderate,1,1674
+Barrackpore,West_Bengal,53.0,88.0,88,Moderate,1,2061
+Ooty,TamilNadu,52.0,87.0,87,Moderate,1,1849
+Ambernath,Maharashtra,52.0,87.0,87,Moderate,1,1599
+Coimbatore,TamilNadu,51.0,85.0,85,Moderate,1,1870
+Kolhapur,Maharashtra,51.0,85.0,85,Moderate,1,1625
+Ulhasnagar,Maharashtra,46.0,84.0,130,Moderate,2,1886
+Satna,Madhya Pradesh,50.0,83.0,83,Moderate,1,1939
+Khanna,Punjab,50.0,83.0,83,Moderate,1,1642
+Gangtok,Sikkim,50.0,83.0,83,Moderate,1,1910
+Jabalpur,Madhya Pradesh,49.8,83.0,90,Moderate,4,1827
+Banswara,Rajasthan,49.0,82.0,82,Moderate,1,1885
+Boisar,Maharashtra,49.0,82.0,82,Moderate,1,2046
+Araria,Bihar,49.0,82.0,82,Moderate,1,1725
+Brajrajnagar,Odisha,49.0,82.0,82,Moderate,1,1649
+Tirumala,Andhra_Pradesh,49.0,82.0,82,Moderate,1,1628
+Satara,Maharashtra,48.0,80.0,80,Moderate,1,1633
+Kunjemura,Chhattisgarh,48.0,80.0,80,Moderate,1,1744
+Amravati,Maharashtra,47.5,79.5,87,Moderate,2,1805
+Byasanagar,Odisha,47.0,78.0,78,Moderate,1,1791
+Sangli,Maharashtra,47.0,78.0,78,Moderate,1,1873
+Sikar,Rajasthan,47.0,78.0,78,Moderate,1,1751
+Mandikhera,Haryana,47.0,78.0,78,Moderate,1,1967
+Howrah,West_Bengal,46.4,77.2,88,Moderate,5,1707
+Ratlam,Madhya Pradesh,46.0,77.0,77,Moderate,1,2154
+Tensa,Odisha,46.0,77.0,77,Moderate,1,1840
+Kolkata,West_Bengal,45.7,76.4,97,Moderate,7,6115
+Vrindavan,Uttar_Pradesh,45.0,75.0,75,Moderate,1,1579
+Mangalore,Karnataka,45.0,75.0,75,Moderate,1,1812
+Jhalawar,Rajasthan,45.0,75.0,75,Moderate,1,1706
+Chandigarh,Chandigarh,44.0,73.5,92,Moderate,2,1842
+Dehradun,Uttarakhand,44.0,73.0,73,Moderate,1,1804
+Virar,Maharashtra,44.0,73.0,73,Moderate,1,1722
+Pratapgarh,Rajasthan,44.0,73.0,73,Moderate,1,1606
+Balasore,Odisha,44.0,73.0,73,Moderate,1,1506
+Rairangpur,Odisha,42.0,70.0,70,Moderate,1,1657
+Nagaur,Rajasthan,42.0,70.0,70,Moderate,1,1852
+Machilipatnam,Andhra_Pradesh,42.0,70.0,70,Moderate,1,1756
+Bhubaneswar,Odisha,40.5,67.5,72,Moderate,2,1529
+Bareilly,Uttar_Pradesh,40.5,67.5,88,Moderate,2,1741
+Chittorgarh,Rajasthan,40.0,67.0,67,Moderate,1,1772
+Perundurai,TamilNadu,40.0,67.0,67,Moderate,1,1581
+Visakhapatnam,Andhra_Pradesh,40.0,67.0,67,Moderate,1,2537
+Raipur,Chhattisgarh,39.7,66.3,90,Moderate,3,1720
+Guwahati,Assam,39.7,66.0,80,Moderate,3,1539
+Jodhpur,Rajasthan,38.8,65.4,107,Moderate,5,1762
+Prayagraj,Uttar_Pradesh,39.0,65.0,78,Moderate,3,1792
+Sirsa,Haryana,39.0,65.0,65,Moderate,1,1870
+Hubballi,Karnataka,39.0,65.0,65,Moderate,1,1866
+Chamarajanagar,Karnataka,38.0,63.0,63,Moderate,1,1494
+Kalaburagi,Karnataka,37.0,62.0,62,Moderate,1,1557
+Nellore,Andhra_Pradesh,37.0,62.0,62,Moderate,1,1775
+Bundi,Rajasthan,37.0,62.0,62,Moderate,1,1775
+Aurangabad,Bihar,37.0,62.0,62,Moderate,1,1775
+Sawai Madhopur,Rajasthan,37.0,62.0,62,Moderate,1,2276
+Sasaram,Bihar,36.0,60.0,60,Moderate,1,1777
+Dombivli,Maharashtra,35.0,58.0,58,Moderate,1,1855
+Bagalkot,Karnataka,34.0,57.0,57,Moderate,1,1825
+Dungarpur,Rajasthan,34.0,57.0,57,Moderate,1,1780
+Srinagar,Jammu_and_Kashmir,34.0,57.0,72,Moderate,2,1635
+Bhiwani,Haryana,33.0,55.0,55,Moderate,1,1789
+Cuttack,Odisha,33.0,55.0,55,Moderate,1,1560
+Bettiah,Bihar,33.0,55.0,55,Moderate,1,1640
+Bhilwara,Rajasthan,33.0,55.0,55,Moderate,1,1603
+Naharlagun,Arunachal_Pradesh,32.0,53.0,53,Moderate,1,1681
+Nalbari,Assam,32.0,53.0,53,Moderate,1,2016
+Thiruvananthapuram,Kerala,31.0,52.0,52,Moderate,1,1386
+Vijayapura,Karnataka,30.0,50.0,50,Good,1,1762
+Bharatpur,Rajasthan,30.0,50.0,50,Good,1,1418
+Bhilai,Chhattisgarh,29.3,48.7,53,Good,3,1585
+Mysuru,Karnataka,29.0,48.0,48,Good,1,1816
+Jalore,Rajasthan,29.0,48.0,48,Good,1,1663
+Chennai,TamilNadu,28.4,47.4,98,Good,7,5490
+Amaravati,Andhra_Pradesh,28.0,47.0,47,Good,1,1543
+Jhansi,Uttar_Pradesh,28.0,47.0,47,Good,1,1752
+Sirohi,Rajasthan,28.0,47.0,47,Good,1,1540
+Shivamogga,Karnataka,26.0,43.0,43,Good,1,1670
+Barmer,Rajasthan,26.0,43.0,43,Good,1,1644
+Madikeri,Karnataka,25.0,42.0,42,Good,1,1536
+Silchar,Assam,24.0,40.0,40,Good,1,1949
+Shillong,Meghalaya,23.0,38.0,38,Good,1,1716
+Hingoli,Maharashtra,23.0,38.0,38,Good,1,1317
+Korba,Chhattisgarh,22.0,36.5,50,Good,2,1644
+Sivasagar,Assam,21.0,35.0,35,Good,1,1512
+Aizawl,Mizoram,18.0,30.0,30,Good,1,1723
+Rupnagar,Punjab,17.0,28.0,28,Good,1,1470
+Rajsamand,Rajasthan,17.0,28.0,28,Good,1,1572
+Rajamahendravaram,Andhra_Pradesh,16.0,27.0,27,Good,1,1662
+Puducherry,Puducherry,14.0,23.0,23,Good,1,1703
+Ambala,Haryana,9.0,15.0,15,Good,1,1367
+Rishikesh,Uttarakhand,2.0,3.0,3,Good,1,1459

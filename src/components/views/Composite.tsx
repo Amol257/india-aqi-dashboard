@@ -12,12 +12,20 @@ import {
 } from '../../constants';
 import { cn } from '../../lib/utils';
 
-export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary' | 'city-dive' | 'composite' | 'stations' | 'health', context?: any) => void }) {
+export default function Composite({ 
+  onNavigate,
+  stations = STATIONS_DATA,
+  cities = MAJOR_CITIES_COMPARISON
+}: { 
+  onNavigate?: (view: any, context?: any) => void,
+  stations?: any[],
+  cities?: any[]
+}) {
   const [activePollutant, setActivePollutant] = useState('pm25');
   const [selectedRegion, setSelectedRegion] = useState('All');
   const [isRegionDropdownOpen, setIsRegionDropdownOpen] = useState(false);
 
-  const allCities = useMemo(() => getAllCities(), []);
+  const allCities = cities;
 
   const correlationData = useMemo(() => {
     // Map UI ID to CSV ID
@@ -31,7 +39,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
     };
     const csvId = pollutantMap[activePollutant] || activePollutant;
 
-    return STATIONS_DATA.map(stn => {
+    return stations.map(stn => {
       const pollutantVal = (stn.pollutant_values as Record<string, any>)?.[csvId] || 0;
       return {
         city: stn.location,
@@ -40,7 +48,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
         region: stn.region.replace(' India', '')
       };
     }).filter(d => (selectedRegion === 'All' || d.region === selectedRegion) && d.x > 0);
-  }, [activePollutant, selectedRegion]);
+  }, [activePollutant, selectedRegion, stations]);
 
   const dynamicPollutants = useMemo(() => {
     const pollutantMap: Record<string, string> = {
@@ -54,7 +62,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
 
     return POLLUTANTS_SUMMARY.map(p => {
       const csvId = pollutantMap[p.id] || p.id;
-      const relevantStations = STATIONS_DATA.filter(s => 
+      const relevantStations = stations.filter(s => 
         (selectedRegion === 'All' || s.region.startsWith(selectedRegion)) && 
         (s.pollutant_values as Record<string, any>)?.[csvId] !== undefined
       );
@@ -75,7 +83,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
         icon: p.id === 'pm25' ? Cloud : p.id === 'pm10' ? Factory : Sun
       };
     });
-  }, [selectedRegion]);
+  }, [selectedRegion, stations]);
 
   return (
     <div className="space-y-8 pb-10">
@@ -84,7 +92,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-[#181c22] dark:text-slate-100">Composite Air Quality Index</h1>
           <p className="text-[#414753] dark:text-slate-400 mt-1 max-w-2xl font-medium">
-            Real-time weighted integration of {STATIONS_DATA.length} monitoring stations across India.
+            Real-time weighted integration of {stations.length} monitoring stations across India.
           </p>
         </div>
         <div className="flex gap-2 self-start">
@@ -202,7 +210,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
           <div className="mt-8 grid grid-cols-3 gap-6">
             {[
               { label: 'Correlation', value: '0.89' },
-              { label: 'Active Stations', value: STATIONS_DATA.length.toString() },
+              { label: 'Active Stations', value: stations.length.toString() },
               { label: 'Data Quality', value: '98%' },
             ].map(stat => (
               <div key={stat.label} className="bg-[#f1f3fc] dark:bg-slate-800 p-4 rounded-xl border border-[#c1c6d5]/20 dark:border-slate-700/30 text-center">
@@ -328,7 +336,7 @@ export default function Composite({ onNavigate }: { onNavigate?: (view: 'summary
               onClick={() => onNavigate?.('stations')}
               className="px-8 py-3 bg-[#f1f3fc] dark:bg-slate-800 hover:bg-[#e6e8f1] dark:hover:bg-slate-700 text-[#005ab4] dark:text-blue-400 font-black text-[11px] uppercase tracking-[0.2em] rounded-2xl transition-all"
             >
-              View All {STATIONS_DATA.length} Stations
+              View All {stations.length} Stations
             </button>
           </div>
         </div>

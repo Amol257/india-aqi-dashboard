@@ -13,12 +13,20 @@ import {
   getAllCities,
   CityData
 } from '../../constants';
-import { cn } from '../../lib/utils';
+import { cn, getCityImage } from '../../lib/utils';
 
 
 
-export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (view: 'summary' | 'city-dive' | 'composite' | 'stations' | 'health', context?: any) => void, initialCity?: CityData | string }) {
-  const allCities = React.useMemo(() => getAllCities(), []);
+export default function CityDive({ 
+  onNavigate, 
+  initialCity, 
+  cities = MAJOR_CITIES_COMPARISON 
+}: { 
+  onNavigate?: (view: any, context?: any) => void, 
+  initialCity?: CityData | string,
+  cities?: CityData[]
+}) {
+  const allCities = cities;
   
   const [selectedCity, setSelectedCity] = React.useState<CityData>(() => {
     if (initialCity) {
@@ -33,18 +41,24 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
   
   React.useEffect(() => {
     if (initialCity) {
-      const found = allCities.find(c => c.name === initialCity);
-      if (found) setSelectedCity(found);
+      if (typeof initialCity === 'object') {
+        setSelectedCity(initialCity);
+      } else {
+        const found = allCities.find(c => c.name === initialCity);
+        if (found) setSelectedCity(found);
+      }
     }
   }, [initialCity, allCities]);
 
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const [dropdownSearch, setDropdownSearch] = React.useState('');
   
-  const filteredDropdownCities = allCities.filter(c => 
-    c.name.toLowerCase().includes(dropdownSearch.toLowerCase()) ||
-    c.state.toLowerCase().includes(dropdownSearch.toLowerCase())
-  ).slice(0, 50); // Show top 50 matches to keep it fast
+  const filteredDropdownCities = [...allCities]
+    .filter(c => 
+      c.name.toLowerCase().includes(dropdownSearch.toLowerCase()) ||
+      c.state.toLowerCase().includes(dropdownSearch.toLowerCase())
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
   
   const [healthData, setHealthData] = React.useState<{
     pm25: number, 
@@ -67,8 +81,9 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
     setNoDataError(false);
     try {
       // 1. Try Local Data First (Requested Switch)
-      const localResponse = await fetch('./data/local_aqi.json');
-      const localDataMap = await localResponse.json();
+      const localResponse = await fetch('/data/local_aqi.json');
+      const rootData = await localResponse.json();
+      const localDataMap = rootData.city_aggregation || {};
       
       // Try exact match or underscore match
       const cityName = city.name.trim();
@@ -252,13 +267,14 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
                         selectedCity.name === city.name ? "bg-blue-50 dark:bg-blue-900/30 text-[#1275e2] dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
                       )}
                     >
-                      {city.imageUrl ? (
-                        <img src={city.imageUrl} alt="" className="w-8 h-8 rounded-lg object-cover shadow-sm" />
-                      ) : (
-                        <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-400 dark:text-slate-500">
-                          <MapPin size={14} />
-                        </div>
-                      )}
+                      <img 
+                        src={getCityImage(city.name, city.imageUrl, city.state)} 
+                        alt="" 
+                        className="w-8 h-8 rounded-lg object-cover shadow-sm" 
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1564507592333-c60657451dd6?auto=format&fit=crop&q=80&w=100';
+                        }}
+                      />
                       <div>
                         <div className="dark:text-slate-100">{city.name}</div>
                         <div className="text-[9px] text-slate-400 dark:text-slate-500 font-medium">{city.state}</div>
@@ -290,9 +306,12 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
         <div className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 relative overflow-hidden h-full flex flex-col justify-end group cursor-pointer transition-all duration-500 hover:shadow-xl hover:shadow-blue-50/10">
           <div className="absolute top-0 left-0 w-full h-full">
             <img 
-              src={selectedCity.imageUrl || "https://images.unsplash.com/photo-1587474260584-1f20d4296ca4?auto=format&fit=crop&q=80&w=1200"} 
+              src={getCityImage(selectedCity.name, selectedCity.imageUrl, selectedCity.state)} 
               alt={selectedCity.name} 
               className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1564507592333-c60657451dd6?auto=format&fit=crop&q=80&w=1200';
+              }}
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent"></div>
           </div>
@@ -386,7 +405,11 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
                   <div 
                     className={cn(
                       "h-full rounded-full relative group-hover:brightness-110 transition-all duration-1000",
-                      city.aqi > 400 ? "bg-[#ba1a1a]" : city.aqi > 300 ? "bg-[#c55b00]" : "bg-[#f97316]"
+                      city.aqi > 400 ? "bg-[#7C3AED]" : 
+                      city.aqi > 300 ? "bg-[#A855F7]" : 
+                      city.aqi > 200 ? "bg-[#EF4444]" : 
+                      city.aqi > 100 ? "bg-[#F97316]" : 
+                      city.aqi > 50 ? "bg-[#EAB308]" : "bg-[#22C55E]"
                     )}
                     style={{ width: `${Math.min(100, (city.aqi / 500) * 100)}%` }}
                   />
@@ -553,7 +576,7 @@ export default function CityDive({ onNavigate, initialCity }: { onNavigate?: (vi
       <div className="mt-12">
         <h3 className="text-2xl font-black text-[#181c22] dark:text-slate-100 mb-8 tracking-tight">Regional Comparison</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {MAJOR_CITIES_COMPARISON.slice(0, 4).map((city) => (
+          {cities.slice().sort((a, b) => b.aqi - a.aqi).slice(0, 4).map((city) => (
             <div key={city.name} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all cursor-pointer group">
               <div className="flex justify-between items-start mb-4">
                 <div>

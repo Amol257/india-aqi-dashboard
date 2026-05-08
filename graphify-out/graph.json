@@ -1,0 +1,829 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "fix_regions.js",
+      "file_type": "code",
+      "source_file": "fix_regions.js",
+      "source_location": "L1",
+      "id": "fix_regions_js",
+      "community": 7,
+      "norm_label": "fix_regions.js"
+    },
+    {
+      "label": "getRegion()",
+      "file_type": "code",
+      "source_file": "fix_regions.js",
+      "source_location": "L12",
+      "id": "aqi_project_fix_regions_getregion",
+      "community": 7,
+      "norm_label": "getregion()"
+    },
+    {
+      "label": "parse_data.js",
+      "file_type": "code",
+      "source_file": "parse_data.js",
+      "source_location": "L1",
+      "id": "parse_data_js",
+      "community": 11,
+      "norm_label": "parse_data.js"
+    },
+    {
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "vite.config.ts",
+      "source_location": "L1",
+      "id": "vite_config_ts",
+      "community": 12,
+      "norm_label": "vite.config.ts"
+    },
+    {
+      "label": "extract_stations.py",
+      "file_type": "code",
+      "source_file": "scratch\\extract_stations.py",
+      "source_location": "L1",
+      "id": "scratch_extract_stations_py",
+      "community": 13,
+      "norm_label": "extract_stations.py"
+    },
+    {
+      "label": "merge_stations.py",
+      "file_type": "code",
+      "source_file": "scratch\\merge_stations.py",
+      "source_location": "L1",
+      "id": "scratch_merge_stations_py",
+      "community": 14,
+      "norm_label": "merge_stations.py"
+    },
+    {
+      "label": "update_local_aqi.py",
+      "file_type": "code",
+      "source_file": "scratch\\update_local_aqi.py",
+      "source_location": "L1",
+      "id": "scratch_update_local_aqi_py",
+      "community": 8,
+      "norm_label": "update_local_aqi.py"
+    },
+    {
+      "label": "aggregate_city_data()",
+      "file_type": "code",
+      "source_file": "scratch\\update_local_aqi.py",
+      "source_location": "L5",
+      "id": "scratch_update_local_aqi_aggregate_city_data",
+      "community": 8,
+      "norm_label": "aggregate_city_data()"
+    },
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "src\\App.tsx",
+      "source_location": "L1",
+      "id": "src_app_tsx",
+      "community": 3,
+      "norm_label": "app.tsx"
+    },
+    {
+      "label": "toggleTheme()",
+      "file_type": "code",
+      "source_file": "src\\App.tsx",
+      "source_location": "L76",
+      "id": "src_app_toggletheme",
+      "community": 3,
+      "norm_label": "toggletheme()"
+    },
+    {
+      "label": "handleNavigate()",
+      "file_type": "code",
+      "source_file": "src\\App.tsx",
+      "source_location": "L103",
+      "id": "src_app_handlenavigate",
+      "community": 3,
+      "norm_label": "handlenavigate()"
+    },
+    {
+      "label": "renderView()",
+      "file_type": "code",
+      "source_file": "src\\App.tsx",
+      "source_location": "L108",
+      "id": "src_app_renderview",
+      "community": 3,
+      "norm_label": "renderview()"
+    },
+    {
+      "label": "constants.ts",
+      "file_type": "code",
+      "source_file": "src\\constants.ts",
+      "source_location": "L1",
+      "id": "src_constants_ts",
+      "community": 9,
+      "norm_label": "constants.ts"
+    },
+    {
+      "label": "getAllCities()",
+      "file_type": "code",
+      "source_file": "src\\constants.ts",
+      "source_location": "L15455",
+      "id": "src_constants_getallcities",
+      "community": 9,
+      "norm_label": "getallcities()"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "src\\main.tsx",
+      "source_location": "L1",
+      "id": "src_main_tsx",
+      "community": 15,
+      "norm_label": "main.tsx"
+    },
+    {
+      "label": "types.d.ts",
+      "file_type": "code",
+      "source_file": "src\\types.d.ts",
+      "source_location": "L1",
+      "id": "src_types_d_ts",
+      "community": 16,
+      "norm_label": "types.d.ts"
+    },
+    {
+      "label": "CityDive.tsx",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\CityDive.tsx",
+      "source_location": "L1",
+      "id": "src_components_views_citydive_tsx",
+      "community": 5,
+      "norm_label": "citydive.tsx"
+    },
+    {
+      "label": "getHealthSeverity()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\CityDive.tsx",
+      "source_location": "L158",
+      "id": "views_citydive_gethealthseverity",
+      "community": 5,
+      "norm_label": "gethealthseverity()"
+    },
+    {
+      "label": "getSeverityActions()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\CityDive.tsx",
+      "source_location": "L166",
+      "id": "views_citydive_getseverityactions",
+      "community": 5,
+      "norm_label": "getseverityactions()"
+    },
+    {
+      "label": "Composite.tsx",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Composite.tsx",
+      "source_location": "L1",
+      "id": "src_components_views_composite_tsx",
+      "community": 17,
+      "norm_label": "composite.tsx"
+    },
+    {
+      "label": "Health.tsx",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L1",
+      "id": "src_components_views_health_tsx",
+      "community": 1,
+      "norm_label": "health.tsx"
+    },
+    {
+      "label": "fetchWeatherAndCity()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L45",
+      "id": "views_health_fetchweatherandcity",
+      "community": 1,
+      "norm_label": "fetchweatherandcity()"
+    },
+    {
+      "label": "detectLocationAndFetch()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L74",
+      "id": "views_health_detectlocationandfetch",
+      "community": 1,
+      "norm_label": "detectlocationandfetch()"
+    },
+    {
+      "label": "refreshData()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L101",
+      "id": "views_health_refreshdata",
+      "community": 1,
+      "norm_label": "refreshdata()"
+    },
+    {
+      "label": "getSeverityData()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L119",
+      "id": "views_health_getseveritydata",
+      "community": 1,
+      "norm_label": "getseveritydata()"
+    },
+    {
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L298",
+      "id": "views_health_cn",
+      "community": 1,
+      "norm_label": "cn()"
+    },
+    {
+      "label": "Stations.tsx",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L1",
+      "id": "src_components_views_stations_tsx",
+      "community": 4,
+      "norm_label": "stations.tsx"
+    },
+    {
+      "label": "toggleAqiFilter()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L29",
+      "id": "views_stations_toggleaqifilter",
+      "community": 4,
+      "norm_label": "toggleaqifilter()"
+    },
+    {
+      "label": "getAqiCategory()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L37",
+      "id": "views_stations_getaqicategory",
+      "community": 4,
+      "norm_label": "getaqicategory()"
+    },
+    {
+      "label": "getAqiColor()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L46",
+      "id": "views_stations_getaqicolor",
+      "community": 4,
+      "norm_label": "getaqicolor()"
+    },
+    {
+      "label": "Summary.tsx",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L1",
+      "id": "src_components_views_summary_tsx",
+      "community": 0,
+      "norm_label": "summary.tsx"
+    },
+    {
+      "label": "scroll()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L16",
+      "id": "views_summary_scroll",
+      "community": 0,
+      "norm_label": "scroll()"
+    },
+    {
+      "label": "getCityTier()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L44",
+      "id": "views_summary_getcitytier",
+      "community": 0,
+      "norm_label": "getcitytier()"
+    },
+    {
+      "label": "getAqiStatus()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L50",
+      "id": "views_summary_getaqistatus",
+      "community": 0,
+      "norm_label": "getaqistatus()"
+    },
+    {
+      "label": "fetchNews()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L112",
+      "id": "views_summary_fetchnews",
+      "community": 0,
+      "norm_label": "fetchnews()"
+    },
+    {
+      "label": "getStatsPattern()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L249",
+      "id": "views_summary_getstatspattern",
+      "community": 0,
+      "norm_label": "getstatspattern()"
+    },
+    {
+      "label": "getAqiColor()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L256",
+      "id": "views_summary_getaqicolor",
+      "community": 0,
+      "norm_label": "getaqicolor()"
+    },
+    {
+      "label": "getAqiStatusLabel()",
+      "file_type": "code",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L287",
+      "id": "views_summary_getaqistatuslabel",
+      "community": 0,
+      "norm_label": "getaqistatuslabel()"
+    },
+    {
+      "label": "utils.ts",
+      "file_type": "code",
+      "source_file": "src\\lib\\utils.ts",
+      "source_location": "L1",
+      "id": "src_lib_utils_ts",
+      "community": 10,
+      "norm_label": "utils.ts"
+    },
+    {
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "src\\lib\\utils.ts",
+      "source_location": "L4",
+      "id": "lib_utils_cn",
+      "community": 10,
+      "norm_label": "cn()"
+    },
+    {
+      "label": "India AQI Dashboard",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "india_aqi_dashboard",
+      "community": 2,
+      "norm_label": "india aqi dashboard"
+    },
+    {
+      "label": "Google Gemini AI",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "id": "gemini_ai",
+      "community": 2,
+      "norm_label": "google gemini ai"
+    },
+    {
+      "label": "Leaflet Map",
+      "file_type": "code",
+      "source_file": "src/components/views/Summary.tsx",
+      "id": "leaflet_map",
+      "community": 2,
+      "norm_label": "leaflet map"
+    },
+    {
+      "label": "Recharts Visualization",
+      "file_type": "code",
+      "source_file": "src/components/views/Composite.tsx",
+      "id": "recharts_viz",
+      "community": 2,
+      "norm_label": "recharts visualization"
+    },
+    {
+      "label": "Heat Bulletin",
+      "file_type": "paper",
+      "source_file": "public/heat_bulletin.pdf",
+      "id": "heat_bulletin",
+      "community": 2,
+      "norm_label": "heat bulletin"
+    },
+    {
+      "label": "AQI Analysis Dashboard",
+      "file_type": "image",
+      "source_file": "public/aqi_analysis.png",
+      "id": "aqi_analysis_img",
+      "community": 6,
+      "norm_label": "aqi analysis dashboard"
+    },
+    {
+      "label": "Pollution News Feed",
+      "file_type": "document",
+      "source_file": "news.csv",
+      "id": "news_feed",
+      "community": 2,
+      "norm_label": "pollution news feed"
+    },
+    {
+      "label": "Respiratory Admissions Correlation",
+      "file_type": "image",
+      "source_file": "public/aqi_analysis.png",
+      "id": "respiratory_admissions",
+      "community": 6,
+      "norm_label": "respiratory admissions correlation"
+    },
+    {
+      "label": "PM2.5 Pollutant",
+      "file_type": "document",
+      "source_file": "README.md",
+      "id": "pm25_pollutant",
+      "community": 6,
+      "norm_label": "pm2.5 pollutant"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "fix_regions.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "fix_regions_js",
+      "_tgt": "aqi_project_fix_regions_getregion",
+      "source": "fix_regions_js",
+      "target": "aqi_project_fix_regions_getregion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scratch\\update_local_aqi.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "scratch_update_local_aqi_py",
+      "_tgt": "scratch_update_local_aqi_aggregate_city_data",
+      "source": "scratch_update_local_aqi_py",
+      "target": "scratch_update_local_aqi_aggregate_city_data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.tsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_toggletheme",
+      "source": "src_app_tsx",
+      "target": "src_app_toggletheme",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.tsx",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_handlenavigate",
+      "source": "src_app_tsx",
+      "target": "src_app_handlenavigate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\App.tsx",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_src": "src_app_tsx",
+      "_tgt": "src_app_renderview",
+      "source": "src_app_tsx",
+      "target": "src_app_renderview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\constants.ts",
+      "source_location": "L15455",
+      "weight": 1.0,
+      "_src": "src_constants_ts",
+      "_tgt": "src_constants_getallcities",
+      "source": "src_constants_ts",
+      "target": "src_constants_getallcities",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\CityDive.tsx",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_src": "src_components_views_citydive_tsx",
+      "_tgt": "views_citydive_gethealthseverity",
+      "source": "src_components_views_citydive_tsx",
+      "target": "views_citydive_gethealthseverity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\CityDive.tsx",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_src": "src_components_views_citydive_tsx",
+      "_tgt": "views_citydive_getseverityactions",
+      "source": "src_components_views_citydive_tsx",
+      "target": "views_citydive_getseverityactions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "src_components_views_health_tsx",
+      "_tgt": "views_health_fetchweatherandcity",
+      "source": "src_components_views_health_tsx",
+      "target": "views_health_fetchweatherandcity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_src": "src_components_views_health_tsx",
+      "_tgt": "views_health_detectlocationandfetch",
+      "source": "src_components_views_health_tsx",
+      "target": "views_health_detectlocationandfetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "src_components_views_health_tsx",
+      "_tgt": "views_health_refreshdata",
+      "source": "src_components_views_health_tsx",
+      "target": "views_health_refreshdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_src": "src_components_views_health_tsx",
+      "_tgt": "views_health_getseveritydata",
+      "source": "src_components_views_health_tsx",
+      "target": "views_health_getseveritydata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L298",
+      "weight": 1.0,
+      "_src": "src_components_views_health_tsx",
+      "_tgt": "views_health_cn",
+      "source": "src_components_views_health_tsx",
+      "target": "views_health_cn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "views_health_detectlocationandfetch",
+      "_tgt": "views_health_fetchweatherandcity",
+      "source": "views_health_fetchweatherandcity",
+      "target": "views_health_detectlocationandfetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_src": "views_health_refreshdata",
+      "_tgt": "views_health_fetchweatherandcity",
+      "source": "views_health_fetchweatherandcity",
+      "target": "views_health_refreshdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Health.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_src": "views_health_refreshdata",
+      "_tgt": "views_health_detectlocationandfetch",
+      "source": "views_health_detectlocationandfetch",
+      "target": "views_health_refreshdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "src_components_views_stations_tsx",
+      "_tgt": "views_stations_toggleaqifilter",
+      "source": "src_components_views_stations_tsx",
+      "target": "views_stations_toggleaqifilter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "src_components_views_stations_tsx",
+      "_tgt": "views_stations_getaqicategory",
+      "source": "src_components_views_stations_tsx",
+      "target": "views_stations_getaqicategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Stations.tsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "src_components_views_stations_tsx",
+      "_tgt": "views_stations_getaqicolor",
+      "source": "src_components_views_stations_tsx",
+      "target": "views_stations_getaqicolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_scroll",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_scroll",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_getcitytier",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_getcitytier",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_getaqistatus",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_getaqistatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_fetchnews",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_fetchnews",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L249",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_getstatspattern",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_getstatspattern",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L256",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_getaqicolor",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_getaqicolor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\components\\views\\Summary.tsx",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_src": "src_components_views_summary_tsx",
+      "_tgt": "views_summary_getaqistatuslabel",
+      "source": "src_components_views_summary_tsx",
+      "target": "views_summary_getaqistatuslabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src\\lib\\utils.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "src_lib_utils_ts",
+      "_tgt": "lib_utils_cn",
+      "source": "src_lib_utils_ts",
+      "target": "lib_utils_cn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "india_aqi_dashboard",
+      "_tgt": "gemini_ai",
+      "source": "india_aqi_dashboard",
+      "target": "gemini_ai"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "india_aqi_dashboard",
+      "_tgt": "leaflet_map",
+      "source": "india_aqi_dashboard",
+      "target": "leaflet_map"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "india_aqi_dashboard",
+      "_tgt": "recharts_viz",
+      "source": "india_aqi_dashboard",
+      "target": "recharts_viz"
+    },
+    {
+      "relation": "displays",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "india_aqi_dashboard",
+      "_tgt": "news_feed",
+      "source": "india_aqi_dashboard",
+      "target": "news_feed"
+    },
+    {
+      "relation": "context_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "_src": "heat_bulletin",
+      "_tgt": "india_aqi_dashboard",
+      "source": "india_aqi_dashboard",
+      "target": "heat_bulletin"
+    },
+    {
+      "relation": "shows",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "_src": "aqi_analysis_img",
+      "_tgt": "respiratory_admissions",
+      "source": "aqi_analysis_img",
+      "target": "respiratory_admissions"
+    },
+    {
+      "relation": "correlated_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "_src": "respiratory_admissions",
+      "_tgt": "pm25_pollutant",
+      "source": "respiratory_admissions",
+      "target": "pm25_pollutant"
+    }
+  ],
+  "hyperedges": []
+}

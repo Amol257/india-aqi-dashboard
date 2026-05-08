@@ -20,7 +20,7 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
-import { cn } from './lib/utils';
+import { cn, getCityImage } from './lib/utils';
 import Summary from './components/views/Summary';
 import CityDive from './components/views/CityDive';
 import Composite from './components/views/Composite';
@@ -33,6 +33,11 @@ type View = 'summary' | 'city-dive' | 'composite' | 'stations' | 'health';
 export default function App() {
   const [activeView, setActiveView] = useState<View>('summary');
   const [activeContext, setActiveContext] = useState<string | CityData | undefined>(undefined);
+  
+  const [stations, setStations] = useState<any[]>(STATIONS_DATA);
+  const [cities, setCities] = useState<CityData[]>([]);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const blurTimerRef = useRef<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -47,13 +52,69 @@ export default function App() {
     return false;
   });
 
-  const notifications = [
-    { id: 1, title: 'AQI Alert: Delhi', message: 'AQI has reached "Severe" levels (412). Avoid outdoor activities.', time: '12m ago', type: 'error' },
-    { id: 2, title: 'Better Air: Mumbai', message: 'Air quality improved to "Satisfactory" (84). Great for a walk!', time: '2h ago', type: 'success' },
-    { id: 3, title: 'Health Tip', message: 'High Ozone levels expected in Bangalore this afternoon.', time: '5h ago', type: 'warning' },
-  ];
+  const notifications = useMemo(() => {
+    if (cities.length === 0) return [];
+    const sortedCities = [...cities].sort((a, b) => b.aqi - a.aqi);
+    const severeCities = sortedCities.filter(c => c.aqi > 200);
+    const goodCities = sortedCities.filter(c => c.aqi < 50);
+    const notes = [];
 
-  const allCities = useMemo(() => getAllCities(), []);
+    if (severeCities.length > 0) {
+      notes.push({ id: 1, title: `AQI Alert: ${severeCities[0].name}`, message: `AQI has reached "${severeCities[0].status}" levels (${severeCities[0].aqi}).`, time: 'Just now', type: 'error' });
+    }
+    if (goodCities.length > 0) {
+      notes.push({ id: 2, title: `Better Air: ${goodCities[0].name}`, message: `Air quality improved to "${goodCities[0].status}" (${goodCities[0].aqi}).`, time: '1h ago', type: 'success' });
+    } else if (sortedCities.length > 0) {
+      notes.push({ id: 2, title: `Update: ${sortedCities[sortedCities.length-1].name}`, message: `Best air quality in the region: ${sortedCities[sortedCities.length-1].aqi} AQI.`, time: '2h ago', type: 'success' });
+    }
+    const avgAqi = Math.round(cities.reduce((acc, c) => acc + c.aqi, 0) / cities.length);
+    notes.push({ id: 3, title: 'Health Insight', message: avgAqi > 100 ? 'Regional average AQI is elevated.' : 'Air quality is within acceptable limits.', time: '5h ago', type: 'warning' });
+    return notes;
+  }, [cities]);
+
+  const allCities = useMemo(() => {
+    // If we have dynamic cities, use them. Otherwise fallback to constants.
+    return cities.length > 0 ? cities : MAJOR_CITIES_COMPARISON;
+  }, [cities]);
+
+  useEffect(() => {
+    const fetchLatestData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('/data/local_aqi.json');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.stations) setStations(data.stations);
+          if (data.city_aggregation) {
+            const dynamicCities: CityData[] = Object.values(data.city_aggregation).map((c: any) => {
+              const staticRef = [...MAJOR_CITIES_COMPARISON, ...TOP_POLLUTED_CITIES].find(sc => sc.name === c.name);
+              return {
+                name: c.name,
+                state: c.state,
+                aqi: c.avgAqi,
+                status: c.avgAqi > 300 ? "Severe" : c.avgAqi > 200 ? "Very Poor" : c.avgAqi > 100 ? "Poor" : c.avgAqi > 50 ? "Moderate" : "Good",
+                pm25: c.pollutants?.["PM2.5"]?.value || Math.round(c.avgAqi * 0.6),
+                trend: staticRef?.trend || "stable",
+                trendValue: staticRef?.trendValue || "LIVE",
+                imageUrl: staticRef?.imageUrl || `/db/cities/${c.name}/${c.name}.jpg`,
+                admissions: c.respiratoryAdmissions,
+                density: c.density,
+                category: c.category,
+                description: staticRef?.description || `Real-time monitoring indicates ${c.avgAqi} AQI in ${c.name}.`
+              };
+            });
+            setCities(dynamicCities);
+          }
+          setLastUpdated(data.fetchedAt);
+        }
+      } catch (error) {
+        console.error("Failed to fetch latest AQI data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchLatestData();
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -107,12 +168,12 @@ export default function App() {
 
   const renderView = () => {
     switch (activeView) {
-      case 'summary': return <Summary onNavigate={handleNavigate} />;
-      case 'city-dive': return <CityDive onNavigate={handleNavigate} initialCity={activeContext} />;
-      case 'composite': return <Composite onNavigate={handleNavigate} />;
-      case 'stations': return <Stations onNavigate={handleNavigate} />;
-      case 'health': return <Health onNavigate={handleNavigate} />;
-      default: return <Summary onNavigate={handleNavigate} />;
+      case 'summary': return <Summary onNavigate={handleNavigate} stations={stations} cities={allCities} lastUpdated={lastUpdated} />;
+      case 'city-dive': return <CityDive onNavigate={handleNavigate} initialCity={activeContext} cities={allCities} />;
+      case 'composite': return <Composite onNavigate={handleNavigate} stations={stations} cities={allCities} />;
+      case 'stations': return <Stations onNavigate={handleNavigate} stations={stations} lastUpdated={lastUpdated} />;
+      case 'health': return <Health onNavigate={handleNavigate} cities={allCities} />;
+      default: return <Summary onNavigate={handleNavigate} stations={stations} cities={allCities} lastUpdated={lastUpdated} />;
     }
   };
 
@@ -152,17 +213,35 @@ export default function App() {
                   searchResults.map((city, index) => (
                     <div 
                       key={index} 
-                      className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer flex justify-between items-center border-b border-slate-100 dark:border-slate-700 last:border-0"
-                      onClick={() => {
+                      className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer flex justify-between items-center border-b border-slate-100 dark:border-slate-700 last:border-0 group"
+                      onMouseDown={() => {
                         handleNavigate('city-dive', city);
                         setSearchQuery('');
+                        setIsSearchFocused(false);
                       }}
                     >
-                      <div>
-                        <div className="font-bold text-sm text-[#181c22] dark:text-slate-100">{city.name}</div>
-                        <div className="text-[10px] text-slate-500 dark:text-slate-400">{city.state}</div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-700 flex-shrink-0">
+                          <img 
+                            src={getCityImage(city.name, city.imageUrl, city.state)} 
+                            alt="" 
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1564507592333-c60657451dd6?auto=format&fit=crop&q=80&w=100';
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <div className="font-bold text-sm text-[#181c22] dark:text-slate-100">{city.name}</div>
+                          <div className="text-[10px] text-slate-500 dark:text-slate-400">{city.state}</div>
+                        </div>
                       </div>
-                      <div className="text-xs font-bold text-[#1275e2] dark:text-blue-400">AQI: {city.aqi}</div>
+                      <div className={cn(
+                        "text-xs font-bold px-2 py-1 rounded-full",
+                        city.aqi > 200 ? "text-red-600 bg-red-50 dark:bg-red-900/30" : "text-blue-600 bg-blue-50 dark:bg-blue-900/30"
+                      )}>
+                        {city.aqi}
+                      </div>
                     </div>
                   ))
                 ) : (
@@ -353,7 +432,9 @@ export default function App() {
             <p className="text-[10px] text-[#717785] dark:text-slate-400 font-bold uppercase tracking-wider mb-2">System Status</p>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-              <span className="text-xs font-semibold dark:text-slate-200">Real-time Sync Active</span>
+              <span className="text-xs font-semibold dark:text-slate-200">
+                {lastUpdated ? `Sync: ${new Date(lastUpdated).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}` : 'Real-time Sync Active'}
+              </span>
             </div>
           </div>
         </div>

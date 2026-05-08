@@ -1,0 +1,268 @@
+city,state,CO,NH3,NO2,OZONE,PM10,PM2.5,SO2,Composite_AQI,Dominant_Pollutant,AQI_Category
+Khora,Uttar_Pradesh,3.0,2.0,144.0,230.0,166.0,470.0,29.0,470.0,PM2.5,Hazardous
+Charkhi Dadri,Haryana,1.0,2.0,19.0,16.0,139.0,401.0,14.0,401.0,PM2.5,Hazardous
+Hajipur,Bihar,1.0,2.0,19.0,188.0,190.0,400.0,6.0,400.0,PM2.5,Severe
+Rohtak,Haryana,2.0,,15.0,39.0,113.0,393.0,15.0,393.0,PM2.5,Severe
+Modinagar,Uttar_Pradesh,2.0,1.0,72.0,73.0,240.0,382.0,38.0,382.0,PM2.5,Severe
+Tirupati,Andhra_Pradesh,1.0,2.0,35.0,30.0,123.0,364.0,10.0,364.0,PM2.5,Severe
+Baddi,Himachal Pradesh,2.0,1.0,34.0,178.0,181.0,350.0,29.0,350.0,PM2.5,Severe
+Jind,Haryana,0.0,1.0,48.0,36.0,109.0,350.0,2.0,350.0,PM2.5,Severe
+Mandi Gobindgarh,Punjab,2.0,2.0,30.0,35.0,168.0,349.0,31.0,349.0,PM2.5,Severe
+Suakati,Odisha,1.0,1.0,12.0,132.0,129.0,342.0,19.0,342.0,PM2.5,Severe
+Manesar,Haryana,1.0,3.0,44.0,38.0,109.0,340.0,4.0,340.0,PM2.5,Severe
+Yamuna Nagar,Haryana,2.0,1.0,26.0,33.0,128.0,340.0,19.0,340.0,PM2.5,Severe
+Bahadurgarh,Haryana,2.0,3.0,16.0,25.0,119.0,338.0,8.0,338.0,PM2.5,Severe
+Ghaziabad,Uttar_Pradesh,2.1666666666666665,2.5,59.333333333333336,107.33333333333333,201.5,328.5,34.166666666666664,328.5,PM2.5,Severe
+Patna,Bihar,1.8333333333333333,1.2,23.833333333333332,50.166666666666664,149.4,325.6666666666667,10.5,325.7,PM2.5,Severe
+Kalyan,Maharashtra,,0.0,45.0,8.0,127.0,325.0,,325.0,PM2.5,Severe
+Gurugram,Haryana,2.5,3.0,21.333333333333332,40.0,130.5,323.25,8.333333333333334,323.2,PM2.5,Severe
+Angul,Odisha,2.0,0.0,19.0,317.0,75.0,133.0,21.0,317.0,OZONE,Severe
+Nandesari,Gujarat,1.0,,107.0,,110.0,315.0,8.0,315.0,PM2.5,Severe
+Begusarai,Bihar,1.0,1.0,16.0,44.0,101.0,311.0,49.0,311.0,PM2.5,Severe
+Motihari,Bihar,1.0,1.0,5.0,6.0,109.0,309.0,4.0,309.0,PM2.5,Severe
+Palwal,Haryana,1.0,2.0,30.0,24.0,118.0,306.0,15.0,306.0,PM2.5,Severe
+Panchgaon,Haryana,1.0,1.0,8.0,77.0,111.0,306.0,31.0,306.0,PM2.5,Severe
+Baghpat,Uttar_Pradesh,2.0,0.0,34.0,77.0,200.0,306.0,54.0,306.0,PM2.5,Severe
+Narnaul,Haryana,2.0,1.0,32.0,34.0,100.0,306.0,10.0,306.0,PM2.5,Severe
+Hingoli,Maharashtra,1.0,0.0,15.0,304.0,30.0,38.0,4.0,304.0,OZONE,Severe
+Vadodara,Gujarat,4.0,1.0,20.0,7.0,115.0,304.0,8.0,304.0,PM2.5,Severe
+Hapur,Uttar_Pradesh,2.0,3.0,78.0,42.0,191.0,304.0,76.0,304.0,PM2.5,Severe
+Hanumangarh,Rajasthan,1.0,2.0,30.0,95.0,124.0,304.0,12.0,304.0,PM2.5,Severe
+Dharuhera,Haryana,4.0,5.0,48.0,53.0,101.0,297.0,9.0,297.0,PM2.5,Very Poor
+Saharsa,Bihar,2.0,1.0,9.0,41.0,132.0,293.0,22.0,293.0,PM2.5,Very Poor
+Arrah,Bihar,3.0,0.0,9.0,8.0,77.0,273.0,6.0,273.0,PM2.5,Very Poor
+Delhi,Delhi,1.9777777777777779,2.138888888888889,64.0909090909091,72.22727272727273,152.95454545454547,265.8636363636364,36.1764705882353,265.9,PM2.5,Very Poor
+Byasanagar,Odisha,5.0,0.0,11.0,265.0,66.0,78.0,19.0,265.0,OZONE,Very Poor
+Gorakhpur,Uttar_Pradesh,0.0,0.0,14.0,6.0,112.0,263.0,60.0,263.0,PM2.5,Very Poor
+Vatva,Gujarat,0.0,5.0,78.0,43.0,115.0,260.0,65.0,260.0,PM2.5,Very Poor
+Kurukshetra,Haryana,1.0,2.0,5.0,76.0,157.0,253.0,22.0,253.0,PM2.5,Very Poor
+Ballabgarh,Haryana,3.0,1.0,25.0,44.0,244.0,250.0,11.0,250.0,PM2.5,Very Poor
+Satara,Maharashtra,1.0,2.0,28.0,248.0,59.0,80.0,2.0,248.0,OZONE,Very Poor
+Baran,Rajasthan,1.0,1.0,42.0,96.0,115.0,247.0,22.0,247.0,PM2.5,Very Poor
+Karnal,Haryana,1.0,2.0,8.0,50.0,88.0,247.0,11.0,247.0,PM2.5,Very Poor
+Byrnihat,Assam,3.0,1.0,10.0,42.0,78.0,247.0,40.0,247.0,PM2.5,Very Poor
+Chandrapur,Maharashtra,1.5,0.0,30.0,105.0,116.5,247.0,,247.0,PM2.5,Very Poor
+Meerut,Uttar_Pradesh,1.75,2.25,65.5,108.0,172.25,245.0,31.25,245.0,PM2.5,Very Poor
+Faridabad,Haryana,2.6666666666666665,2.6666666666666665,38.666666666666664,13.333333333333334,104.33333333333333,242.66666666666666,7.333333333333333,242.7,PM2.5,Very Poor
+Bhagalpur,Bihar,4.0,1.0,12.0,19.5,115.5,241.5,78.0,241.5,PM2.5,Very Poor
+Lucknow,Uttar_Pradesh,2.0,4.6,34.0,51.4,116.33333333333333,240.16666666666666,17.333333333333332,240.2,PM2.5,Very Poor
+Muzaffarpur,Bihar,1.6666666666666667,3.0,21.666666666666668,124.0,103.5,239.66666666666666,10.0,239.7,PM2.5,Very Poor
+Gaya,Bihar,0.5,0.5,18.333333333333332,56.666666666666664,112.0,234.66666666666666,30.5,234.7,PM2.5,Very Poor
+Noida,Uttar_Pradesh,2.0,2.3333333333333335,52.25,90.75,152.25,228.25,21.0,228.2,PM2.5,Very Poor
+Jaipur,Rajasthan,2.0,4.6,55.6,74.16666666666667,118.0,225.16666666666666,29.5,225.2,PM2.5,Very Poor
+Panchkula,Haryana,1.0,,30.0,34.0,,223.0,18.0,223.0,PM2.5,Very Poor
+Barbil,Odisha,1.0,0.0,25.0,202.0,112.0,220.0,26.0,220.0,PM2.5,Very Poor
+Udaipur,Rajasthan,1.0,2.0,71.0,56.0,103.0,220.0,9.0,220.0,PM2.5,Very Poor
+Muzaffarnagar,Uttar_Pradesh,1.0,2.0,49.0,103.0,143.0,217.0,46.0,217.0,PM2.5,Very Poor
+Bhiwadi,Rajasthan,1.0,2.0,45.0,90.5,128.5,214.5,20.0,214.5,PM2.5,Very Poor
+Kaithal,Haryana,1.0,2.0,39.0,17.0,105.0,210.0,101.0,210.0,PM2.5,Very Poor
+Vapi,Gujarat,,1.0,32.0,21.0,92.0,207.0,26.0,207.0,PM2.5,Very Poor
+Parbhani,Maharashtra,1.0,1.0,25.0,29.0,111.0,203.0,22.0,203.0,PM2.5,Very Poor
+Hisar,Haryana,1.0,3.0,40.0,197.0,66.0,120.0,16.0,197.0,OZONE,Poor
+Sri Ganganagar,Rajasthan,2.0,1.0,28.0,194.0,127.0,123.0,6.0,194.0,OZONE,Poor
+Greater Noida,Uttar_Pradesh,1.0,2.0,70.0,172.0,178.0,192.0,28.5,192.0,PM2.5,Poor
+Gummidipoondi,TamilNadu,,0.0,24.0,,95.0,190.0,24.0,190.0,PM2.5,Poor
+Dharwad,Karnataka,3.0,2.0,35.0,40.0,91.0,190.0,9.0,190.0,PM2.5,Poor
+Ludhiana,Punjab,2.0,3.0,61.0,43.0,100.0,187.0,18.0,187.0,PM2.5,Poor
+Khurja,Uttar_Pradesh,3.0,0.0,15.0,15.0,126.0,183.0,12.0,183.0,PM2.5,Poor
+Nagpur,Maharashtra,1.5,2.0,42.5,51.25,90.66666666666667,180.0,34.75,180.0,PM2.5,Poor
+Bharatpur,Rajasthan,1.0,2.0,30.0,179.0,102.0,50.0,14.0,179.0,OZONE,Poor
+Bilaspur,Chhattisgarh,1.0,,35.0,,77.0,177.0,18.0,177.0,PM2.5,Poor
+Pali,Rajasthan,1.0,1.0,19.0,50.0,109.0,177.0,8.0,177.0,PM2.5,Poor
+Kannur,Kerala,1.0,0.0,19.0,33.0,70.0,177.0,2.0,177.0,PM2.5,Poor
+Sawai Madhopur,Rajasthan,1.0,1.0,48.0,171.0,125.0,62.0,4.0,171.0,OZONE,Poor
+Malegaon,Maharashtra,1.0,,21.0,79.0,106.0,170.0,,170.0,PM2.5,Poor
+Bhavnagar,Gujarat,5.0,1.0,89.0,23.0,123.0,167.0,9.0,167.0,PM2.5,Poor
+Akola,Maharashtra,1.0,2.0,18.0,82.0,81.0,167.0,25.0,167.0,PM2.5,Poor
+Bulandshahr,Uttar_Pradesh,1.0,2.0,72.0,66.0,167.0,157.0,36.0,167.0,PM10,Poor
+Panipat,Haryana,2.0,1.0,39.0,30.0,155.0,163.0,24.0,163.0,PM2.5,Poor
+Dhule,Maharashtra,1.0,0.0,21.0,28.0,106.0,163.0,18.0,163.0,PM2.5,Poor
+Churu,Rajasthan,1.0,2.0,21.0,160.0,118.0,120.0,8.0,160.0,OZONE,Poor
+Purnia,Bihar,3.0,0.0,8.0,29.0,62.0,160.0,21.0,160.0,PM2.5,Poor
+Pampore,Jammu_and_Kashmir,,,22.0,,79.0,157.0,5.0,157.0,PM2.5,Poor
+Sonipat,Haryana,2.0,5.0,15.0,23.0,116.0,157.0,10.0,157.0,PM2.5,Poor
+Mandideep,Madhya Pradesh,1.0,2.0,41.0,118.0,84.0,153.0,20.0,153.0,PM2.5,Poor
+Talcher,Odisha,4.0,1.0,40.0,34.0,81.0,153.0,11.0,153.0,PM2.5,Poor
+Nanded,Maharashtra,1.0,1.0,55.0,75.0,114.0,153.0,25.0,153.0,PM2.5,Poor
+Firozabad,Uttar_Pradesh,1.0,0.0,20.0,19.0,96.5,152.5,22.0,152.5,PM2.5,Poor
+Varanasi,Uttar_Pradesh,0.5,0.0,16.75,13.75,99.0,152.0,31.5,152.0,PM2.5,Poor
+Amritsar,Punjab,1.0,2.0,148.0,49.0,86.0,98.0,20.0,148.0,NO2,Poor
+Navi Mumbai,Maharashtra,1.3333333333333333,1.0,44.8,24.75,98.75,147.6,9.0,147.6,PM2.5,Poor
+Munger,Bihar,1.0,1.0,6.0,10.0,70.0,147.0,72.0,147.0,PM2.5,Poor
+Kota,Rajasthan,2.0,2.0,48.333333333333336,50.0,89.0,146.0,23.0,146.0,PM2.5,Poor
+Rourkela,Odisha,2.0,0.0,18.5,25.0,81.0,145.33333333333334,8.0,145.3,PM2.5,Poor
+Nayagarh,Odisha,1.0,2.0,5.0,13.0,109.0,143.0,15.0,143.0,PM2.5,Poor
+Aurangabad,Maharashtra,0.5,2.5,31.0,66.0,80.5,143.0,32.0,143.0,PM2.5,Poor
+Solapur,Maharashtra,1.0,3.5,63.0,49.0,88.0,142.5,7.0,142.5,PM2.5,Poor
+Singrauli,Madhya Pradesh,3.0,1.0,29.0,4.0,129.0,140.0,45.0,140.0,PM2.5,Poor
+Balasore,Odisha,2.0,,14.0,140.0,70.0,73.0,19.0,140.0,OZONE,Poor
+Gwalior,Madhya Pradesh,2.0,1.0,59.5,139.5,106.0,109.5,33.0,139.5,OZONE,Poor
+Bathinda,Punjab,4.0,,24.0,,135.0,95.0,12.0,135.0,PM10,Poor
+Pimpri-Chinchwad,Maharashtra,1.4285714285714286,1.6666666666666667,42.857142857142854,46.714285714285715,91.57142857142857,134.57142857142858,7.0,134.6,PM2.5,Poor
+Ujjain,Madhya Pradesh,1.0,3.0,56.0,56.0,78.0,133.0,6.0,133.0,PM2.5,Poor
+Mehsana,Gujarat,3.0,1.0,49.0,14.0,132.0,90.0,11.0,132.0,PM10,Poor
+Sikar,Rajasthan,1.0,2.0,38.0,115.0,132.0,78.0,5.0,132.0,PM10,Poor
+Agra,Uttar_Pradesh,0.8333333333333334,2.0,25.666666666666668,40.6,129.75,131.4,42.0,131.4,PM2.5,Poor
+Guntur,Andhra_Pradesh,0.0,1.0,24.0,63.0,83.0,130.0,18.0,130.0,PM2.5,Poor
+Tumidih,Chhattisgarh,1.0,0.0,86.0,86.0,92.0,127.0,12.0,127.0,PM2.5,Poor
+Katni,Madhya Pradesh,1.0,1.0,36.0,94.0,106.0,127.0,79.0,127.0,PM2.5,Poor
+Bhiwandi,Maharashtra,1.0,2.0,25.0,65.0,89.0,127.0,10.0,127.0,PM2.5,Poor
+Bikaner,Rajasthan,1.0,,,124.0,,,,124.0,OZONE,Poor
+Rajkot,Gujarat,5.0,0.0,14.0,13.0,73.0,123.0,24.0,123.0,PM2.5,Poor
+Sagar,Madhya Pradesh,1.0,0.0,25.0,122.0,84.0,90.0,12.0,122.0,OZONE,Poor
+Ahmedabad,Gujarat,0.8571428571428571,1.4285714285714286,42.5,49.75,100.625,120.0,44.875,120.0,PM2.5,Poor
+Tonk,Rajasthan,2.0,2.0,28.0,92.0,120.0,103.0,8.0,120.0,PM10,Poor
+Kanpur,Uttar_Pradesh,2.0,0.5,41.333333333333336,17.0,81.0,119.33333333333333,19.333333333333332,119.3,PM2.5,Poor
+Durgapur,West_Bengal,1.3333333333333333,1.3333333333333333,35.666666666666664,72.66666666666667,82.66666666666667,117.66666666666667,13.666666666666666,117.7,PM2.5,Poor
+Jalgaon,Maharashtra,1.0,0.0,16.0,95.0,86.0,117.0,15.0,117.0,PM2.5,Poor
+Baripada,Odisha,1.0,0.0,14.0,57.0,84.0,117.0,11.0,117.0,PM2.5,Poor
+Dewas,Madhya Pradesh,1.0,1.0,116.0,31.0,97.0,98.0,29.0,116.0,NO2,Poor
+Asansol,West_Bengal,2.0,1.25,24.75,58.0,73.5,114.75,30.25,114.8,PM2.5,Poor
+Anantapur,Andhra_Pradesh,1.0,1.0,29.0,48.0,65.0,113.0,11.0,113.0,PM2.5,Poor
+Siwan,Bihar,3.0,0.0,2.0,9.0,107.0,113.0,9.0,113.0,PM2.5,Poor
+Visakhapatnam,Andhra_Pradesh,1.0,1.0,69.0,17.0,113.0,67.0,65.0,113.0,PM10,Poor
+Nagaon,Assam,1.0,1.0,1.0,9.0,57.0,113.0,14.0,113.0,PM2.5,Poor
+Latur,Maharashtra,1.0,2.0,28.0,40.0,59.0,113.0,8.0,113.0,PM2.5,Poor
+Agartala,Tripura,1.0,1.0,22.0,12.0,85.0,113.0,4.0,113.0,PM2.5,Poor
+Vijayawada,Andhra_Pradesh,1.75,1.5,24.0,40.75,56.5,112.5,19.666666666666668,112.5,PM2.5,Poor
+Thane,Maharashtra,1.0,1.0,8.0,43.5,112.0,92.0,10.0,112.0,PM10,Poor
+Jaisalmer,Rajasthan,1.0,4.0,28.0,65.0,112.0,,4.0,112.0,PM10,Poor
+Sirsa,Haryana,3.0,3.0,22.0,112.0,59.0,65.0,19.0,112.0,OZONE,Poor
+Jhunjhunu,Rajasthan,0.0,2.0,28.0,109.0,111.0,97.0,9.0,111.0,PM10,Poor
+Gandhinagar,Gujarat,1.0,0.6666666666666666,26.666666666666668,32.666666666666664,110.66666666666667,103.0,16.333333333333332,110.7,PM10,Poor
+Nashik,Maharashtra,1.25,0.75,11.5,52.25,79.0,110.5,19.75,110.5,PM2.5,Poor
+Mysuru,Karnataka,1.0,1.0,24.0,110.0,68.0,48.0,4.0,110.0,OZONE,Poor
+Karauli,Rajasthan,2.0,2.0,54.0,96.0,94.0,110.0,14.0,110.0,PM2.5,Poor
+Ahmednagar,Maharashtra,1.0,2.0,26.0,110.0,96.0,,10.0,110.0,OZONE,Poor
+Ajmer,Rajasthan,3.0,1.0,35.0,38.0,103.0,110.0,12.0,110.0,PM2.5,Poor
+Nagaur,Rajasthan,1.0,2.0,28.0,83.0,109.0,70.0,8.0,109.0,PM10,Poor
+Pithampur,Madhya Pradesh,1.0,4.0,20.0,95.0,107.0,95.0,16.0,107.0,PM10,Poor
+Dausa,Rajasthan,2.0,3.0,64.0,107.0,96.0,93.0,10.0,107.0,OZONE,Poor
+Ramanagara,Karnataka,1.0,1.0,20.0,54.0,73.0,107.0,28.0,107.0,PM2.5,Poor
+Mumbai,Maharashtra,1.7826086956521738,1.7,28.571428571428573,44.0,86.63636363636364,106.3913043478261,10.95,106.4,PM2.5,Poor
+Bhilwara,Rajasthan,2.0,1.0,35.0,70.0,106.0,55.0,18.0,106.0,PM10,Poor
+Bundi,Rajasthan,1.0,1.0,58.0,106.0,82.0,62.0,14.0,106.0,OZONE,Poor
+Patiala,Punjab,1.0,2.0,22.0,36.0,105.0,90.0,15.0,105.0,PM10,Poor
+Pune,Maharashtra,2.1666666666666665,0.0,33.8,56.333333333333336,78.8,104.0,6.0,104.0,PM2.5,Poor
+Pratapgarh,Rajasthan,1.0,2.0,20.0,88.0,104.0,73.0,9.0,104.0,PM10,Poor
+Alwar,Rajasthan,1.0,2.0,55.0,46.0,103.0,103.0,25.0,103.0,PM10,Poor
+Damoh,Madhya Pradesh,1.0,,,,100.0,103.0,62.0,103.0,PM2.5,Poor
+Chikkaballapur,Karnataka,2.0,0.0,5.0,8.0,84.0,103.0,26.0,103.0,PM2.5,Poor
+Rajgir,Bihar,2.0,1.0,18.0,26.0,58.0,103.0,4.0,103.0,PM2.5,Poor
+Jorapokhar,Jharkhand,2.0,1.0,10.0,22.0,103.0,95.0,,103.0,PM10,Poor
+Mahad,Maharashtra,2.0,1.0,19.0,54.0,102.0,103.0,54.0,103.0,PM2.5,Poor
+Surat,Gujarat,2.0,0.0,20.0,12.0,80.0,102.5,18.0,102.5,PM2.5,Poor
+Kunjemura,Chhattisgarh,2.0,0.0,54.0,33.0,102.0,80.0,38.0,102.0,PM10,Poor
+Buxar,Bihar,1.0,1.0,11.0,21.0,57.0,100.0,35.0,100.0,PM2.5,Moderate
+Vrindavan,Uttar_Pradesh,1.0,2.0,34.0,16.0,100.0,75.0,29.0,100.0,PM10,Moderate
+Indore,Madhya Pradesh,1.6,2.0,37.0,14.2,60.2,99.4,17.6,99.4,PM2.5,Moderate
+Sasaram,Bihar,3.0,1.0,4.0,18.0,99.0,60.0,,99.0,PM10,Moderate
+Jhalawar,Rajasthan,1.0,2.0,38.0,99.0,88.0,75.0,25.0,99.0,OZONE,Moderate
+Chittorgarh,Rajasthan,1.0,4.0,26.0,99.0,79.0,67.0,10.0,99.0,OZONE,Moderate
+Moradabad,Uttar_Pradesh,1.8333333333333333,1.1666666666666667,32.0,51.666666666666664,98.5,97.33333333333333,40.25,98.5,PM10,Moderate
+Dholpur,Rajasthan,1.0,,45.0,52.0,98.0,,8.0,98.0,PM10,Moderate
+Bengaluru,Karnataka,1.4166666666666667,0.7777777777777778,37.0,71.4,87.72727272727273,97.8,16.7,97.8,PM2.5,Moderate
+Jalna,Maharashtra,0.0,1.0,26.0,70.0,75.0,97.0,,97.0,PM2.5,Moderate
+Siliguri,West_Bengal,2.0,2.0,95.0,41.0,87.0,97.0,18.0,97.0,PM2.5,Moderate
+Eluru,Andhra_Pradesh,2.0,0.0,15.0,54.0,52.0,97.0,14.0,97.0,PM2.5,Moderate
+Yadgir,Karnataka,1.0,0.0,32.0,23.0,86.0,97.0,15.0,97.0,PM2.5,Moderate
+Jalandhar,Punjab,2.0,1.0,41.0,44.0,64.0,97.0,25.0,97.0,PM2.5,Moderate
+Bihar Sharif,Bihar,3.0,1.0,11.0,2.0,43.0,95.0,12.0,95.0,PM2.5,Moderate
+Araria,Bihar,1.0,2.0,18.0,10.0,95.0,82.0,60.0,95.0,PM10,Moderate
+Hyderabad,Telangana,1.5384615384615385,0.9166666666666666,18.916666666666668,30.692307692307693,77.66666666666667,94.5,16.5,94.5,PM2.5,Moderate
+Bhopal,Madhya Pradesh,2.0,1.6666666666666667,38.0,80.0,94.0,93.0,23.666666666666668,94.0,PM10,Moderate
+Banswara,Rajasthan,1.0,1.0,40.0,71.0,94.0,82.0,8.0,94.0,PM10,Moderate
+Mira-Bhayandar,Maharashtra,1.0,1.0,24.0,22.0,76.0,93.0,10.0,93.0,PM2.5,Moderate
+Chittoor,Andhra_Pradesh,1.0,1.0,38.0,36.0,54.0,93.0,12.0,93.0,PM2.5,Moderate
+Jodhpur,Rajasthan,1.0,1.4,17.8,85.2,91.8,65.4,7.2,91.8,PM10,Moderate
+Badlapur,Maharashtra,2.0,2.0,26.0,64.0,90.0,88.0,10.0,90.0,PM10,Moderate
+Cuttack,Odisha,4.0,0.0,10.0,78.0,90.0,55.0,10.0,90.0,PM10,Moderate
+Kadapa,Andhra_Pradesh,1.0,1.0,26.0,30.0,57.0,90.0,18.0,90.0,PM2.5,Moderate
+Kishanganj,Bihar,1.0,1.0,10.0,34.0,47.0,88.0,10.0,88.0,PM2.5,Moderate
+Haldia,West_Bengal,1.0,1.0,20.0,36.0,65.0,88.0,16.0,88.0,PM2.5,Moderate
+Keonjhar,Odisha,1.0,1.0,16.0,43.0,77.0,88.0,10.0,88.0,PM2.5,Moderate
+Barrackpore,West_Bengal,2.0,2.0,30.0,45.0,64.0,88.0,19.0,88.0,PM2.5,Moderate
+Belgaum,Karnataka,,2.0,71.0,19.0,69.0,88.0,56.0,88.0,PM2.5,Moderate
+Ambernath,Maharashtra,1.0,2.0,59.0,39.0,61.0,87.0,15.0,87.0,PM2.5,Moderate
+Ooty,TamilNadu,,,4.0,5.0,60.0,87.0,4.0,87.0,PM2.5,Moderate
+Ratlam,Madhya Pradesh,,,21.0,,87.0,77.0,49.0,87.0,PM10,Moderate
+Barmer,Rajasthan,1.0,1.0,12.0,58.0,85.0,43.0,4.0,85.0,PM10,Moderate
+Kolhapur,Maharashtra,1.5,1.0,9.0,69.5,54.0,85.0,8.0,85.0,PM2.5,Moderate
+Coimbatore,TamilNadu,2.0,0.0,18.0,20.0,54.0,85.0,30.0,85.0,PM2.5,Moderate
+Belapur,Maharashtra,2.0,,,84.0,,,,84.0,OZONE,Moderate
+Ulhasnagar,Maharashtra,0.5,1.0,25.0,56.0,76.5,84.0,11.5,84.0,PM2.5,Moderate
+Khanna,Punjab,2.0,2.0,35.0,40.0,60.0,83.0,29.0,83.0,PM2.5,Moderate
+Gangtok,Sikkim,0.0,0.0,8.0,23.0,53.0,83.0,1.0,83.0,PM2.5,Moderate
+Jabalpur,Madhya Pradesh,1.75,0.75,34.25,68.5,74.75,83.0,16.0,83.0,PM2.5,Moderate
+Satna,Madhya Pradesh,1.0,,15.0,,70.0,83.0,29.0,83.0,PM2.5,Moderate
+Brajrajnagar,Odisha,2.0,2.0,18.0,64.0,64.0,82.0,25.0,82.0,PM2.5,Moderate
+Boisar,Maharashtra,2.0,1.0,24.0,31.0,58.0,82.0,25.0,82.0,PM2.5,Moderate
+Tirumala,Andhra_Pradesh,1.0,1.0,60.0,60.0,57.0,82.0,11.0,82.0,PM2.5,Moderate
+Amravati,Maharashtra,1.5,1.0,21.5,57.5,68.0,79.5,20.0,79.5,PM2.5,Moderate
+Prayagraj,Uttar_Pradesh,1.0,2.0,9.666666666666666,37.666666666666664,78.66666666666667,65.0,42.333333333333336,78.7,PM10,Moderate
+Mandikhera,Haryana,1.0,2.0,28.0,28.0,55.0,78.0,42.0,78.0,PM2.5,Moderate
+Sangli,Maharashtra,1.0,2.0,15.0,47.0,58.0,78.0,28.0,78.0,PM2.5,Moderate
+Howrah,West_Bengal,1.6,0.5,27.0,35.6,61.4,77.2,15.8,77.2,PM2.5,Moderate
+Tensa,Odisha,2.0,,,75.0,,77.0,,77.0,PM2.5,Moderate
+Kolkata,West_Bengal,1.4285714285714286,2.0,31.428571428571427,39.285714285714285,52.0,76.42857142857143,12.571428571428571,76.4,PM2.5,Moderate
+Raipur,Chhattisgarh,1.25,0.6666666666666666,36.666666666666664,19.75,76.33333333333333,66.33333333333333,26.333333333333332,76.3,PM10,Moderate
+Mangalore,Karnataka,,0.0,10.0,14.0,42.0,75.0,,75.0,PM2.5,Moderate
+Dungarpur,Rajasthan,1.0,3.0,21.0,53.0,75.0,57.0,6.0,75.0,PM10,Moderate
+Chandigarh,Chandigarh,1.6666666666666667,5.0,36.5,67.0,75.0,73.5,11.5,75.0,PM10,Moderate
+Bareilly,Uttar_Pradesh,1.5,0.0,6.5,20.5,74.5,67.5,65.0,74.5,PM10,Moderate
+Dehradun,Uttarakhand,0.0,,2.0,54.0,38.0,73.0,8.0,73.0,PM2.5,Moderate
+Virar,Maharashtra,1.0,1.0,30.0,42.0,62.0,73.0,4.0,73.0,PM2.5,Moderate
+Rajsamand,Rajasthan,1.0,2.0,19.0,72.0,45.0,28.0,15.0,72.0,OZONE,Moderate
+Jalore,Rajasthan,1.0,1.0,18.0,71.0,71.0,48.0,6.0,71.0,OZONE,Moderate
+Korba,Chhattisgarh,1.5,0.0,41.0,8.5,70.5,36.5,38.0,70.5,PM10,Moderate
+Machilipatnam,Andhra_Pradesh,1.0,1.0,12.0,38.0,48.0,70.0,20.0,70.0,PM2.5,Moderate
+Rairangpur,Odisha,1.0,0.0,14.0,39.0,62.0,70.0,10.0,70.0,PM2.5,Moderate
+Sirohi,Rajasthan,0.0,1.0,12.0,69.0,66.0,47.0,9.0,69.0,OZONE,Moderate
+Bhubaneswar,Odisha,3.0,1.5,12.5,56.0,58.0,67.5,6.5,67.5,PM2.5,Moderate
+Perundurai,TamilNadu,2.0,1.0,15.0,23.0,50.0,67.0,21.0,67.0,PM2.5,Moderate
+Aizawl,Mizoram,0.0,,1.0,,67.0,30.0,18.0,67.0,PM10,Moderate
+Guwahati,Assam,1.0,0.6666666666666666,8.333333333333334,15.25,33.333333333333336,66.0,21.0,66.0,PM2.5,Moderate
+Srinagar,Jammu_and_Kashmir,1.0,,26.0,2.0,65.5,57.0,4.5,65.5,PM10,Moderate
+Hubballi,Karnataka,1.0,0.0,10.0,29.0,55.0,65.0,2.0,65.0,PM2.5,Moderate
+Thoothukudi,TamilNadu,2.0,,21.0,32.0,64.0,,12.0,64.0,PM10,Moderate
+Rishikesh,Uttarakhand,2.0,3.0,28.0,64.0,38.0,3.0,1.0,64.0,OZONE,Moderate
+Chamarajanagar,Karnataka,1.0,0.0,29.0,28.0,51.0,63.0,5.0,63.0,PM2.5,Moderate
+Jhansi,Uttar_Pradesh,0.0,1.0,8.0,8.0,63.0,47.0,21.0,63.0,PM10,Moderate
+Nellore,Andhra_Pradesh,2.0,1.0,29.0,32.0,37.0,62.0,12.0,62.0,PM2.5,Moderate
+Aurangabad,Bihar,5.0,0.0,10.0,60.0,47.0,62.0,14.0,62.0,PM2.5,Moderate
+Amaravati,Andhra_Pradesh,1.0,1.0,20.0,62.0,50.0,47.0,19.0,62.0,OZONE,Moderate
+Kalaburagi,Karnataka,2.0,1.0,20.0,,49.0,62.0,5.0,62.0,PM2.5,Moderate
+Dombivli,Maharashtra,1.0,0.0,34.0,30.0,59.0,58.0,10.0,59.0,PM10,Moderate
+Dhanbad,Jharkhand,3.0,,,58.0,,,,58.0,OZONE,Moderate
+Bagalkot,Karnataka,1.0,0.0,14.0,12.0,52.0,57.0,9.0,57.0,PM2.5,Moderate
+Shivamogga,Karnataka,1.0,0.0,26.0,56.0,44.0,43.0,4.0,56.0,OZONE,Moderate
+Bettiah,Bihar,1.0,0.0,10.0,21.0,39.0,55.0,28.0,55.0,PM2.5,Moderate
+Bhiwani,Haryana,0.0,2.0,11.0,5.0,28.0,55.0,10.0,55.0,PM2.5,Moderate
+Naharlagun,Arunachal_Pradesh,1.0,0.0,9.0,6.0,36.0,53.0,12.0,53.0,PM2.5,Moderate
+Nalbari,Assam,1.0,2.0,18.0,16.0,35.0,53.0,29.0,53.0,PM2.5,Moderate
+Thiruvananthapuram,Kerala,2.0,,,24.5,47.0,52.0,25.0,52.0,PM2.5,Moderate
+Sivasagar,Assam,1.0,2.0,34.0,52.0,30.0,35.0,10.0,52.0,OZONE,Moderate
+Vijayapura,Karnataka,2.0,1.0,14.0,16.0,39.0,50.0,4.0,50.0,PM2.5,Good
+Chennai,TamilNadu,1.4,0.7142857142857143,12.714285714285714,17.666666666666668,49.0,47.42857142857143,9.571428571428571,49.0,PM10,Good
+Bhilai,Chhattisgarh,1.0,0.6666666666666666,25.333333333333332,21.0,42.666666666666664,48.666666666666664,18.333333333333332,48.7,PM2.5,Good
+Silchar,Assam,1.0,0.0,41.0,3.0,47.0,40.0,8.0,47.0,PM10,Good
+Puducherry,Puducherry,1.0,1.0,14.0,46.0,21.0,23.0,9.0,46.0,OZONE,Good
+Madikeri,Karnataka,1.0,,,3.0,22.0,42.0,9.0,42.0,PM2.5,Good
+Shillong,Meghalaya,0.5,,41.0,34.0,,38.0,27.0,41.0,NO2,Good
+Kohima,Nagaland,0.0,0.0,5.0,9.0,,,40.0,40.0,SO2,Good
+Koppal,Karnataka,,2.0,38.0,,36.0,,,38.0,NO2,Good
+Ankleshwar,Gujarat,2.0,2.0,36.0,33.0,,,32.0,36.0,NO2,Good
+Kollam,Kerala,1.0,,,36.0,,,,36.0,OZONE,Good
+Rajamahendravaram,Andhra_Pradesh,1.0,0.0,11.0,21.0,36.0,27.0,8.0,36.0,PM10,Good
+Rupnagar,Punjab,2.0,,32.0,,22.0,28.0,18.0,32.0,NO2,Good
+Chikkamagaluru,Karnataka,1.0,0.0,26.0,29.0,,,,29.0,OZONE,Good
+Ambala,Haryana,2.0,2.0,12.0,21.0,10.0,15.0,28.0,28.0,SO2,Good
+Ramanathapuram,TamilNadu,,,,4.0,22.0,,12.0,22.0,PM10,Good
+Manguraha,Bihar,2.0,0.0,6.0,10.0,,,21.0,21.0,SO2,Good
+Bileipada,Odisha,2.0,,,18.0,,,,18.0,OZONE,Good
+Katihar,Bihar,4.0,,,17.0,,,,17.0,OZONE,Good
+Kashipur,Uttarakhand,1.0,0.0,10.0,,,,,10.0,NO2,Good
+Samastipur,Bihar,0.0,,,8.0,,,,8.0,OZONE,Good
+Maihar,Madhya Pradesh,4.0,,,,,,,4.0,CO,Good
+Madurai,TamilNadu,1.0,,,,,,,1.0,CO,Good
+Byrnihat,Meghalaya,1.0,,,,,,,1.0,CO,Good
