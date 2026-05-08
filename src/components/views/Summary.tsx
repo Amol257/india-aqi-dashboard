@@ -526,73 +526,7 @@ export default function Summary({
 
       </div>
 
-      {/* New Analytics Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm transition-transform hover:scale-[1.005]">
-          <div className="flex items-center gap-2 mb-6">
-            <Activity size={18} className="text-rose-500" />
-            <h3 className="text-lg font-bold dark:text-slate-100">National Pollutant Profile</h3>
-          </div>
-          <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={summaryStats?.pollutants || []}>
-                <PolarGrid stroke="#e2e8f0" strokeDasharray="3 3" />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 10, fontWeight: 700 }} />
-                <Radar
-                  name="Concentration"
-                  dataKey="A"
-                  stroke="#1275e2"
-                  fill="#1275e2"
-                  fillOpacity={0.5}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
-          </div>
-          <p className="text-[10px] text-slate-500 mt-4 font-medium text-center italic">Comparative distribution of key aerosol and gaseous tracers across monitored zones.</p>
-        </div>
 
-        <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm transition-transform hover:scale-[1.005]">
-          <div className="flex items-center gap-2 mb-6">
-            <MapPin size={18} className="text-emerald-500" />
-            <h3 className="text-lg font-bold dark:text-slate-100">AQI Exposure Distribution</h3>
-          </div>
-          <div className="h-[300px] w-full relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={summaryStats?.distribution || []}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {summaryStats?.distribution?.map((entry: any, index: number) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#fff' }}
-                  itemStyle={{ color: '#fff' }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-              <p className="text-xs font-black text-slate-400 uppercase tracking-tighter">Cities</p>
-              <p className="text-2xl font-black dark:text-slate-100">{summaryStats?.totalCities}</p>
-            </div>
-          </div>
-          <div className="flex justify-center gap-4 mt-2">
-            {summaryStats?.distribution?.map((d: any) => (
-              <div key={d.name} className="flex items-center gap-1.5">
-                <div className="h-2 w-2 rounded-full" style={{ backgroundColor: d.color }} />
-                <span className="text-[10px] font-bold text-slate-500">{d.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Bento Grid Bottom */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
