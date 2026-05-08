@@ -1,8 +1,5 @@
 name: Daily AQI Data Refresh + Deploy
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 on:
   # Run every day at 06:30 IST (01:00 UTC)
   schedule:
