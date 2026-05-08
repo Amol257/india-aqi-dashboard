@@ -1,9 +1,9 @@
-name: Daily AQI Data Refresh + Deploy
+name: Hourly AQI Data Refresh + Deploy
 
 on:
-  # Run every day at 06:30 IST (01:00 UTC)
+  # Run at the top of every hour
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 * * * *"
 
   # Also run on every push to main (so deploys stay fast)
   push:
