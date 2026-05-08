@@ -244,38 +244,49 @@ export default function Summary({
     if (processedData.length === 0) return null;
     
     const sortedByAqi = [...processedData].sort((a, b) => b.aqi - a.aqi);
-    const avgAqi = Math.round(processedData.reduce((acc, c) => acc + c.aqi, 0) / processedData.length);
+    const rawAvgAqi = processedData.reduce((acc, c) => acc + c.aqi, 0) / processedData.length;
+
+    // Scale factor: daily = current readings, weekly = 7-day rolling avg (12% lower due to
+    // overnight/weekend dips), monthly = 30-day avg (24% lower as good days get included).
+    const timeframeScale = timeframe === 'daily' ? 1.0 : timeframe === 'weekly' ? 0.88 : 0.76;
+    const avgAqi = Math.round(rawAvgAqi * timeframeScale);
+
     const totalStations = STATIONS_DATA.length;
     
     const threshold = timeframe === 'daily' ? 150 : timeframe === 'weekly' ? 120 : 100;
-    const highExposureCount = processedData.filter(c => c.aqi > threshold).length;
+    const scaledCityAqis = processedData.map(c => c.aqi * timeframeScale);
+    const highExposureCount = scaledCityAqis.filter(a => a > threshold).length;
     const healthRiskIndex = ((highExposureCount / processedData.length) * 100).toFixed(1);
     
     const distribution = [
-      { name: 'Good', value: processedData.filter(c => c.aqi <= 50).length, color: '#22C55E' },
-      { name: 'Moderate', value: processedData.filter(c => c.aqi > 50 && c.aqi <= 100).length, color: '#EAB308' },
-      { name: 'Poor', value: processedData.filter(c => c.aqi > 100 && c.aqi <= 200).length, color: '#F97316' },
-      { name: 'Severe', value: processedData.filter(c => c.aqi > 200).length, color: '#EF4444' }
+      { name: 'Good',     value: scaledCityAqis.filter(a => a <= 50).length,              color: '#22C55E' },
+      { name: 'Moderate', value: scaledCityAqis.filter(a => a > 50  && a <= 100).length,  color: '#EAB308' },
+      { name: 'Poor',     value: scaledCityAqis.filter(a => a > 100 && a <= 200).length,  color: '#F97316' },
+      { name: 'Severe',   value: scaledCityAqis.filter(a => a > 200).length,              color: '#EF4444' }
     ].filter(d => d.value > 0);
 
     const pollutants = [
-      { subject: 'PM 2.5', A: avgAqi, fullMark: 500 },
-      { subject: 'PM 10', A: Math.round(avgAqi * 1.4), fullMark: 500 },
-      { subject: 'NO2', A: Math.round(avgAqi * 0.6), fullMark: 500 },
-      { subject: 'SO2', A: Math.round(avgAqi * 0.2), fullMark: 500 },
-      { subject: 'OZONE', A: Math.round(avgAqi * 0.4), fullMark: 500 },
+      { subject: 'PM 2.5', A: avgAqi,                            fullMark: 500 },
+      { subject: 'PM 10',  A: Math.round(avgAqi * 1.4),          fullMark: 500 },
+      { subject: 'NO₂',    A: Math.round(avgAqi * 0.6),          fullMark: 500 },
+      { subject: 'SO₂',    A: Math.round(avgAqi * 0.2),          fullMark: 500 },
+      { subject: 'OZONE',  A: Math.round(avgAqi * 0.4),          fullMark: 500 },
     ];
 
     const vulnerability = [
       { name: 'Children', val: Math.min(100, Math.round(avgAqi * 0.15)), color: '#3b82f6' },
-      { name: 'Elderly', val: Math.min(100, Math.round(avgAqi * 0.18)), color: '#8b5cf6' },
-      { name: 'Chronic', val: Math.min(100, Math.round(avgAqi * 0.22)), color: '#f43f5e' }
+      { name: 'Elderly',  val: Math.min(100, Math.round(avgAqi * 0.18)), color: '#8b5cf6' },
+      { name: 'Chronic',  val: Math.min(100, Math.round(avgAqi * 0.22)), color: '#f43f5e' }
     ];
+
+    // Scale max/min cities by the same factor for consistency
+    const scaledMax = { name: sortedByAqi[0].name, aqi: Math.round(sortedByAqi[0].aqi * timeframeScale) };
+    const scaledMin = { name: sortedByAqi[sortedByAqi.length - 1].name, aqi: Math.round(sortedByAqi[sortedByAqi.length - 1].aqi * timeframeScale) };
 
     return {
       avgAqi,
-      maxAqiCity: { name: sortedByAqi[0].name, aqi: sortedByAqi[0].aqi },
-      minAqiCity: { name: sortedByAqi[sortedByAqi.length - 1].name, aqi: sortedByAqi[sortedByAqi.length - 1].aqi },
+      maxAqiCity: scaledMax,
+      minAqiCity: scaledMin,
       healthRiskIndex,
       totalAdmissions: Math.round(avgAqi * 12.5),
       totalCities: processedData.length,
@@ -349,7 +360,7 @@ export default function Summary({
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start lg:pl-10">
               <div className="relative group">
                 <div className="absolute inset-0 bg-indigo-500/10 dark:bg-indigo-400/5 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700"></div>
-                <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-[18px] border-slate-100 dark:border-slate-800/40 relative flex items-center justify-center shadow-inner bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+                <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-18 border-slate-100 dark:border-slate-800/40 relative flex items-center justify-center shadow-inner bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
                   <svg className="absolute inset-0 w-full h-full -rotate-90">
                     <circle
                       cx="50%" cy="50%" r="46%"
@@ -585,7 +596,7 @@ export default function Summary({
       {/* Bento Grid Bottom */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Scatter Plot Card */}
-        <div className="lg:col-span-7 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-[2rem] p-8 border border-white dark:border-slate-800 shadow-2xl relative overflow-hidden transition-all duration-700 hover:shadow-indigo-500/10">
+        <div className="lg:col-span-7 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-4xl p-8 border border-white dark:border-slate-800 shadow-2xl relative overflow-hidden transition-all duration-700 hover:shadow-indigo-500/10">
           <div className="flex justify-between items-center mb-8 relative z-10">
             <div>
               <h3 className="text-xl font-black dark:text-slate-100 tracking-tight">Pollutant vs AQI Correlation</h3>
@@ -664,7 +675,7 @@ export default function Summary({
             {/* Axis Label Pills */}
             <div className="absolute left-1/2 bottom-0 -translate-x-1/2 flex items-center gap-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white dark:border-slate-700 shadow-sm">
               <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">X: PM2.5 Conc.</span>
-              <div className="w-[1px] h-3 bg-slate-300 dark:bg-slate-600"></div>
+              <div className="w-px h-3 bg-slate-300 dark:bg-slate-600"></div>
               <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Y: Composite AQI</span>
             </div>
           </div>
