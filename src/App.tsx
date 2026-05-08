@@ -222,7 +222,7 @@ export default function App() {
                       }}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-700 flex-shrink-0">
+                        <div className="w-8 h-8 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-700 shrink-0">
                           <img 
                             src={getCityImage(city.name, city.imageUrl, city.state)} 
                             alt="" 
@@ -475,7 +475,7 @@ export default function App() {
       {/* Health Diagnostic Modal */}
       <AnimatePresence>
         {isHealthModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+          <div className="fixed inset-0 z-100 flex items-center justify-center px-4">
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 

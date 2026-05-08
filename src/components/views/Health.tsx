@@ -180,17 +180,17 @@ const RealtimeWeatherWarning = () => {
         </p>
 
         <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+          <div className="bg-slate-50 dark:bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
             <Thermometer size={16} className="text-slate-300 mb-1" />
             <span className="text-lg font-bold">{weatherData.temperature}°C</span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Current</span>
           </div>
-          <div className="bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+          <div className="bg-slate-50 dark:bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
             <TrendingUp size={16} className="text-red-400 mb-1" />
             <span className="text-lg font-bold">{weatherData.maxTemp}°C</span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Max Today</span>
           </div>
-          <div className="bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+          <div className="bg-slate-50 dark:bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
             <Wind size={16} className="text-blue-300 mb-1" />
             <span className="text-lg font-bold">{weatherData.windSpeed} <span className="text-[10px]">km/h</span></span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Wind</span>
@@ -198,9 +198,9 @@ const RealtimeWeatherWarning = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-6">
-          <span className="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-300">Drink water regularly</span>
-          <span className="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-300">Avoid 12pm–3pm outdoors</span>
-          <span className="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-300">ORS at public spots</span>
+          <span className="px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300">Drink water regularly</span>
+          <span className="px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300">Avoid 12pm–3pm outdoors</span>
+          <span className="px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300">ORS at public spots</span>
         </div>
 
         <a 
@@ -208,7 +208,7 @@ const RealtimeWeatherWarning = () => {
           download="Heat_Bulletin.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="block text-center w-full py-3 bg-white text-black font-black text-xs uppercase tracking-widest rounded-xl hover:bg-slate-100 transition-colors shadow-lg mb-6"
+          className="block text-center w-full py-3 bg-slate-900 dark:bg-white text-white dark:text-black font-black text-xs uppercase tracking-widest rounded-xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg mb-6"
         >
           Download Health Protocol
         </a>
@@ -241,7 +241,7 @@ const RealtimeWeatherWarning = () => {
   const glowColor = weatherData ? getSeverityData(weatherData.maxTemp).glow : 'bg-slate-500/20';
 
   return (
-    <div className="bg-[#181c22] text-white rounded-2xl p-6 shadow-xl relative overflow-hidden group">
+    <div className="bg-white dark:bg-[#181c22] text-slate-800 dark:text-white border border-slate-100 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
       <div className={cn("absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -mr-32 -mt-32 transition-colors duration-1000", glowColor)}></div>
       {content}
     </div>
@@ -393,8 +393,8 @@ export default function Health({ onNavigate, cities = MAJOR_CITIES_COMPARISON }:
 
         {/* Radar & Pie Breakdown */}
         <div className="lg:col-span-4 space-y-6 flex flex-col">
-          <div className="bg-[#181c22] text-white rounded-[2.5rem] p-8 shadow-2xl flex-1 flex flex-col items-center text-center overflow-hidden relative">
-            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 to-transparent"></div>
+          <div className="bg-white dark:bg-[#181c22] text-slate-900 dark:text-white border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-2xl flex-1 flex flex-col items-center text-center overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-blue-500 to-transparent"></div>
             <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-slate-400 relative z-10">Toxicity Profile</h4>
             <div className="h-64 w-full relative z-10">
               <ResponsiveContainer width="100%" height="100%">
@@ -473,7 +473,7 @@ export default function Health({ onNavigate, cities = MAJOR_CITIES_COMPARISON }:
         </div>
 
         {/* Guardian Protocol Advice */}
-        <div className="bg-slate-950 text-white rounded-[2.5rem] p-8 shadow-2xl">
+        <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-2xl">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center">
               <ShieldCheck size={20} />
@@ -486,10 +486,10 @@ export default function Health({ onNavigate, cities = MAJOR_CITIES_COMPARISON }:
               { label: 'Outdoor Workout', status: 'Danger', desc: 'Cardiovascular load exceeds safe limits.' },
               { label: 'Commute', status: 'Warning', desc: 'Use N95 grade filtration masks.' }
             ].map(p => (
-              <div key={p.label} className="p-4 bg-slate-900/50 rounded-2xl border border-slate-800 hover:border-blue-500 transition-colors">
+              <div key={p.label} className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-blue-500 transition-colors">
                 <div className="flex justify-between items-center mb-1">
                   <span className="text-xs font-black">{p.label}</span>
-                  <span className={cn("text-[10px] font-black uppercase px-2 py-0.5 rounded", p.status === 'Danger' ? 'bg-red-500 text-white' : 'bg-slate-700 text-slate-300')}>
+                  <span className={cn("text-[10px] font-black uppercase px-2 py-0.5 rounded", p.status === 'Danger' ? 'bg-red-500 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300')}>
                     {p.status}
                   </span>
                 </div>
