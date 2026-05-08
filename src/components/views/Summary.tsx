@@ -178,20 +178,23 @@ export default function Summary({
   // Dynamic data based on timeframe
   const nationalTrend = React.useMemo(() => {
     const values = processedData.map(c => c.aqi).sort((a, b) => a - b);
-    const step = Math.floor(values.length / 7);
+    const avg = values.reduce((a, b) => a + b, 0) / (values.length || 1);
+    
+    // Deterministic pseudo-randomness based on timeframe string length
+    const shift = timeframe.length * 5;
     
     switch (timeframe) {
       case 'weekly':
         return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => ({
-          day, val: values[i * step] || values[values.length - 1]
+          name: day, val: Math.max(0, values[Math.floor(i * (values.length / 7))] + (Math.sin(i + shift) * 15))
         }));
       case 'monthly':
-        return ['Week 1', 'Week 2', 'Week 3', 'Week 4'].map((day, i) => ({
-          day, val: values[i * Math.floor(values.length / 4)] || values[values.length - 1]
+        return ['Wk 1', 'Wk 2', 'Wk 3', 'Wk 4'].map((day, i) => ({
+          name: day, val: Math.max(0, avg + (Math.cos(i * shift) * 25))
         }));
       default:
         return ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59'].map((day, i) => ({
-          day, val: values[i * step] || values[values.length - 1]
+          name: day, val: values[Math.floor(i * (values.length / 7))] || values[values.length - 1]
         }));
     }
   }, [timeframe, processedData]);
@@ -457,6 +460,13 @@ export default function Summary({
                       <stop offset="95%" stopColor="#f43f5e" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
+                  <XAxis 
+                    dataKey="name" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{fontSize: 8, fontWeight: 700, fill: '#94a3b8'}} 
+                    interval="preserveStartEnd"
+                  />
                   <Area 
                     type="monotone" 
                     dataKey="val" 
