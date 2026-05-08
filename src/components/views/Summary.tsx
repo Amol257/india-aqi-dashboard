@@ -1,11 +1,11 @@
 import React from 'react';
-import { 
+import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
-  LineChart, Line, AreaChart, Area,
+  AreaChart, Area,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
-  PieChart, Pie, BarChart, Bar
+  BarChart, Bar
 } from 'recharts';
-import { TrendingDown, TrendingUp, Info, AlertCircle, Activity, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
+import { TrendingDown, TrendingUp, Info, Activity, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   STATIONS_DATA,
   MAJOR_CITIES_COMPARISON,
@@ -231,14 +231,6 @@ export default function Summary({
     return { tier1Data: tier1, tier2Data: tier2, industrialData: industrial };
   }, [citiesList]);
 
-  // Generates pseudo-random but stable bar patterns based on timeframe
-  const getStatsPattern = (seed: string) => {
-    const base = timeframe === 'daily' ? [40, 60, 85, 45, 95, 70, 80] :
-      timeframe === 'weekly' ? [70, 40, 90, 30, 60, 50, 40] :
-        [50, 90, 40, 80, 30, 70, 20];
-    return base;
-  };
-
   const getAqiColor = (aqi: number) => {
     if (aqi <= 50) return '#22C55E';
     if (aqi <= 100) return '#EAB308';
@@ -345,100 +337,154 @@ export default function Summary({
       </section>
 
 
-      {/* Top Section */}
+      {/* Top Section - Command Center */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-12 bg-white/70 dark:bg-slate-900/80 backdrop-blur-3xl rounded-[2.5rem] p-10 border border-white dark:border-slate-800 shadow-2xl relative overflow-hidden transition-all duration-700 hover:shadow-indigo-500/5">
+        <div className="lg:col-span-12 bg-white/70 dark:bg-slate-900/80 backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-10 border border-white dark:border-slate-800 shadow-2xl relative overflow-hidden transition-all duration-700 hover:shadow-indigo-500/5">
           <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
             <Activity size={180} className="text-indigo-500/10" />
           </div>
 
-          <div className="flex flex-col items-center justify-center relative z-10 py-10">
-            {/* Centered SVG Gauge */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-indigo-500/10 dark:bg-indigo-400/5 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700"></div>
-              <div className="w-72 h-72 rounded-full border-[20px] border-slate-100 dark:border-slate-800/40 relative flex items-center justify-center shadow-inner bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
-                <svg className="absolute inset-0 w-full h-full -rotate-90">
-                  <circle
-                    cx="50%" cy="50%" r="46%"
-                    fill="none"
-                    stroke={getAqiColor(summaryStats?.avgAqi || 0)}
-                    strokeWidth="20"
-                    strokeDasharray={`${((summaryStats?.avgAqi || 0) / 500) * 580} 1000`}
-                    className="transition-all duration-1000 ease-out"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <div className="text-center z-10">
-                  <span className="text-8xl font-black text-[#181c22] dark:text-slate-100 tracking-tighter">
-                    {summaryStats?.avgAqi}
-                  </span>
-                  <div className="flex flex-col items-center mt-1">
-                    <p className="text-xs font-black text-[#717785] dark:text-slate-400 uppercase tracking-widest">PM 2.5 Index</p>
-                    <div className={cn(
-                      "mt-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest",
-                      getAqiStatus(summaryStats?.avgAqi || 0) === 'Good' ? "bg-emerald-500/10 text-emerald-500" :
-                      getAqiStatus(summaryStats?.avgAqi || 0) === 'Moderate' ? "bg-amber-500/10 text-amber-500" :
-                      "bg-rose-500/10 text-rose-500"
-                    )}>
-                      {getAqiStatus(summaryStats?.avgAqi || 0)}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+            {/* Left Column: Master Gauge */}
+            <div className="lg:col-span-7 flex flex-col items-center lg:items-start lg:pl-10">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-indigo-500/10 dark:bg-indigo-400/5 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700"></div>
+                <div className="w-64 h-64 md:w-80 md:h-80 rounded-full border-[18px] border-slate-100 dark:border-slate-800/40 relative flex items-center justify-center shadow-inner bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
+                  <svg className="absolute inset-0 w-full h-full -rotate-90">
+                    <circle
+                      cx="50%" cy="50%" r="46%"
+                      fill="none"
+                      stroke={getAqiColor(summaryStats?.avgAqi || 0)}
+                      strokeWidth="18"
+                      strokeDasharray={`${((summaryStats?.avgAqi || 0) / 500) * 580} 1000`}
+                      className="transition-all duration-1000 ease-out"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <div className="text-center z-10">
+                    <span className="text-7xl md:text-8xl font-black text-[#181c22] dark:text-slate-100 tracking-tighter">
+                      {summaryStats?.avgAqi}
+                    </span>
+                    <div className="flex flex-col items-center mt-1">
+                      <p className="text-[10px] font-black text-[#717785] dark:text-slate-400 uppercase tracking-widest">PM 2.5 Index</p>
+                      <div className={cn(
+                        "mt-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest",
+                        getAqiStatus(summaryStats?.avgAqi || 0) === 'Good' ? "bg-emerald-500/10 text-emerald-500" :
+                        getAqiStatus(summaryStats?.avgAqi || 0) === 'Moderate' ? "bg-amber-500/10 text-amber-500" :
+                        "bg-rose-500/10 text-rose-500"
+                      )}>
+                        {getAqiStatus(summaryStats?.avgAqi || 0)}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
-            {/* Unified 5-Column Stats Belt */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-16 w-full max-w-5xl">
-              <div className="text-center group transition-transform hover:scale-105">
-                <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Medical Alert</p>
-                <div className="flex flex-col items-center">
-                  <p className="text-2xl font-black text-rose-500">
-                    {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
-                      ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
-                      : summaryStats?.totalAdmissions}
-                  </p>
-                  <span className="text-[9px] font-bold text-emerald-500 flex items-center gap-0.5">
-                    <TrendingDown size={8} /> STABLE
-                  </span>
+
+            {/* Right Column: Mini Dashboard */}
+            <div className="lg:col-span-5 space-y-8">
+              {/* Sparkline 1: Trend */}
+              <div className="bg-slate-50/50 dark:bg-slate-800/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-700/50">
+                <div className="flex justify-between items-center mb-4">
+                  <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <TrendingUp size={12} className="text-indigo-500" /> National Momentum
+                  </h4>
+                  <span className="text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-0.5 rounded-full">LIVE</span>
+                </div>
+                <div className="h-24 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={nationalTrend}>
+                      <Area 
+                        type="monotone" 
+                        dataKey="val" 
+                        stroke="#6366f1" 
+                        fill="#6366f1" 
+                        fillOpacity={0.1} 
+                        strokeWidth={3} 
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
 
-              <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
-                <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Growth Index</p>
-                <div className="flex flex-col items-center">
-                  <p className="text-2xl font-black text-amber-500">+2.4%</p>
-                  <span className="text-[9px] font-bold text-amber-500 flex items-center gap-0.5">
-                    <TrendingUp size={8} /> MOMENTUM
-                  </span>
+              {/* Sparkline 2: Top Rankings */}
+              <div className="bg-slate-50/50 dark:bg-slate-800/30 p-6 rounded-3xl border border-slate-100 dark:border-slate-700/50">
+                <div className="flex justify-between items-center mb-4">
+                  <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <MapPin size={12} className="text-rose-500" /> Critical Regions
+                  </h4>
+                  <span className="text-[10px] font-bold text-slate-400">TOP 4</span>
                 </div>
-              </div>
-
-              <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
-                <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Regional Peak</p>
-                <p className="text-2xl font-black text-slate-800 dark:text-slate-100">{summaryStats?.maxAqiCity.aqi}</p>
-                <p className="text-[10px] font-bold text-slate-400 truncate px-2">{summaryStats?.maxAqiCity.name}</p>
-              </div>
-
-              <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
-                <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Pristine Zone</p>
-                <p className="text-2xl font-black text-emerald-500">{summaryStats?.minAqiCity.aqi}</p>
-                <p className="text-[10px] font-bold text-slate-400 truncate px-2">{summaryStats?.minAqiCity.name}</p>
-              </div>
-
-              <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
-                <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Live Sensors</p>
-                <p className="text-2xl font-black text-indigo-500">{summaryStats?.activeStations}</p>
-                <div className="flex items-center justify-center gap-1">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                  </span>
-                  <span className="text-[9px] font-black text-emerald-500 uppercase tracking-widest">Active</span>
+                <div className="space-y-3">
+                  {citiesList.slice().sort((a, b) => b.aqi - a.aqi).slice(0, 4).map((city) => (
+                    <div key={city.name} className="flex items-center gap-4">
+                      <span className="text-[10px] font-bold text-slate-500 w-20 truncate">{city.name}</span>
+                      <div className="flex-1 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-rose-500 rounded-full" 
+                          style={{ width: `${(city.aqi / 500) * 100}%` }}
+                        />
+                      </div>
+                      <span className="text-[10px] font-black text-slate-800 dark:text-slate-200">{city.aqi}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Bottom Belt: Integrated Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mt-12 pt-10 border-t border-slate-100 dark:border-slate-800/60 relative z-10">
+            <div className="text-center group transition-transform hover:scale-105">
+              <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Medical Alert</p>
+              <div className="flex flex-col items-center">
+                <p className="text-2xl font-black text-rose-500">
+                  {summaryStats?.totalAdmissions && summaryStats.totalAdmissions > 1000 
+                    ? `${(summaryStats.totalAdmissions / 1000).toFixed(1)}k` 
+                    : summaryStats?.totalAdmissions}
+                </p>
+                <span className="text-[9px] font-bold text-emerald-500 flex items-center gap-0.5">
+                  <TrendingDown size={8} /> STABLE
+                </span>
+              </div>
+            </div>
+
+            <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
+              <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Growth Index</p>
+              <div className="flex flex-col items-center">
+                <p className="text-2xl font-black text-amber-500">+2.4%</p>
+                <span className="text-[9px] font-bold text-amber-500 flex items-center gap-0.5">
+                  <TrendingUp size={8} /> MOMENTUM
+                </span>
+              </div>
+            </div>
+
+            <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
+              <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Regional Peak</p>
+              <p className="text-2xl font-black text-slate-800 dark:text-slate-100">{summaryStats?.maxAqiCity.aqi}</p>
+              <p className="text-[10px] font-bold text-slate-400 truncate px-2">{summaryStats?.maxAqiCity.name}</p>
+            </div>
+
+            <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
+              <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Pristine Zone</p>
+              <p className="text-2xl font-black text-emerald-500">{summaryStats?.minAqiCity.aqi}</p>
+              <p className="text-[10px] font-bold text-slate-400 truncate px-2">{summaryStats?.minAqiCity.name}</p>
+            </div>
+
+            <div className="text-center group transition-transform hover:scale-105 border-l border-slate-100 dark:border-slate-800">
+              <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-2">Live Sensors</p>
+              <p className="text-2xl font-black text-indigo-500">{summaryStats?.activeStations}</p>
+              <div className="flex items-center justify-center gap-1">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-[9px] font-black text-emerald-500 uppercase tracking-widest">Active</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
         {/* Analytics Section - Health Focus */}
         <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
