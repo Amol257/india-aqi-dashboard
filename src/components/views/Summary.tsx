@@ -28,20 +28,9 @@ export default function Summary({
 }) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [lastUpdated, setLastUpdated] = React.useState<string | null>(initialLastUpdated);
-  const [timeframe, setTimeframe] = React.useState<'daily' | 'weekly' | 'monthly'>('daily');
 
-  // Generate robust trend data based on the current timeframe
-  const nationalTrend = React.useMemo(() => {
-    const points = timeframe === 'daily' ? 24 : timeframe === 'weekly' ? 7 : 30;
-    const baseValue = cities.reduce((acc, c) => acc + c.aqi, 0) / (cities.length || 1);
-    
-    return Array.from({ length: points }, (_, i) => ({
-      name: i,
-      val: Math.round(baseValue + (Math.sin(i * 0.5) * 15) + (Math.random() * 10))
-    }));
-  }, [cities, timeframe]);
 
-  const citiesList = React.useMemo(() => cities, [cities]);
+
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -209,7 +198,9 @@ export default function Summary({
 
   const citiesList = React.useMemo(() => {
     return processedData.map(city => ({
-      ...city
+      ...city,
+      tier: getCityTier(city.name),
+      status: getAqiStatus(city.aqi)
     }));
   }, [processedData]);
 
