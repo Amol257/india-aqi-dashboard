@@ -366,12 +366,6 @@ export default function App() {
                           <span className="text-[10px] font-black text-slate-400 uppercase">AQI (US)</span>
                         </div>
                         <div className="h-px bg-slate-100 dark:bg-slate-700 my-2" />
-                        <div className="px-3 py-2 flex items-center justify-between hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg cursor-pointer transition-colors group">
-                          <span className="text-xs font-bold text-red-600">Emergency Mode</span>
-                          <div className="w-8 h-4 bg-slate-200 dark:bg-slate-700 rounded-full relative">
-                            <div className="absolute left-1 top-1 w-2 h-2 bg-white rounded-full" />
-                          </div>
-                        </div>
                       </div>
                       <div className="p-3 bg-slate-50 dark:bg-slate-900/50 text-center">
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter">v2.4.0 Stable Build</p>
@@ -381,9 +375,7 @@ export default function App() {
                 )}
               </AnimatePresence>
             </div>
-            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-bold text-[#1275e2] border border-blue-200">
-              U
-            </div>
+
           </div>
         </div>
       </header>
