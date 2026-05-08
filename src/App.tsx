@@ -44,6 +44,7 @@ export default function App() {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
@@ -479,9 +480,99 @@ export default function App() {
         })}
       </nav>
 
+      {/* Health Diagnostic Modal */}
+      <AnimatePresence>
+        {isHealthModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }}
+              onClick={() => setIsHealthModalOpen(false)}
+              className="absolute inset-0 bg-slate-950/40 backdrop-blur-md" 
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl border border-white dark:border-slate-800 overflow-hidden"
+            >
+              <div className="p-8">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-inner">
+                      <Activity size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-black dark:text-slate-100">Guardian Briefing</h3>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">AI Health Diagnostic</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setIsHealthModalOpen(false)}
+                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                  >
+                    <X size={20} className="text-slate-400" />
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                  {/* Risk Score */}
+                  <div className="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-100 dark:border-slate-800">
+                    <div className="flex items-end justify-between mb-2">
+                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Live Risk Score</span>
+                      <span className={cn(
+                        "text-xs font-black px-3 py-1 rounded-full uppercase",
+                        (cities.reduce((a, b) => a + b.aqi, 0) / cities.length) > 150 ? "bg-red-100 text-red-600" : "bg-emerald-100 text-emerald-600"
+                      )}>
+                        {(cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) > 150 ? 'High Risk' : 'Optimal'}
+                      </span>
+                    </div>
+                    <div className="text-4xl font-black dark:text-slate-100">
+                      {Math.round(cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1))} <span className="text-sm font-bold text-slate-400">AVG AQI</span>
+                    </div>
+                  </div>
+
+                  {/* Recommendations */}
+                  <div className="space-y-3">
+                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Guardian Protocol</h4>
+                    {[
+                      { icon: Sun, text: "Optimal for outdoor activities", active: (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) < 100 },
+                      { icon: Activity, text: "Mask recommended for sensitive groups", active: (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) >= 100 },
+                      { icon: Bell, text: "Avoid high-traffic zones today", active: true }
+                    ].filter(r => r.active).map((rec, i) => (
+                      <div key={i} className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm hover:border-blue-200 dark:hover:border-blue-900 transition-colors">
+                        <rec.icon size={18} className="text-blue-500" />
+                        <span className="text-sm font-bold dark:text-slate-300">{rec.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => {
+                    handleNavigate('health');
+                    setIsHealthModalOpen(false);
+                  }}
+                  className="w-full mt-8 py-4 bg-[#1275e2] dark:bg-blue-600 text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-blue-200 dark:shadow-none hover:translate-y-[-2px] active:translate-y-0 transition-all"
+                >
+                  See Full Health Report
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Contextual FAB */}
-      <button className="fixed right-6 bottom-20 md:bottom-8 w-14 h-14 bg-[#1275e2] dark:bg-blue-600 text-white rounded-2xl shadow-xl shadow-blue-200 dark:shadow-none flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group z-30">
-        <Activity size={24} className="group-hover:animate-pulse" />
+      <button 
+        onClick={() => setIsHealthModalOpen(true)}
+        className={cn(
+          "fixed right-6 bottom-20 md:bottom-8 w-14 h-14 bg-[#1275e2] dark:bg-blue-600 text-white rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group z-30",
+          (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) > 150 ? "animate-pulse" : ""
+        )}
+      >
+        <Activity size={24} className="group-hover:rotate-12 transition-transform" />
       </button>
     </div>
   );
