@@ -541,56 +541,88 @@ export default function Summary({
       {/* Bento Grid Bottom */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Scatter Plot Card */}
-        <div className="lg:col-span-7 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-bold dark:text-slate-100">Regional AQI vs Population Density</h3>
-            <button
-              onClick={() => onNavigate && onNavigate('city-dive')}
-              className="text-[#1275e2] dark:text-blue-400 text-xs font-bold flex items-center gap-1 hover:underline"
-            >
-              Expand Details <AlertCircle size={14} />
-            </button>
+        <div className="lg:col-span-7 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-[2rem] p-8 border border-white dark:border-slate-800 shadow-2xl relative overflow-hidden transition-all duration-700 hover:shadow-indigo-500/10">
+          <div className="flex justify-between items-center mb-8 relative z-10">
+            <div>
+              <h3 className="text-xl font-black dark:text-slate-100 tracking-tight">Pollutant vs AQI Correlation</h3>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Cross-Parameter Sensitivity Analysis</p>
+            </div>
+            <div className="flex gap-2">
+              <span className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[9px] font-black text-slate-500 uppercase tracking-widest border border-slate-200 dark:border-slate-700">
+                <div className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></div> HAZARDOUS
+              </span>
+              <span className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[9px] font-black text-slate-500 uppercase tracking-widest border border-slate-200 dark:border-slate-700">
+                <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> STABLE
+              </span>
+            </div>
           </div>
 
-          <div className="h-[280px] w-full bg-slate-50/50 dark:bg-slate-800/30 rounded-xl border border-slate-100 dark:border-slate-800 relative p-4">
+          <div className="h-[320px] w-full relative z-10">
             <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke={document.documentElement.classList.contains('dark') ? "#334155" : "#e2e8f0"} />
-                <XAxis type="number" dataKey="x" name="Density" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} />
-                <YAxis type="number" dataKey="y" name="AQI" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    const data = payload[0].payload;
-                    return (
-                      <div className="bg-white dark:bg-slate-800 p-2 border border-slate-200 dark:border-slate-700 rounded shadow-md text-xs font-bold">
-                        <div className="text-slate-500 dark:text-slate-400 mb-1">{data.name}</div>
-                        <div className="dark:text-slate-100">AQI: <span className="text-[#181c22] dark:text-blue-400">{data.y}</span></div>
-                        <div className="dark:text-slate-100">Population Density: <span className="text-[#181c22] dark:text-blue-400">{data.x}%</span></div>
-                      </div>
-                    );
-                  }
-                  return null;
-                }} />
-                <Scatter name="Tier 1 Cities" data={tier1Data} fill="#1275e2" fillOpacity={0.7} />
-                <Scatter name="Tier 2 Cities" data={tier2Data} fill="#5f78a3" fillOpacity={0.7} />
-                <Scatter name="Industrial Zones" data={industrialData} fill="#c55b00" fillOpacity={0.7} />
+              <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 10 }}>
+                <defs>
+                  <filter id="pointGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <CartesianGrid 
+                  strokeDasharray="4 4" 
+                  stroke={document.documentElement.classList.contains('dark') ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} 
+                  vertical={false}
+                />
+                <XAxis 
+                  type="number" 
+                  dataKey="x" 
+                  name="Concentration" 
+                  stroke="#94a3b8" 
+                  fontSize={10} 
+                  tickLine={false} 
+                  axisLine={false} 
+                  tick={{fontWeight: 700}}
+                />
+                <YAxis 
+                  type="number" 
+                  dataKey="y" 
+                  name="AQI" 
+                  stroke="#94a3b8" 
+                  fontSize={10} 
+                  tickLine={false} 
+                  axisLine={false}
+                  tick={{fontWeight: 700}}
+                />
+                <Tooltip 
+                  cursor={{ strokeDasharray: '3 3', stroke: '#6366f1' }} 
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      return (
+                        <div className="bg-slate-900/90 backdrop-blur-md p-4 border border-slate-700 rounded-2xl shadow-2xl text-xs">
+                          <div className="text-white font-black mb-2 uppercase tracking-widest border-b border-slate-700 pb-2">{data.name}</div>
+                          <div className="text-slate-400 font-bold flex justify-between gap-8">
+                            AQI <span className="text-indigo-400">{data.y}</span>
+                          </div>
+                          <div className="text-slate-400 font-bold flex justify-between gap-8 mt-1">
+                            PM2.5 <span className="text-rose-400">{data.x} µg/m³</span>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }} 
+                />
+                <Scatter name="Tier 1" data={tier1Data} fill="#6366f1" fillOpacity={0.6} stroke="#6366f1" strokeWidth={1} filter="url(#pointGlow)" />
+                <Scatter name="Tier 2" data={tier2Data} fill="#818cf8" fillOpacity={0.4} stroke="#818cf8" strokeWidth={1} />
+                <Scatter name="Industrial" data={industrialData} fill="#f43f5e" fillOpacity={0.7} stroke="#f43f5e" strokeWidth={1} filter="url(#pointGlow)" />
               </ScatterChart>
             </ResponsiveContainer>
-            <div className="absolute left-8 bottom-4 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Density (low)</div>
-            <div className="absolute left-4 top-12 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest rotate-90 origin-left">AQI (High)</div>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-4 px-2">
-            {[
-              { label: 'Tier 1 Cities', color: '#1275e2' },
-              { label: 'Tier 2 Cities', color: '#5f78a3' },
-              { label: 'Industrial Zones', color: '#c55b00' },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }}></div>
-                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">{item.label}</span>
-              </div>
-            ))}
+            
+            {/* Axis Label Pills */}
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 flex items-center gap-4 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white dark:border-slate-700 shadow-sm">
+              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">X: PM2.5 Conc.</span>
+              <div className="w-[1px] h-3 bg-slate-300 dark:bg-slate-600"></div>
+              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Y: Composite AQI</span>
+            </div>
           </div>
         </div>
 
