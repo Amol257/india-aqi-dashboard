@@ -81,7 +81,8 @@ export default function CityDive({
     setNoDataError(false);
     try {
       // 1. Try Local Data First (Requested Switch)
-      const localResponse = await fetch('/data/local_aqi.json');
+      const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+      const localResponse = await fetch(`${baseUrl}/data/local_aqi.json`);
       const rootData = await localResponse.json();
       const localDataMap = rootData.city_aggregation || {};
       
