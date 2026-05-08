@@ -12,9 +12,11 @@ export function cn(...inputs: ClassValue[]) {
 export function getCityImage(cityName: string, currentUrl?: string, stateName?: string) {
   // If we already have a valid non-placeholder URL, use it
   if (currentUrl && currentUrl.trim() !== "" && !currentUrl.includes('placeholder')) {
-    // Convert relative ./db paths to work in dev
-    if (currentUrl.startsWith('./db')) {
-      return currentUrl.replace('./', '/');
+    // Support GitHub Pages subdirectories by using the base URL
+    if (currentUrl.includes('db/')) {
+      const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+      const cleanPath = currentUrl.replace(/^(\.|\/)?\/?db\//, 'db/');
+      return `${baseUrl}/${cleanPath}`;
     }
     return currentUrl;
   }
@@ -60,10 +62,6 @@ export function getCityImage(cityName: string, currentUrl?: string, stateName?: 
     hash = cityName.charCodeAt(i) + ((hash << 5) - hash);
   }
   const index = Math.abs(hash) % placeholders.length;
-  
-  // Use source.unsplash.com style but with the more reliable query string on standard unsplash URLs
-  // Actually, standard Unsplash doesn't support query-based random unless using the API or source.unsplash (deprecated)
-  // We'll stick to our deterministic list but add a category-based fallback if the index is high
   
   return `${placeholders[index]}?auto=format&fit=crop&q=80&w=800&sig=${hash}`;
 }

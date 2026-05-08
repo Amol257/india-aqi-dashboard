@@ -81,7 +81,8 @@ export default function App() {
     const fetchLatestData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('/data/local_aqi.json');
+        const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+        const response = await fetch(`${baseUrl}/data/local_aqi.json`);
         if (response.ok) {
           const data = await response.json();
           if (data.stations) setStations(data.stations);
@@ -96,7 +97,7 @@ export default function App() {
                 pm25: c.pollutants?.["PM2.5"]?.value || Math.round(c.avgAqi * 0.6),
                 trend: staticRef?.trend || "stable",
                 trendValue: staticRef?.trendValue || "LIVE",
-                imageUrl: staticRef?.imageUrl || `/db/cities/${c.name}/${c.name}.jpg`,
+                imageUrl: staticRef?.imageUrl || `db/cities/${c.name}/${c.name}.jpg`,
                 admissions: c.respiratoryAdmissions,
                 density: c.density,
                 category: c.category,
