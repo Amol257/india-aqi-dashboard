@@ -177,7 +177,7 @@ export default function Summary({
 
   // Dynamic data based on timeframe
   const nationalTrend = React.useMemo(() => {
-    const values = processedData.map(c => c.avgAqi).sort((a, b) => a - b);
+    const values = processedData.map(c => c.aqi).sort((a, b) => a - b);
     const step = Math.floor(values.length / 7);
     
     switch (timeframe) {
