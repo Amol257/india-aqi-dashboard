@@ -484,7 +484,7 @@ export default function Summary({
           </div>
           <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={summaryStats?.pollutants}>
+              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={summaryStats?.pollutants || []}>
                 <PolarGrid stroke="#e2e8f0" strokeDasharray="3 3" />
                 <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 10, fontWeight: 700 }} />
                 <Radar
@@ -509,7 +509,7 @@ export default function Summary({
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={summaryStats?.distribution}
+                  data={summaryStats?.distribution || []}
                   cx="50%"
                   cy="50%"
                   innerRadius={60}
@@ -517,7 +517,7 @@ export default function Summary({
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {summaryStats?.distribution.map((entry: any, index: number) => (
+                  {summaryStats?.distribution?.map((entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
@@ -533,7 +533,7 @@ export default function Summary({
             </div>
           </div>
           <div className="flex justify-center gap-4 mt-2">
-            {summaryStats?.distribution.map((d: any) => (
+            {summaryStats?.distribution?.map((d: any) => (
               <div key={d.name} className="flex items-center gap-1.5">
                 <div className="h-2 w-2 rounded-full" style={{ backgroundColor: d.color }} />
                 <span className="text-[10px] font-bold text-slate-500">{d.name}</span>
