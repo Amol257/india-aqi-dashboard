@@ -14,7 +14,7 @@ export function getCityImage(cityName: string, currentUrl?: string, stateName?: 
   if (currentUrl && currentUrl.trim() !== "" && !currentUrl.includes('placeholder')) {
     // Support GitHub Pages subdirectories by using the base URL
     if (currentUrl.includes('db/')) {
-      const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+      const baseUrl = ((import.meta as any).env?.BASE_URL || '/').replace(/\/$/, '');
       const cleanPath = currentUrl.replace(/^(\.|\/)?\/?db\//, 'db/');
       return `${baseUrl}/${cleanPath}`;
     }

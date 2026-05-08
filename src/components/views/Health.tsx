@@ -248,7 +248,7 @@ const RealtimeWeatherWarning = () => {
   );
 };
 
-export default function Health({ onNavigate, cities = MAJOR_CITIES_COMPARISON }: { onNavigate?: (view: any, context?: any) => void, cities?: CityData[] }) {
+export default function Health({ onNavigate, cities = MAJOR_CITIES_COMPARISON }: { onNavigate?: (view: any, context?: any) => void, cities?: any[] }) {
   const avgAqiTotal = React.useMemo(() => {
     return cities.length > 0 ? cities.reduce((acc, c) => acc + c.aqi, 0) / cities.length : 100;
   }, [cities]);

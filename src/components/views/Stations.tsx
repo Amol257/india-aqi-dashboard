@@ -389,7 +389,7 @@ export default function Stations({
                     <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-0.5">{s.city}</p>
                   </td>
                   <td className="px-6 py-4 flex gap-1 pt-6">
-                    {s.pollutants.map(p => <span key={p} className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-[#1275e2] dark:text-blue-400 text-[9px] font-black rounded-md">{p}</span>)}
+                    {s.pollutants.map((p: string) => <span key={p} className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-[#1275e2] dark:text-blue-400 text-[9px] font-black rounded-md">{p}</span>)}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">

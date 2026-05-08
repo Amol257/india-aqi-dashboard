@@ -486,8 +486,8 @@ export default function Summary({
         </div>
       </div>
 
-        {/* Analytics Section - Health Focus */}
-        <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+      {/* Analytics Section - Health Focus */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Health Chart 1: Medical Impact Trend */}
           <div className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white dark:border-slate-800 shadow-sm transition-transform hover:scale-[1.005]">
             <div className="flex items-center justify-between mb-6">
@@ -578,8 +578,6 @@ export default function Summary({
               </ResponsiveContainer>
             </div>
           </div>
-        </div>
-
       </div>
 
 
