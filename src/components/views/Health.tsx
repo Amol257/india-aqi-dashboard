@@ -170,18 +170,18 @@ const RealtimeWeatherWarning = () => {
             </div>
             <h4 className={cn("font-bold tracking-tight text-lg", sev.text)}>{sev.label}</h4>
           </div>
-          <button onClick={refreshData} disabled={loading} className="p-2 text-slate-400 hover:text-white transition-colors disabled:opacity-50">
+          <button onClick={refreshData} disabled={loading} className="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors disabled:opacity-50">
             <RefreshCw size={16} className={cn(loading && "animate-spin")} />
           </button>
         </div>
 
-        <p className="text-base font-medium mb-6 text-white/90">
+        <p className="text-base font-medium mb-6 text-slate-700 dark:text-white/90">
           {sev.message}
         </p>
 
         <div className="grid grid-cols-3 gap-3 mb-6">
           <div className="bg-slate-50 dark:bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-            <Thermometer size={16} className="text-slate-300 mb-1" />
+            <Thermometer size={16} className="text-slate-600 dark:text-slate-300 mb-1" />
             <span className="text-lg font-bold">{weatherData.temperature}°C</span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Current</span>
           </div>
@@ -191,7 +191,7 @@ const RealtimeWeatherWarning = () => {
             <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Max Today</span>
           </div>
           <div className="bg-slate-50 dark:bg-white/10 rounded-xl p-3 flex flex-col items-center justify-center text-center">
-            <Wind size={16} className="text-blue-300 mb-1" />
+            <Wind size={16} className="text-blue-500 dark:text-blue-300 mb-1" />
             <span className="text-lg font-bold">{weatherData.windSpeed} <span className="text-[10px]">km/h</span></span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Wind</span>
           </div>

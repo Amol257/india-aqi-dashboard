@@ -182,29 +182,29 @@ export default function App() {
     <div className="min-h-screen bg-[#f9f9ff] dark:bg-slate-950 text-[#181c22] dark:text-slate-200 font-sans selection:bg-blue-100 transition-colors duration-300">
       {/* Top App Bar */}
       <header className="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-50 flex items-center justify-between px-4 md:px-6 shadow-sm">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="md:hidden p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors"
           >
             {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <span className="text-xl font-bold tracking-tight text-[#1275e2] dark:text-blue-400">AQI Health India</span>
+          <span className="text-lg md:text-xl font-bold tracking-tight text-[#1275e2] dark:text-blue-400 truncate max-w-[120px] sm:max-w-none">AQI Health India</span>
         </div>
 
         <div className="flex items-center gap-2 md:gap-6">
-          <div className="hidden sm:flex items-center bg-[#ebedf7] dark:bg-slate-800 rounded-full px-4 py-1.5 border border-[#c1c6d5] dark:border-slate-700 focus-within:ring-2 focus-within:ring-[#005ab4] transition-all relative">
-            <Search className="text-[#717785] dark:text-slate-400 mr-2" size={18} />
+          <div className="flex items-center bg-[#ebedf7] dark:bg-slate-800 rounded-full px-3 md:px-4 py-1.5 border border-[#c1c6d5] dark:border-slate-700 focus-within:ring-2 focus-within:ring-[#005ab4] transition-all relative">
+            <Search className="text-[#717785] dark:text-slate-400 mr-2" size={16} />
             <input 
               type="text" 
-              placeholder="Search cities..." 
+              placeholder="Search..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => {
                 blurTimerRef.current = window.setTimeout(() => setIsSearchFocused(false), 200);
               }}
-              className="bg-transparent border-none outline-none text-sm w-32 md:w-64 placeholder:text-[#717785] dark:placeholder:text-slate-500"
+              className="bg-transparent border-none outline-none text-sm w-20 sm:w-32 md:w-64 placeholder:text-[#717785] dark:placeholder:text-slate-500"
             />
             
             {/* Search Results Dropdown */}
