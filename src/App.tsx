@@ -45,6 +45,7 @@ export default function App() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
+  const [userLocationData, setUserLocationData] = useState<{ city: string; aqi: number | null } | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
@@ -115,6 +116,37 @@ export default function App() {
       }
     };
     fetchLatestData();
+  }, []);
+
+  useEffect(() => {
+    if (!navigator.geolocation) return;
+
+    const detectLocation = () => {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const { latitude: lat, longitude: lon } = pos.coords;
+        try {
+          // Get city name
+          const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`, {
+            headers: { 'User-Agent': 'aqi-health-app' }
+          });
+          const geoData = await geoRes.json();
+          const city = geoData.address?.city || geoData.address?.town || geoData.address?.village || geoData.address?.state_district || 'Your Area';
+
+          // Get AQI from Open-Meteo
+          const aqiRes = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=us_aqi`);
+          const aqiData = await aqiRes.json();
+          const aqi = aqiData.current?.us_aqi || null;
+
+          setUserLocationData({ city, aqi });
+        } catch (err) {
+          console.error("Error fetching location AQI:", err);
+        }
+      }, (err) => {
+        console.warn("Location access denied or failed:", err);
+      }, { timeout: 10000 });
+    };
+
+    detectLocation();
   }, []);
 
   useEffect(() => {
@@ -511,33 +543,46 @@ export default function App() {
                 <div className="space-y-6">
                   {/* Risk Score */}
                   <div className="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-6 border border-slate-100 dark:border-slate-800">
-                    <div className="flex items-end justify-between mb-2">
-                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Live Risk Score</span>
-                      <span className={cn(
-                        "text-xs font-black px-3 py-1 rounded-full uppercase",
-                        (cities.reduce((a, b) => a + b.aqi, 0) / cities.length) > 150 ? "bg-red-100 text-red-600" : "bg-emerald-100 text-emerald-600"
-                      )}>
-                        {(cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) > 150 ? 'High Risk' : 'Optimal'}
-                      </span>
-                    </div>
-                    <div className="text-4xl font-black dark:text-slate-100">
-                      {Math.round(cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1))} <span className="text-sm font-bold text-slate-400">AVG AQI</span>
-                    </div>
+                    {(() => {
+                      const currentAqi = userLocationData?.aqi ?? Math.round(cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1));
+                      const isHighRisk = currentAqi > 150;
+                      return (
+                        <>
+                          <div className="flex items-end justify-between mb-2">
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                              {userLocationData?.city ? `${userLocationData.city} Risk Score` : 'Live Risk Score'}
+                            </span>
+                            <span className={cn(
+                              "text-xs font-black px-3 py-1 rounded-full uppercase",
+                              isHighRisk ? "bg-red-100 text-red-600" : "bg-emerald-100 text-emerald-600"
+                            )}>
+                              {isHighRisk ? 'High Risk' : 'Optimal'}
+                            </span>
+                          </div>
+                          <div className="text-4xl font-black dark:text-slate-100">
+                            {currentAqi} <span className="text-sm font-bold text-slate-400">AQI</span>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
 
                   {/* Recommendations */}
                   <div className="space-y-3">
                     <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Guardian Protocol</h4>
-                    {[
-                      { icon: Sun, text: "Optimal for outdoor activities", active: (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) < 100 },
-                      { icon: Activity, text: "Mask recommended for sensitive groups", active: (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) >= 100 },
-                      { icon: Bell, text: "Avoid high-traffic zones today", active: true }
-                    ].filter(r => r.active).map((rec, i) => (
-                      <div key={i} className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm hover:border-blue-200 dark:hover:border-blue-900 transition-colors">
-                        <rec.icon size={18} className="text-blue-500" />
-                        <span className="text-sm font-bold dark:text-slate-300">{rec.text}</span>
-                      </div>
-                    ))}
+                    {(() => {
+                      const currentAqi = userLocationData?.aqi ?? Math.round(cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1));
+                      return [
+                        { icon: Sun, text: "Optimal for outdoor activities", active: currentAqi < 100 },
+                        { icon: Activity, text: "Mask recommended for sensitive groups", active: currentAqi >= 100 },
+                        { icon: Bell, text: "Avoid high-traffic zones today", active: true }
+                      ].filter(r => r.active).map((rec, i) => (
+                        <div key={i} className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm hover:border-blue-200 dark:hover:border-blue-900 transition-colors">
+                          <rec.icon size={18} className="text-blue-500" />
+                          <span className="text-sm font-bold dark:text-slate-300">{rec.text}</span>
+                        </div>
+                      ));
+                    })()}
                   </div>
                 </div>
 
@@ -561,7 +606,7 @@ export default function App() {
         onClick={() => setIsHealthModalOpen(true)}
         className={cn(
           "fixed right-6 bottom-20 md:bottom-8 w-14 h-14 bg-[#1275e2] dark:bg-blue-600 text-white rounded-2xl shadow-xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group z-30",
-          (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1)) > 150 ? "animate-pulse" : ""
+          (userLocationData?.aqi ?? (cities.reduce((a, b) => a + b.aqi, 0) / (cities.length || 1))) > 150 ? "animate-pulse" : ""
         )}
       >
         <Activity size={24} className="group-hover:rotate-12 transition-transform" />
