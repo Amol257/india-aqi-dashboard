@@ -10,7 +10,7 @@ import {
   POLLUTANTS_SUMMARY,
   getAllCities 
 } from '../../constants';
-import { cn } from '../../lib/utils';
+import { cn, exportToCSV } from '../../lib/utils';
 
 export default function Composite({ 
   onNavigate,
@@ -96,7 +96,10 @@ export default function Composite({
           </p>
         </div>
         <div className="flex gap-2 self-start">
-          <button className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#0a73e0] text-white font-bold text-xs shadow-lg shadow-blue-100 dark:shadow-none hover:bg-[#005ab4] transition-all">
+          <button 
+            onClick={() => exportToCSV(stations, 'aqi_composite_data')}
+            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#0a73e0] text-white font-bold text-xs shadow-lg shadow-blue-100 dark:shadow-none hover:bg-[#005ab4] transition-all"
+          >
             <Download size={16} /> Export Data
           </button>
           <div className="relative">

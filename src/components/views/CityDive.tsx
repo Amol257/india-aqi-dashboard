@@ -13,7 +13,7 @@ import {
   getAllCities,
   CityData
 } from '../../constants';
-import { cn, getCityImage } from '../../lib/utils';
+import { cn, getCityImage, exportToCSV } from '../../lib/utils';
 
 
 
@@ -297,7 +297,10 @@ export default function CityDive({
               </div>
             )}
           </div>
-          <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1275e2] text-white font-bold text-xs shadow-md shadow-blue-100 dark:shadow-none hover:opacity-90 transition-all">
+          <button 
+            onClick={() => exportToCSV([selectedCity], `aqi_report_${selectedCity.name.toLowerCase()}`)}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1275e2] text-white font-bold text-xs shadow-md shadow-blue-100 dark:shadow-none hover:opacity-90 transition-all"
+          >
             <FileDown size={16} /> Export Report
           </button>
         </div>

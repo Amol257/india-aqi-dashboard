@@ -3,11 +3,11 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   Cell, ScatterChart, Scatter
 } from 'recharts';
-import { Radio, Search, SlidersHorizontal, Map, Settings2, Download, Plus, MapPin } from 'lucide-react';
+import { Radio, Search, SlidersHorizontal, Map, Settings2, Download, Plus, MapPin, FileDown } from 'lucide-react';
 import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { TOTAL_STATIONS, STATIONS_DATA, HISTOGRAM_DATA } from '../../constants';
-import { cn } from '../../lib/utils';
+import { cn, exportToCSV } from '../../lib/utils';
 
 export default function Stations({ 
   onNavigate, 
@@ -365,8 +365,20 @@ export default function Stations({
             </div>
           </div>
           <div className="flex gap-2">
-            <button className="px-4 py-2 border dark:border-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white dark:hover:bg-slate-800 dark:text-slate-300 transition-all">CSV</button>
-            <button className="px-4 py-2 bg-[#1275e2] text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-50 dark:shadow-none">+ Add</button>
+            <button 
+              onClick={() => exportToCSV(filteredStations, 'aqi_stations_data')}
+              className="px-4 py-2 border dark:border-slate-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white dark:hover:bg-slate-800 dark:text-slate-300 transition-all flex items-center gap-2"
+            >
+              <Download size={12} />
+              CSV
+            </button>
+            <button 
+              onClick={() => exportToCSV(filteredStations, 'aqi_stations_full_report')}
+              className="px-4 py-2 bg-[#1275e2] text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-50 dark:shadow-none flex items-center gap-2 hover:bg-[#1066c7] transition-all"
+            >
+              <FileDown size={12} />
+              Export
+            </button>
           </div>
         </div>
         <div className="overflow-x-auto p-4">
