@@ -2,7 +2,7 @@
 
 ![India AQI Dashboard](public/screenshot.png)
 
-**Live:** [india-aqi-dashboard.vercel.app](https://india-aqi-dashboard.vercel.app)
+**Live:** [https://amol257.github.io/india-aqi-dashboard](https://amol257.github.io/india-aqi-dashboard)
 
 ---
 
