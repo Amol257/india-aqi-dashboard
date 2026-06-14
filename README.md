@@ -2,7 +2,7 @@
 
 ![India AQI Dashboard](public/screenshot.png)
 
-**Live:** [https://amol257.github.io/india-aqi-dashboard](https://amol257.github.io/india-aqi-dashboard)
+**Live:** [amol257.github.io/india-aqi-dashboard](https://amol257.github.io/india-aqi-dashboard)
 
 ---
 
@@ -34,7 +34,7 @@ India has 511 CPCB-monitored air quality stations across the country, but no sin
 | Data Processing | Python, Pandas |
 | AI Insights | Gemini AI (Google) |
 | Visualization | Recharts |
-| Deployment | Vercel |
+| Deployment | GitHub Pages |
 
 ---
 
@@ -95,4 +95,4 @@ india-aqi-dashboard/
 ## About
 
 Built by **Amol Singhal** | Data Analyst
-[Portfolio](https://amol257.github.io) · [LinkedIn](https://linkedin.com/in/your-handle) · [GitHub](https://github.com/Amol257)
+[Portfolio](https://amol257.github.io) · [LinkedIn](https://linkedin.com/in/amol-singhal257) · [GitHub](https://github.com/Amol257)
