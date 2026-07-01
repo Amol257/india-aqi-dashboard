@@ -163,7 +163,7 @@ export const MAJOR_CITIES_COMPARISON: CityData[] = [
     "state": "Karnataka",
     "aqi": 107,
     "status": "Poor",
-    "pm25": 21,
+    "pm25": 22,
     "trend": "stable",
     "trendValue": "STABLE",
     "admissions": 5737,
@@ -5950,8 +5950,8 @@ export const STATIONS_DATA = [
           "PM10": 121.0,
           "NH3": 6.0,
           "SO2": 2.0,
-          "NO2": 5.0,
           "OZONE": 15.0,
+          "NO2": 5.0,
           "PM2.5": 29.0,
           "CO": 25.0
     }
@@ -6200,6 +6200,8 @@ export const STATIONS_DATA = [
           "PM10": 47.0,
           "CO": 14.0,
           "PM2.5": 30.0,
+          "NO2": 8.0,
+          "SO2": 2.0,
           "NH3": 2.0,
           "OZONE": 25.0
     }
@@ -8144,6 +8146,7 @@ export const STATIONS_DATA = [
           "PM2.5": 23.0,
           "SO2": 22.0,
           "CO": 38.0,
+          "NO2": 25.0,
           "OZONE": 23.0,
           "NH3": 2.0,
           "PM10": 28.0
