@@ -1164,8 +1164,8 @@ export const STATIONS_DATA = [
     ],
     "pollutant_values": {
           "CO": 103.0,
-          "NO2": 8.0,
           "OZONE": 7.0,
+          "NO2": 8.0,
           "NH3": 1.0
     }
   },
@@ -3334,9 +3334,9 @@ export const STATIONS_DATA = [
       "OZONE"
     ],
     "pollutant_values": {
+          "SO2": 26.0,
           "PM10": 25.0,
           "NH3": 1.0,
-          "SO2": 26.0,
           "PM2.5": 13.0,
           "CO": 12.0,
           "OZONE": 20.0,
@@ -3362,8 +3362,8 @@ export const STATIONS_DATA = [
       "SO2"
     ],
     "pollutant_values": {
-          "CO": 38.0,
           "PM2.5": 55.0,
+          "CO": 38.0,
           "NO2": 10.0,
           "SO2": 6.0,
           "PM10": 97.0,
@@ -9839,8 +9839,8 @@ export const STATIONS_DATA = [
           "PM2.5": 23.0,
           "CO": 6.0,
           "OZONE": 14.0,
-          "SO2": 8.0,
           "PM10": 55.0,
+          "SO2": 8.0,
           "NH3": 1.0,
           "NO2": 9.0
     }
